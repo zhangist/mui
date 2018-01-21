@@ -1,0 +1,75 @@
+.Sui_Modal-root {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  z-index: 1300;
+  position: fixed;
+}
+
+.Sui_Modal-body {
+  position: absolute;
+  max-width: 100%;
+  max-height: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgb(255, 255, 255);
+  box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 15px;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+}
+
+.Sui_Modal-body-full-height {
+  height: 100%;
+  border-radius: 0;
+}
+
+.Sui_Modal-header {
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 0;
+}
+
+.Sui_Modal-content {
+  flex: 1 1 auto;
+  padding: 0 24px 24px 24px;
+  overflow-y: auto;
+}
+
+.Sui_Modal-footer {
+  flex: 0 0 auto;
+  margin: 8px 4px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.Sui_Modal-hidden {
+  visibility: hidden;
+}
+
+.Sui_Backdrop-root {
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  // Remove grey highlight
+  -webkit-tap-highlight-color: transparent;
+  will-change: opacity;
+  background-color: rgba(0, 0, 0, 0.54);
+  // transition: opacity 200ms ease-in-out;
+  // opacity: 0.1;
+}
+
+.Sui_Backdrop-invisible {
+  background-color: transparent;
+}
+
+.Sui_Backdrop-entered {
+  opacity: 1;
+}

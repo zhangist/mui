@@ -2,6 +2,7 @@ import * as classNames from 'classnames'
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 import Transition from 'react-transition-group/Transition'
+import Fade from '../transitions/Fade'
 
 const DURATION = 300
 
@@ -72,14 +73,17 @@ export default class Modal extends React.Component<Props, any> {
 
     return (
       <div className="Sui_Modal-root">
-        <Transition in={openBackdrop} appear timeout={DURATION}>
+        {/* <Transition in={openBackdrop} appear timeout={DURATION}>
           {(state: any) => (
             <div className="Sui_Backdrop-root" onClick={() => this.setState({openBackdrop: true})} style={{
               ...defaultStyle,
               ...transitionStyles[state],
             }}></div>)}
-        </Transition>
+        </Transition> */}
         {/* <div className={backdropClassName}></div> */}
+        <Fade appear in={openBackdrop} timeout={DURATION}>
+          <div className="Sui_Backdrop-root" onClick={() => this.setState({openBackdrop: true})}></div>
+        </Fade>
         <div className={modalBodyClassName} style={{
           width: width ? '100%' : null,
           maxWidth: width ? width : null,

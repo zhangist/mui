@@ -30,11 +30,13 @@ section>.title {
   margin: 20px 0 10px 0;
   line-height: 20px;
   font-size: 20px;
+  color: #333;
 }
 section>.subtitle {
   margin: 10px 0;
   line-height: 16px;
   font-size: 16px;
+  color: #666;
 }
 section>.content {
   padding: 16px;

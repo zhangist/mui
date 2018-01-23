@@ -1,0 +1,68 @@
+.Sui_Drawer-docked {
+  flex: 0 0 auto;
+}
+
+.Sui_Drawer-root {
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  flex: 1 0 auto;
+  z-index: 111;
+  -webkit-overflow-scrolling: touch; // Add iOS momentum scrolling.
+  // temporary style
+  position: fixed;
+  top: 0;
+  // We disable the focus ring for mouse; touch and keyboard users.
+  // At some point; it would be better to keep it for keyboard users.
+  // :focus-ring CSS pseudo-class will help.
+  
+  &:focus {
+    outline: none;
+  }
+}
+
+.Sui_Drawer-root-anchor-left {
+  left: 0;
+  right: auto;
+}
+
+.Sui_Drawer-root-anchor-right {
+  left: auto;
+  right: 0;
+}
+
+.Sui_Drawer-root-anchor-top {
+  top: 0;
+  left: 0;
+  bottom: auto;
+  right: 0;
+  height: auto;
+  max-height: 100vh;
+}
+
+.Sui_Drawer-root-anchor-bottom {
+  top: auto;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: auto;
+  max-height: 100vh;
+}
+
+.Sui_Drawer-root-anchor-docked-left {
+  border-right: 1px solid #ccc;
+}
+
+.Sui_Drawer-root-anchor-docked-top {
+  border-bottom: 1px solid #ccc;
+}
+
+.Sui_Drawer-root-anchor-docked-right {
+  border-left: 1px solid #ccc;
+}
+
+.Sui_Drawer-root-anchor-docked-bottom {
+  border-top: 1px solid #ccc;
+}
+

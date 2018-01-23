@@ -1,7 +1,7 @@
 import * as React from 'react'
 
-export default ({ children }: any) => (
-  <div className="Sui_Modal-footer">
+export default ({ children, ...other }: any) => (
+  <div className="Sui_Modal-footer" {...other}>
     {children}
   </div>
 )

@@ -1,4 +1,6 @@
 import './Button/style.less'
+import './Dialog/style.less'
+import './Drawer/style.less'
 import './Modal/style.less'
 import './Ripple/style.less'
 import './TouchRipple/style.less'

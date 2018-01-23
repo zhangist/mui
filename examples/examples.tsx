@@ -2,18 +2,18 @@ import * as React from 'react'
 import { render } from 'react-dom'
 import {
   Button,
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
   Drawer,
-  Modal,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
 } from '../src'
 
 class Examples extends React.Component {
   public state = {
-    openModal: false,
-    openModal2: false,
-    openModal3: false,
+    openDialog: false,
+    openDialog2: false,
+    openDialog3: false,
     openDrawer: false,
   }
 
@@ -24,7 +24,7 @@ class Examples extends React.Component {
           Button / 按钮
           <sup><a href="#remark-1">1</a></sup>
         </div>
-        <div className="subtitle">('a'|'button')</div>
+        <div className="subtitle">(a | button)</div>
         <div className="content">
           <Button>Button / 按钮</Button>
         </div>
@@ -32,65 +32,65 @@ class Examples extends React.Component {
     )
   }
 
-  public renderSectionModal() {
+  public renderSectionDialog() {
     const {
-      openModal,
-      openModal2,
-      openModal3,
+      openDialog,
+      openDialog2,
+      openDialog3,
     } = this.state
     return (
       <section>
         <div className="title">
-          Modal / 模态框
+          Dialog / 模态框
           <sup><a href="#remark-2">2</a></sup>
           <sup>/</sup>
           <sup><a href="#remark-3">3</a></sup>
         </div>
         <div className="subtitle">react-dom/createPortal</div>
         <div className="content">
-          <Button onClick={() => this.setState({ openModal: true })}>Open Modal / 打开模态框</Button>
-          <Button onClick={() => this.setState({ openModal2: true })}>Open Modal 2 / 打开模态框2</Button>
-          <Button onClick={() => this.setState({ openModal3: true })}>Open Modal 3 / 打开模态框3</Button>
-          <Modal open={openModal}>
-            <ModalHeader>
-              <Button onClick={() => this.setState({ openModal: false })}>Close / 关闭</Button>
-            </ModalHeader>
-            <ModalContent>
-              <div>Modal</div>
+          <Button onClick={() => this.setState({ openDialog: true })}>Open Dialog / 打开模态框</Button>
+          <Button onClick={() => this.setState({ openDialog2: true })}>Open Dialog 2 / 打开模态框2</Button>
+          <Button onClick={() => this.setState({ openDialog3: true })}>Open Dialog 3 / 打开模态框3</Button>
+          <Dialog open={openDialog} onClose={() => this.setState({openDialog: false})}>
+            <DialogHeader>
+              <Button onClick={() => this.setState({ openDialog: false })}>Close / 关闭</Button>
+            </DialogHeader>
+            <DialogContent>
+              <div>Dialog</div>
               <br /><br />
-              {`<Modal open={openModal}>`}
+              {`<Dialog open={openDialog}>`}
               {`...`}
-              {`</Modal>`}
-            </ModalContent>
-          </Modal>
-          <Modal width={600} height="300px" open={openModal2}>
-            <ModalHeader>
-              <Button onClick={() => this.setState({ openModal2: false })}>Close / 关闭</Button>
-            </ModalHeader>
-            <ModalContent style={{ padding: '0 16px 16px 16px'}}>
-              <div>Modal 2</div>
+              {`</Dialog>`}
+            </DialogContent>
+          </Dialog>
+          <Dialog width={600} height="300px" open={openDialog2}>
+            <DialogHeader>
+              <Button onClick={() => this.setState({ openDialog2: false })}>Close / 关闭</Button>
+            </DialogHeader>
+            <DialogContent style={{ padding: '0 16px 16px 16px'}}>
+              <div>Dialog 2</div>
               <br /><br />
-              {`<Modal width={600} height="300px" open={openModal2}>`}
+              {`<Dialog width={600} height="300px" open={openDialog2}>`}
               {`...`}
-              {`</Modal>`}
+              {`</Dialog>`}
               <br /><br /><br /><br /><br /><br /><br /><br />
               <br /><br /><br /><br /><br /><br /><br /><br />
               End
-            </ModalContent>
-            <ModalFooter>Footer</ModalFooter>
-          </Modal>
-          <Modal fullHeight open={openModal3}>
-            <ModalHeader>
-              <Button onClick={() => this.setState({ openModal3: false })}>Close / 关闭</Button>
-            </ModalHeader>
-            <ModalContent>
-              <div>Modal 3</div>
+            </DialogContent>
+            <DialogFooter>Footer</DialogFooter>
+          </Dialog>
+          <Dialog fullHeight open={openDialog3}>
+            <DialogHeader>
+              <Button onClick={() => this.setState({ openDialog3: false })}>Close / 关闭</Button>
+            </DialogHeader>
+            <DialogContent>
+              <div>Dialog 3</div>
               <br /><br />
-              {`<Modal fullHeight open={openModal3}>`}
+              {`<Dialog fullHeight open={openDialog3}>`}
               {`...`}
-              {`</Modal>`}
-            </ModalContent>
-          </Modal>
+              {`</Dialog>`}
+            </DialogContent>
+          </Dialog>
         </div>
       </section>
     )
@@ -109,9 +109,6 @@ class Examples extends React.Component {
             anchor="left"
             open={this.state.openDrawer}
             onClose={() => this.setState({openDrawer: false})}
-            ModalProps={{
-              keepMounted: true, // Better open performance on mobile.
-            }}
           >
             <div>Drawer</div>
           </Drawer>
@@ -129,7 +126,7 @@ class Examples extends React.Component {
         </header>
         <div className="title">Examples / 实例</div>
         {this.renderSectionButton()}
-        {this.renderSectionModal()}
+        {this.renderSectionDialog()}
         {this.renderSectionDrawer()}
         <br /><br /><br /><br /><br /><br /><br />
         <div className="remark">

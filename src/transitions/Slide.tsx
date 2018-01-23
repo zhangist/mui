@@ -181,8 +181,8 @@ class Slide extends React.Component<Props, any> {
   public handleEntering = (node: any) => {
     const { timeout } = this.props
     if (timeout) {
-      node.style.transition = 'transform' + (typeof timeout === 'number' ? timeout : timeout.enter) + 'ms'
-      node.style.webkitTransition = 'transform' + (typeof timeout === 'number' ? timeout : timeout.enter) + 'ms'
+      node.style.transition = 'transform ' + (typeof timeout === 'number' ? timeout : timeout.enter) + 'ms'
+      node.style.webkitTransition = 'transform ' + (typeof timeout === 'number' ? timeout : timeout.enter) + 'ms'
       node.style.transform = 'translate3d(0, 0, 0)'
       node.style.webkitTransform = 'translate3d(0, 0, 0)'
     }
@@ -194,8 +194,8 @@ class Slide extends React.Component<Props, any> {
   public handleExit = (node: any) => {
     const { timeout } = this.props
     if (timeout) {
-      node.style.transition = 'transform' + (typeof timeout === 'number' ? timeout : timeout.exit) + 'ms'
-      node.style.webkitTransition = 'transform' + (typeof timeout === 'number' ? timeout : timeout.exit) + 'ms'
+      node.style.transition = 'transform ' + (typeof timeout === 'number' ? timeout : timeout.exit) + 'ms'
+      node.style.webkitTransition = 'transform ' + (typeof timeout === 'number' ? timeout : timeout.exit) + 'ms'
     }
     setTranslateValue(this.props, node)
     if (this.props.onExit) {

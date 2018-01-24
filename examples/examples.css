@@ -7,8 +7,11 @@ html, body {
   padding: 16px;
 }
 
+sup {
+  color: #999;
+}
 sup>a {
-  color: #333;
+  color: #999;
   text-decoration: none;
 }
 sup>a {

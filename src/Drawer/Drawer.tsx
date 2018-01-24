@@ -45,6 +45,7 @@ export interface Props {
    * If `true`, the drawer is open.
    */
   open?: boolean,
+  rootStyle?: any,
   /**
    * Properties applied to the `Slide` element.
    */
@@ -88,6 +89,7 @@ class Drawer extends React.Component<Props, any> {
       className,
       ModalProps,
       open,
+      rootStyle,
       SlideProps,
       transitionDuration,
       type,
@@ -95,25 +97,25 @@ class Drawer extends React.Component<Props, any> {
     } = this.props
 
     const rootClassName = classNames('Sui_Drawer-root', {
-      '.Sui_Drawer-root-anchor-left': anchor === 'left',
-      '.Sui_Drawer-root-anchor-right': anchor === 'right',
-      '.Sui_Drawer-root-anchor-top': anchor === 'top',
-      '.Sui_Drawer-root-anchor-bottom': anchor === 'bottom',
-      '.Sui_Drawer-root-anchor-docked-left': anchor === 'left' && type !== 'temporary',
-      '.Sui_Drawer-root-anchor-docked-right': anchor === 'right' && type !== 'temporary',
-      '.Sui_Drawer-root-anchor-docked-top': anchor === 'top' && type !== 'temporary',
-      '.Sui_Drawer-root-anchor-docked-bottom': anchor === 'bottom' && type !== 'temporary',
+      'Sui_Drawer-root-anchor-left': anchor === 'left',
+      'Sui_Drawer-root-anchor-right': anchor === 'right',
+      'Sui_Drawer-root-anchor-top': anchor === 'top',
+      'Sui_Drawer-root-anchor-bottom': anchor === 'bottom',
+      'Sui_Drawer-root-anchor-docked-left': anchor === 'left' && type !== 'temporary',
+      'Sui_Drawer-root-anchor-docked-right': anchor === 'right' && type !== 'temporary',
+      'Sui_Drawer-root-anchor-docked-top': anchor === 'top' && type !== 'temporary',
+      'Sui_Drawer-root-anchor-docked-bottom': anchor === 'bottom' && type !== 'temporary',
     })
 
     const drawer = (
-      <div className={rootClassName}>
+      <div className={rootClassName} style={...rootStyle}>
         {children}
       </div>
     )
 
     if (type === 'permanent') {
       return (
-        <div className={classNames('.Sui_Drawer-docked', className)}>
+        <div className={classNames('Sui_Drawer-docked', className)}>
           {drawer}
         </div>
       )
@@ -133,7 +135,7 @@ class Drawer extends React.Component<Props, any> {
 
     if (type === 'persistent') {
       return (
-        <div className={classNames('.Sui_Drawer-docked', className)} {...other}>
+        <div className={classNames('Sui_Drawer-docked', className)} {...other}>
           {slidingDrawer}
         </div>
       )

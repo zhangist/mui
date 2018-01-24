@@ -240,7 +240,7 @@ class Slide extends React.Component<Props, any> {
       ...(React.isValidElement(children) ? (children.props as any).style : {}),
     }
 
-    const myTimeout = timeout ? timeout : 200
+    const slideTimeout = timeout ? timeout : 200
 
     return (
       <EventListener target="window" onResize={this.handleResize}>
@@ -250,7 +250,7 @@ class Slide extends React.Component<Props, any> {
           onExit={this.handleExit}
           onExited={this.handleExited}
           appear
-          timeout={myTimeout}
+          timeout={slideTimeout}
           style={style}
           ref={(node: any) => {
             this.transition = node

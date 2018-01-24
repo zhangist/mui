@@ -12,7 +12,7 @@ import { createChainedFunction } from '../utils/helpers'
 import isOverflowing from './isOverflowing'
 import ModalManager from './ModalManager'
 
-const DURATION = 300
+const DURATION = 200
 
 function getContainer(container: any, defaultContainer: any) {
   container = typeof container === 'function' ? container() : container
@@ -51,12 +51,12 @@ export interface Props {
   onBackdropClick?: (arg: any) => any,
   handleRendered?: () => any,
   open: boolean,
+  rootStyle?: any,
 }
 
 export default class Modal extends React.Component<Props, any> {
   public static defaultProps = {
     manager: new ModalManager(),
-    container: document.body,
   }
 
   public modalNode: any = null
@@ -88,23 +88,8 @@ export default class Modal extends React.Component<Props, any> {
     }
   }
 
-  public componentWillUpdate(nextProps: any, nextState: any) {
-    if (!this.props.open && nextProps.open) {
-      // document.body.style.overflow = 'hidden'
-      this.setState({
-        openBackdrop: true,
-      })
-    }
-    if (this.props.open && !nextProps.open) {
-      // document.body.style.overflow = this.overflow
-      this.setState({
-        openBackdrop: false,
-      })
-    }
-  }
-
   public componentDidUpdate(prevProps: any) {
-    if (prevProps.open && !this.props.open) {
+    if (prevProps.open && !this.props.open && !getHasTransition(this.props)) {
       // Otherwise handleExited will call this.
       this.handleClose()
     } else if (!prevProps.open && this.props.open) {
@@ -156,7 +141,10 @@ export default class Modal extends React.Component<Props, any> {
   public render() {
     const {
       children,
+      container,
+      handleRendered,
       open,
+      rootStyle,
     } = this.props
     const {
       exited,
@@ -182,10 +170,10 @@ export default class Modal extends React.Component<Props, any> {
         ref={(node: any) => {
           this.mountNode = node ? node.getMountNode() : node
         }}
-        container={this.props.container}
-        onRendered={this.props.handleRendered}
+        container={container}
+        onRendered={handleRendered}
       >
-        <div className={modalRootClassName}>
+        <div className={modalRootClassName} style={...rootStyle}>
           <Fade appear in={open} timeout={DURATION}>
             <div className="Sui_Backdrop-root"  onClick={this.handleBackdropClick}></div>
           </Fade>

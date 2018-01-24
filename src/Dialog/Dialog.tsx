@@ -30,6 +30,10 @@ class Dialog extends React.Component<Props, any> {
     return (
       <Modal
         open={open}
+        rootStyle={{
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
         {...other}
       >
         <Fade appear in={open} timeout={DURATION}>

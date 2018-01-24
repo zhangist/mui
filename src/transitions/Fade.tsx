@@ -33,6 +33,10 @@ interface Props {
   /**
    * @ignore
    */
+  onExited?: (node: any) => any,
+  /**
+   * @ignore
+   */
   style?: {},
   /**
    * The duration for the transition, in milliseconds.
@@ -74,8 +78,10 @@ class Fade extends React.Component<Props, {}> {
   public handleEntering = (node: any) => {
     const { timeout } = this.props
     if (timeout) {
-      node.style.transition = 'opacity ' + (typeof timeout === 'number' ? timeout : timeout.enter) + 'ms'
-      node.style.webkitTransition = 'opacity ' + (typeof timeout === 'number' ? timeout : timeout.enter) + 'ms'
+      node.style.transition = 'opacity ' + (typeof timeout === 'number' ? timeout : timeout.enter)
+        + 'ms cubic-bezier(0.4, 0, 0.2, 1) 0ms'
+      node.style.webkitTransition = 'opacity ' + (typeof timeout === 'number' ? timeout : timeout.enter)
+        + 'ms cubic-bezier(0.4, 0, 0.2, 1) 0ms'
       node.style.opacity = '1'
     }
 
@@ -94,6 +100,15 @@ class Fade extends React.Component<Props, {}> {
 
     if (this.props.onExit) {
       this.props.onExit(node)
+    }
+  }
+
+  public handleExited = (node: any) => {
+    node.style.transition = ''
+    node.style.webkitTransition = ''
+
+    if (this.props.onExited) {
+      this.props.onExited(node)
     }
   }
 
@@ -127,10 +142,11 @@ class Fade extends React.Component<Props, {}> {
     return (
       <Transition
         appear={appear}
-        style={style}
         onEnter={this.handleEnter}
         onEntering={this.handleEntering}
         onExit={this.handleExit}
+        onExited={this.handleExited}
+        style={style}
         timeout={fadeTimeout}
         {...other}
       >

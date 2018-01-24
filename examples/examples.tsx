@@ -15,6 +15,7 @@ class Examples extends React.Component {
     openDialog2: false,
     openDialog3: false,
     openDrawer: false,
+    openDrawer2: false,
   }
 
   public renderSectionButton() {
@@ -52,15 +53,14 @@ class Examples extends React.Component {
           <Button onClick={() => this.setState({ openDialog2: true })}>Open Dialog 2 / 打开模态框2</Button>
           <Button onClick={() => this.setState({ openDialog3: true })}>Open Dialog 3 / 打开模态框3</Button>
           <Dialog open={openDialog} onClose={() => this.setState({openDialog: false})}>
-            <DialogHeader>
-              <Button onClick={() => this.setState({ openDialog: false })}>Close / 关闭</Button>
-            </DialogHeader>
             <DialogContent>
               <div>Dialog</div>
               <br /><br />
-              {`<Dialog open={openDialog}>`}
+              {`<Dialog open={openDialog} onClose={() => this.setState({openDialog: false})}>`}
               {`...`}
               {`</Dialog>`}
+              <br /><br />
+              End
             </DialogContent>
           </Dialog>
           <Dialog width={600} height="300px" open={openDialog2}>
@@ -89,6 +89,8 @@ class Examples extends React.Component {
               {`<Dialog fullHeight open={openDialog3}>`}
               {`...`}
               {`</Dialog>`}
+              <br /><br />
+              End
             </DialogContent>
           </Dialog>
         </div>
@@ -102,16 +104,42 @@ class Examples extends React.Component {
         <div className="title">
           Drawer / 抽屉
         </div>
-        <div className="content">
-          <Button onClick={() => this.setState({openDrawer: true})}>Open Drawer / 打开抽屉</Button>
-          <Drawer
-            type="temporary"
-            anchor="left"
-            open={this.state.openDrawer}
-            onClose={() => this.setState({openDrawer: false})}
-          >
-            <div>Drawer</div>
-          </Drawer>
+        <div className="content" style={{height: '200px'}}>
+          <div style={{width: '100%', height: '100%', overflow: 'hidden', display: 'flex', position: 'relative'}}>
+            <Drawer
+              type="persistent"
+              anchor="left"
+              open={this.state.openDrawer}
+              onClose={() => this.setState({openDrawer: false})}
+              rootStyle={{height: '100%', position: 'relative'}}
+            >
+              <Button onClick={() => this.setState({openDrawer: false})}>Close Drawer / 关闭抽屉</Button>
+              <div style={{width: '200px'}}>Drawer</div>
+            </Drawer>
+            <Drawer
+              type="temporary"
+              anchor="right"
+              open={this.state.openDrawer2}
+              onClose={() => this.setState({openDrawer2: false})}
+            >
+              <div style={{width: '200px'}}>Drawer</div>
+            </Drawer>
+            <div style={{
+              height: '100%',
+              backgroundColor: '#ccc',
+              flex: '1 1 auto',
+              transition: 'margin 200ms',
+              marginLeft: this.state.openDrawer ? '0px' : '-200px',
+            }}>
+              <Button
+                onClick={() => this.setState({openDrawer: true})}
+                disabled={this.state.openDrawer}
+              >
+                Open Drawer / 打开抽屉
+              </Button>
+              <Button onClick={() => this.setState({openDrawer2: true})}>Open Drawer2 / 打开抽屉2</Button>
+            </div>
+          </div>
         </div>
       </section>
     )

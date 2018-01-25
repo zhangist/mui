@@ -1,0 +1,156 @@
+@unit: 8px;
+@placeholder: {
+  color: currentColor;
+  opacity: 0.42;
+  transition: opacity 200ms ease-in-out;
+};
+@placeholderHidden: {
+  opacity: 0;
+};
+@placeholderVisible: {
+  opacity: 0.42;
+};
+
+.Sui_Input-root {
+  display: inline-flex;
+  align-items: baseline;
+  position: relative;
+  color: rgba(0, 0, 0, 0.87);
+  font-size: 16px,
+}
+
+.Sui_Input-form-control {
+  label + & {
+    margin-top: @unit;
+  }
+}
+
+.Sui_Input-inkbar {
+  &:after {
+    background-color: #1976d2;
+    left: 0;
+    bottom: 0;
+    // Doing the other way around crash on IE11 "''" https://github.com/cssinjs/jss/issues/242
+    content: "";
+    height: 2px;
+    position: absolute;
+    right: 0;
+    transform: scaleX(0);
+    transition: transform 200ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+    pointer-events: none; // Transparent to the hover style.
+  }
+  &.Sui_Input-focused:after {
+    transform: scaleX(1);
+  }
+}
+
+.Sui_Input-disabled {
+  color: rgba(0,0,0,0.3)
+}
+
+.Sui_Input-underline {
+  &:before {
+    background-color: rgba(0, 0, 0, 0.42);
+    left: 0;
+    bottom: 0;
+    // Doing the other way around crash on IE11 "''" https://github.com/cssinjs/jss/issues/242
+    content: "";
+    height: 1px;
+    position: absolute;
+    right: 0;
+    transition: background-color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    pointer-events: none; // Transparent to the hover style.
+  }
+  &:hover:not(.Sui_Input-disabled):before {
+    height: 2px;
+    background-color: rgba(0,0,0,0.87);
+  }
+  &.Sui_Input-disabled:before {
+    background: transparent;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.42) 33%, transparent 0%);
+    background-position: left top;
+    background-repeat: repeat-x;
+    background-size: 5px 1px;
+  }
+}
+
+.Sui_Input-multiline {
+  padding: (@unit - 2) 0 (@unit - 1);
+}
+
+.Sui_Input-full-width {
+  width: 100%;
+}
+
+.Sui_Input-input {
+  font: inherit;
+  color: currentColor;
+  padding: (@unit - 2) 0px (@unit - 1);
+  border: 0;
+  box-sizing: content-box;
+  vertical-align: middle;
+  background: none;
+  margin: 0; // Reset for Safari
+  // Remove grey highlight
+  -webkit-tap-highlight-color: transparent;
+  display: block;
+  // Make the flex item shrink with Firefox
+  min-width: 0;
+  width: 100%;
+  &::-webkit-input-placeholder {
+    color: currentColor;
+    opacity: 0.42;
+    transition: opacity 200ms ease-in-out;
+  }
+  // &::-moz-placeholder @{placeholder} // Firefox 19+
+  // &:-ms-input-placeholder @{placeholder} // IE 11
+  // &::-ms-input-placeholder @{placeholder} // Edge
+
+  &:focus {
+    outline: 0;
+  }
+  // Reset Firefox invalid required input style
+  &:invalid {
+    box-shadow: none;
+  }
+  &::-webkit-search-decoration {
+    // Remove the padding when type=search.
+    appearance: none;
+  }
+  // Show and hide the placeholder logic
+  label[data-shrink=false] + .Sui_Input-form-control & {
+    &::-webkit-input-placeholder {
+      opacity: 0;
+    }
+    // &::-moz-placeholder @placeholderHidden // Firefox 19+
+    // &:-ms-input-placeholder @placeholderHidden // IE 11
+    // &::-ms-input-placeholder @placeholderHidden // Edge
+    &:focus::-webkit-input-placeholder {
+      opacity: 0.42;
+    }
+    // &:focus::-moz-placeholder @placeholderVisible // Firefox 19+
+    // &:focus:-ms-input-placeholder @placeholderVisible // IE 11
+    // &:focus::-ms-input-placeholder @placeholderVisible // Edge
+  }
+}
+
+.Sui_Input-input-dense {
+  padding-top: ((@unit / 2) - 1);
+}
+
+.Sui_Input-input-disabled {
+  opacity: 1; // Reset iOS opacity
+}
+
+.Sui_Input-input-singleline {
+  height: 1.1875em; // Reset (19px)
+}
+
+.Sui_Input-input-multiline {
+  resize: none;
+  padding: 0;
+}
+
+.Sui_Input-input-search {
+  appearance: textfield; // Improve type search style.
+}

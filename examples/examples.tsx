@@ -146,6 +146,19 @@ class Examples extends React.Component {
     )
   }
 
+  public renderSectionInput() {
+    return (
+      <section>
+        <div className="title">
+          Input / 输入框
+        </div>
+        <div className="content">
+          <Input type="date" />
+        </div>
+      </section>
+    )
+  }
+
   public render() {
 
     return (
@@ -161,7 +174,7 @@ class Examples extends React.Component {
         {this.renderSectionButton()}
         {this.renderSectionDialog()}
         {this.renderSectionDrawer()}
-        <Input type="date" />
+        {this.renderSectionInput()}
         <br /><br /><br /><br /><br /><br /><br />
         <div className="remark">
           Remarks / 备注

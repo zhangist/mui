@@ -1,0 +1,36 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+<svg viewBox="0,0,256,256" width="100%" height="100%" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <!--
+  <path d=" M 17.5 64 L 128 0 L 192 192 L 128 192 Z " fill="#115588" />
+  <path d=" M 128 0 L 238.5 64 L 128 192 Z " fill="#113366" />
+
+  <path d="M 17.5 64 L 128 128 L 192 128 L 128 256 L 17.5 192 Z" fill="#1188cc" />
+  <path d="M 128 128 L 238.5 64 L 238.5 192 L 128 256 Z" fill="#22aaff" />
+  -->
+  
+  <!-- inner border -->
+  <path d="M 17.5 64
+    L 128 120 L 238.5 64
+    L 135 132.5 L 128 256
+    L 121 132.5 Z" fill="#000" />
+  <!-- out border -->
+  <!--
+  <path d="M 17.5 64 L 128 8 L 238.5 64 L 128 0 Z" fill="#000" />
+  <path d="M 17.5 64 L 24.5 187.5 L 128 256 L 17.5 192 Z" fill="#000" />
+  <path d="M 238.5 64 L 238.5 192 L 128 256 L 231.5 187.5 Z" fill="#000" />
+  -->
+  
+  <!-- point -->
+  <!--<circle cx="128" cy="128" r="6" fill="#fff"/>-->
+  
+  <!-- s -->
+  <path d="M 51 65 L 128 103 L 174 80 L 110.5 49.5 L 128 42 L 189 71
+    L 204 64 L 128 27 L 82 50 L 146 80 L 128 88 L 67 58 Z" fill="#000" />
+  <!-- u -->
+  <path d="M 43 110 L 47 176 L 100 212 L 96 146 
+    L 78 134 L 81.5 181 L 63 169 L 60 123 Z" fill="#000" />
+  <!-- i -->
+  <path d="M 180 132 L 176 200 L 196 186 L 200 116 Z" fill="#000" />
+</svg>

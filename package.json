@@ -41,9 +41,11 @@
     "react-dom": "^16.2.0",
     "react-event-listener": "^0.5.3",
     "react-transition-group": "^2.2.1",
+    "recompose": "^0.26.0",
     "warning": "^3.0.0"
   },
   "devDependencies": {
+    "@types/recompose": "^0.24.4",
     "autoprefixer": "^7.2.5",
     "css-loader": "^0.28.9",
     "extract-text-webpack-plugin": "^3.0.2",

@@ -42,6 +42,7 @@ function getPaddingRight(node: any) {
 }
 
 export interface Props {
+  BackdropProps?: any,
   children: any,
   closable?: boolean,
   container?: any,

@@ -7,6 +7,7 @@ import {
   DialogFooter,
   DialogHeader,
   Drawer,
+  Input,
 } from '../src'
 
 class Examples extends React.Component {
@@ -150,12 +151,17 @@ class Examples extends React.Component {
     return (
       <div className="page">
         <header>
-          <div className="logo">Shulive-UI</div>
+          <div className="logo">
+            <img src="./logo.svg" style={{width: '128px', verticalAlign: 'top'}} />
+            <br />
+            <span>Shulive-UI</span>
+          </div>
         </header>
         <div className="title">Examples / 实例</div>
         {this.renderSectionButton()}
         {this.renderSectionDialog()}
         {this.renderSectionDrawer()}
+        <Input type="date" />
         <br /><br /><br /><br /><br /><br /><br />
         <div className="remark">
           Remarks / 备注

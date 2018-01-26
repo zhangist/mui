@@ -1,231 +1,123 @@
-import * as classnames from 'classnames'
-import * as keycode from 'keycode'
+// @inheritedComponent ButtonBase
+
+import * as classNames from 'classnames'
 import * as React from 'react'
-import { findDOMNode } from 'react-dom'
-import TouchRipple from '../TouchRipple'
-import { detectKeyboardFocus, focusKeyPressed, listenForFocusKeys } from '../utils/keyboardFocus'
-import createRippleHandler from './createRippleHandler'
+import ButtonBase , { Props as ButtonBaseProps } from '../ButtonBase/ButtonBase'
 
 export interface Props {
-  centerRipple?: boolean,
-  color?: string,
-  component?: React.ReactType<Button>,
+  /**
+   * The content of the button.
+   */
+  children: any,
+  /**
+   * @ignore
+   */
+  className?: string,
+  /**
+   * The color of the component. It's using the theme palette when that makes sense.
+   */
+  color?: 'default'|'inherit'|'primary'|'accent'|'contrast',
+  /**
+   * The component used for the root node.
+   * Either a string to use a DOM element or a component.
+   * The default value is a `button`.
+   */
+  component?: any,
+  /**
+   * Uses a smaller minWidth, ideal for things like card actions.
+   */
+  dense?: boolean,
+  /**
+   * If `true`, the button will be disabled.
+   */
+  disabled?: boolean,
+  /**
+   * If `true`, the  keyboard focus ripple will be disabled.
+   * `disableRipple` must also be true.
+   */
+  disableFocusRipple?: boolean,
+  /**
+   * If `true`, the ripple effect will be disabled.
+   */
   disableRipple?: boolean,
-  focusRipple?: boolean,
-  keyboardFocusedClassName?: string,
+  /**
+   * If `true`, will use floating action button styling.
+   */
+  fab?: boolean,
+  /**
+   * If `true`, the button will take up the full width of its container.
+   */
+  fullWidth?: boolean,
+  /**
+   * The URL to link to when the button is clicked.
+   * If defined, an `a` element will be used as the root node.
+   */
+  href?: string,
+  /**
+   * If `true`, and `fab` is `true`, will use mini floating action button styling.
+   */
   mini?: boolean,
-  onKeyboardFocus?: React.FocusEventHandler<any>,
-  rootRef?: React.Ref<any>,
+  /**
+   * If `true`, the button will use raised styling.
+   */
+  raised?: boolean,
+  /**
+   * @ignore
+   */
+  type?: string,
 }
 
-export default class Button extends React.Component<Props
-  & React.AnchorHTMLAttributes<HTMLElement>
-  & React.ButtonHTMLAttributes<HTMLElement>, any> {
+function Button(props: Props & ButtonBaseProps) {
+  const {
+    children,
+    className: classNameProp,
+    color = 'default',
+    dense = false,
+    disabled = false,
+    disableFocusRipple = false,
+    disableRipple = false,
+    fab = false,
+    fullWidth = false,
+    mini = false,
+    raised = false,
+    type = 'button',
+    ...other,
+  } = props
 
-  public button: null|Element = null
-  public ripple: null|any = null
-  // Used to help track keyboard activation keyDown
-  public keyDown = false
-  // public keyboardFocusTimeout = null
-  public keyboardFocusCheckTime = 50
-  public keyboardFocusMaxCheckTimes = 5
+  const flat = !raised && !fab
+  const className = classNames(
+    'Sui_Button_root',
+    {
+      'Sui_Button_raised': raised || fab,
+      'Sui_Button_fab': fab,
+      'Sui_Button_mini': fab && mini,
+      'Sui_Button_color-inherit': color === 'inherit',
+      'Sui_Button_flat-primary': flat && color === 'primary',
+      'Sui_Button_flat-accent': flat && color === 'accent',
+      'Sui_Button_flat-contrast': flat && color === 'contrast',
+      'Sui_Button_raised-primary': !flat && color === 'primary',
+      'Sui_Button_raised-accent': !flat && color === 'accent',
+      'Sui_Button_raised-contrast': !flat && color === 'contrast',
+      'Sui_Button_dense': dense,
+      'Sui_Button_disabled': disabled,
+      'Sui_Button_full-width': fullWidth,
+    },
+    classNameProp,
+  )
 
-  public handleMouseDown = createRippleHandler(this, 'MouseDown', 'start', () => {
-    // clearTimeout(this.keyboardFocusTimeout)
-    focusKeyPressed(false)
-    if (this.state.keyboardFocused) {
-      this.setState({ keyboardFocused: false })
-    }
-  })
-
-  public handleMouseUp = createRippleHandler(this, 'MouseUp', 'stop')
-
-  public handleMouseLeave = createRippleHandler(this, 'MouseLeave', 'stop', (event: any) => {
-    if (this.state.keyboardFocused) {
-      event.preventDefault()
-    }
-  })
-
-  public handleTouchStart = createRippleHandler(this, 'TouchStart', 'start')
-
-  public handleTouchEnd = createRippleHandler(this, 'TouchEnd', 'stop')
-
-  public handleTouchMove = createRippleHandler(this, 'TouchEnd', 'stop')
-
-  public handleBlur = createRippleHandler(this, 'Blur', 'stop', () => {
-    // clearTimeout(this.keyboardFocusTimeout)
-    focusKeyPressed(false)
-    this.setState({ keyboardFocused: false })
-  })
-
-  public state = {
-    keyboardFocused: false,
-  }
-
-  public componentDidMount() {
-    this.button = findDOMNode(this)
-  }
-
-  public componentWillUnmount() {
-    this.button = null
-  }
-
-  public componentWillReceiveProps(nextProps: any) {
-    if (!this.props.disabled && nextProps.disabled) {
-      this.setState({
-        keyboardFocused: false,
-      })
-    }
-  }
-
-  public onKeyboardFocusHandler(event: any) {
-    this.keyDown = false
-    this.setState({ keyboardFocused: true })
-
-    if (this.props.onKeyboardFocus) {
-      this.props.onKeyboardFocus(event)
-    }
-  }
-
-  public handleKeyDown(event: any) {
-    const { component, focusRipple, onKeyDown, onClick } = this.props
-    const key = keycode(event)
-
-    // Check if key is already down to avoid repeats being counted as multiple activations
-    if (focusRipple && !this.keyDown && this.state.keyboardFocused && key === 'space') {
-      this.keyDown = true
-      event.persist()
-      this.ripple.stop(event, () => {
-        this.ripple.start(event)
-      })
-    }
-
-    if (onKeyDown) {
-      onKeyDown(event)
-    }
-
-    // Keyboard accessibility for non interactive elements
-    if (
-      event.target === this.button &&
-      onClick &&
-      component &&
-      component !== 'a' &&
-      component !== 'button' &&
-      (key === 'space' || key === 'enter')
-    ) {
-      event.preventDefault()
-      onClick(event)
-    }
-  }
-
-  public handleKeyUp(event: any) {
-    if (this.props.focusRipple && keycode(event) === 'space' && this.state.keyboardFocused) {
-      this.keyDown = false
-      event.persist()
-      this.ripple.stop(event, () => this.ripple.pulsate(event))
-    }
-    if (this.props.onKeyUp) {
-      this.props.onKeyUp(event)
-    }
-  }
-
-  public handleFocus(event: any) {
-    if (this.props.disabled) {
-      return false
-    }
-
-    // Fix for https://github.com/facebook/react/issues/7769
-    if (!this.button) {
-      this.button = event.currentTarget
-    }
-
-    event.persist()
-    detectKeyboardFocus(this, this.button, () => {
-      this.onKeyboardFocusHandler(event)
-    })
-
-    if (this.props.onFocus) {
-      this.props.onFocus(event)
-    }
-  }
-
-  public render() {
-    const {
-      centerRipple,
-      children,
-      color,
-      component,
-      disabled,
-      disableRipple,
-      focusRipple,
-      keyboardFocusedClassName,
-      onBlur,
-      onFocus,
-      onKeyboardFocus,
-      onKeyDown,
-      onKeyUp,
-      onMouseDown,
-      onMouseLeave,
-      onMouseUp,
-      onTouchEnd,
-      onTouchMove,
-      onTouchStart,
-      rootRef,
-      tabIndex,
-      type,
-      ...other,
-    } = this.props
-
-    const buttonProps: any = {}
-
-    let Root = 'button'
-
-    if (!component) {
-      if (other.href) {
-        Root = 'a'
-      }
-    }
-
-    if (component === 'button') {
-      buttonProps.type = type || 'button'
-    }
-
-    if (component !== 'a') {
-      buttonProps.role = buttonProps.role || 'button'
-      buttonProps.disabled = disabled
-    }
-
-    const rootClassName = classnames('Sui_Button-root')
-    const labelClassName = classnames('Sui_Button-label')
-
-    return (
-      <Root
-        className={rootClassName}
-        onBlur={(e: any) => this.handleBlur(e)}
-        onFocus={(e: any) => this.handleFocus(e)}
-        onKeyDown={(e: any) => this.handleKeyDown(e)}
-        onKeyUp={(e: any) => this.handleKeyUp(e)}
-        onMouseDown={(e: any) => this.handleMouseDown(e)}
-        onMouseLeave={(e: any) => this.handleMouseLeave(e)}
-        onMouseUp={(e: any) => this.handleMouseUp(e)}
-        onTouchEnd={(e: any) => this.handleTouchEnd(e)}
-        onTouchMove={(e: any) => this.handleTouchMove(e)}
-        onTouchStart={(e: any) => this.handleTouchStart(e)}
-        tabIndex={disabled ? -1 : tabIndex}
-        ref={rootRef}
-        {...buttonProps}
-        {...other}
-      >
-        <span className={labelClassName}>{children}</span>
-        {!disableRipple && !disabled ? (
-          <TouchRipple
-            ref={(node: any) => {
-              this.ripple = node
-            }}
-            center={centerRipple}
-          />
-        ) : null}
-      </Root>
-    )
-  }
+  return (
+    <ButtonBase
+      className={className}
+      disabled={disabled}
+      disableRipple={disableRipple}
+      focusRipple={!disableFocusRipple}
+      keyboardFocusedClassName="Sui_Button_keyboard-focused"
+      type={type}
+      {...other}
+    >
+      <span className="Sui_Button_label">{children}</span>
+    </ButtonBase>
+  )
 }
+
+export default Button

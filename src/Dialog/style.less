@@ -1,4 +1,4 @@
-.Sui_Dialog-root {
+.Sui_Dialog_root {
   flex: 0 1 auto;
   display: flex;
   max-width: 100%;
@@ -9,27 +9,27 @@
   display: flex;
   flex-direction: column;
   position: relative;
+
+  &.Sui_Dialog_full-height {
+    height: 100%;
+    border-radius: 0;
+  }
 }
 
-.Sui_Dialog-root-full-height {
-  height: 100%;
-  border-radius: 0;
-}
-
-.Sui_Dialog-header {
+.Sui_Dialog_header {
   margin: 0;
   padding: 0;
   flex: 0 0 auto;
 }
 
-.Sui_Dialog-content {
+.Sui_Dialog_content {
   margin: 0;
   padding: 0;
   flex: 1 1 auto;
   overflow-y: auto;
 }
 
-.Sui_Dialog-footer {
+.Sui_Dialog_footer {
   margin: 0;
   padding: 0;
   flex: 0 0 auto;

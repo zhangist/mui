@@ -1,0 +1,28 @@
+@import './theme.less';
+
+.marginLeftLoop(@n, @i:1) when (@i <= @n) {
+  .margin-left-@{i} {
+    margin-left: @i - 0px;
+  }
+  .marginLeftLoop(@n, (@i + 1))
+}
+
+.marginRightLoop(@n, @i:1) when (@i <= @n) {
+  .margin-right-@{i} {
+    margin-right: @i - 0px;
+  }
+  .marginRightLoop(@n, (@i + 1))
+}
+
+.marginLeftLoop(16);
+.marginRightLoop(16);
+
+.margin-left-unit {
+  margin-right: @spacing_unit;
+}
+.margin-right-unit {
+  margin-right: @spacing_unit;
+}
+.margin-unit {
+  margin: @spacing_unit;
+}

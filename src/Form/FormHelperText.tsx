@@ -60,11 +60,11 @@ function FormHelperText(props: Props, context: ContextTypes) {
   }
 
   const className = classNames(
-    'Sui_FormHelperText-root',
+    'Sui_FormHelperText_root',
     {
-      'Sui_FormHelperText-disabled': disabled,
-      'Sui_FormHelperText-error': error,
-      'Sui_FormHelperText-dense': margin === 'dense',
+      'Sui_FormHelperText_disabled': disabled,
+      'Sui_FormHelperText_error': error,
+      'Sui_FormHelperText_dense': margin === 'dense',
     },
     classNameProp,
   )

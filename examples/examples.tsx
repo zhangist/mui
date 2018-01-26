@@ -7,7 +7,8 @@ import {
   DialogFooter,
   DialogHeader,
   Drawer,
-  Input,
+  MenuItem,
+  TextField,
 } from '../src'
 
 class Examples extends React.Component {
@@ -17,6 +18,17 @@ class Examples extends React.Component {
     openDialog3: false,
     openDrawer: false,
     openDrawer2: false,
+    textFieldValue: '',
+    textFieldValue2: '',
+    textFieldValue3: '',
+    textFieldValue4: '',
+    textFieldValue5: '',
+  }
+
+  public handleChange = (name: string) => (event: any) => {
+    this.setState({
+      [name]: event.target.value,
+    })
   }
 
   public renderSectionButton() {
@@ -28,7 +40,7 @@ class Examples extends React.Component {
         </div>
         <div className="subtitle">(a | button)</div>
         <div className="content">
-          <Button>Button / 按钮</Button>
+          <Button fullWidth>Button / 按钮</Button>
         </div>
       </section>
     )
@@ -150,10 +162,72 @@ class Examples extends React.Component {
     return (
       <section>
         <div className="title">
-          Input / 输入框
+          TextField / 输入框
         </div>
         <div className="content">
-          <Input type="date" />
+          <div>
+            <TextField
+              className="margin-left-8 margin-right-8"
+              helperText="&nbsp;"
+              label="&nbsp;"
+              type="date"
+              value={this.state.textFieldValue}
+              onChange={this.handleChange('textFieldValue')}
+              margin="normal"
+            />
+            <TextField
+              className="margin-left-unit margin-right-unit"
+              helperText="Some important text"
+              label="Helper text"
+              type="text"
+              value={this.state.textFieldValue2}
+              onChange={this.handleChange('textFieldValue2')}
+              placeholder="PlaceHolder"
+              margin="normal"
+            />
+            <TextField
+              className="margin-left-unit margin-right-unit"
+              helperText="&nbsp;"
+              label="&nbsp;"
+              type="number"
+              value={this.state.textFieldValue3}
+              onChange={this.handleChange('textFieldValue3')}
+              margin="normal"
+            />
+            <TextField
+              id="select-currency"
+              select
+              label="Select"
+              value={this.state.textFieldValue4}
+              onChange={this.handleChange('textFieldValue4')}
+              helperText="Please select your currency"
+              margin="normal"
+            >
+              {[{value: 'value', label: 'label'}].map((option: any) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </TextField>
+            <TextField
+              id="select-currency-native"
+              select
+              label="Native select"
+              value={this.state.textFieldValue5}
+              onChange={this.handleChange('textFieldValue5')}
+              helperText="Please select your currency"
+              margin="normal"
+            >
+              {[{value: 'value', label: 'label'}].map((option: any) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </TextField>
+          </div>
+          <div className="margin-unit">
+            <span>TextField: {this.state.textFieldValue}</span>
+          </div>
         </div>
       </section>
     )

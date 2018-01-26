@@ -1,0 +1,35 @@
+@import './colors.less';
+
+@spacing_unit: 8px;
+@typography_fontFamily: "Roboto", "Helvetica", "Arial", sans-serif;
+@palette_input_labelText: rgba(0, 0, 0, 0.54);
+@typography_pxToRem_16: 1rem;
+@typography_fontSize: 16px;
+@palette_text_primary: rgba(0, 0, 0, 0.87);
+@palette_text_divider: rgba(0, 0, 0, 0.13);
+@palette_primary_main: #333;
+@palette_secondary_main: #444;
+@palette_secondary_light: #666;
+@palette_action_disabled: #234;
+@palette_primary_dark: #333;
+@palette_primary_contrastText: #456;
+@transitions_backgroundColor: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+@transitions_boxShadow: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+.typography_button() {
+  font-size: 0.875rem;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 500;
+  border: none;
+  outline: none;
+  position: relative;
+  background-color: rgba(0, 0, 0, 0);
+  cursor: pointer;
+};
+
+@palette_grey_300: #ccc;
+.typography_fontSize_pxToRem(@n) {
+  font-size: @n / 16px;
+}
+.boxShadow(@n) {
+  box-shadow: 0 0 4px rgba(0, 0, 0, @n * 0.01)
+}

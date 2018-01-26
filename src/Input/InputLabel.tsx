@@ -76,13 +76,13 @@ function InputLabel(props: Props, context: ContextTypes) {
   }
 
   const className = classNames(
-    'Sui_InputLabel-root',
+    'Sui_InputLabel_root',
     {
-      'Sui_InputLabel-form-control': muiFormControl,
-      'Sui_InputLabel-animated': !disableAnimation,
-      'Sui_InputLabel-shrink': shrink,
-      'Sui_InputLabel-disabled': disabled,
-      'Sui_InputLabel-label-dense': margin === 'dense',
+      'Sui_InputLabel_form-control': muiFormControl,
+      'Sui_InputLabel_animated': !disableAnimation,
+      'Sui_InputLabel_shrink': shrink,
+      'Sui_InputLabel_disabled': disabled,
+      'Sui_InputLabel_label-dense': margin === 'dense',
     },
     classNameProp,
   )

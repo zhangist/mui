@@ -1,17 +1,6 @@
-@unit: 8px;
-@placeholder: {
-  color: currentColor;
-  opacity: 0.42;
-  transition: opacity 200ms ease-in-out;
-};
-@placeholderHidden: {
-  opacity: 0;
-};
-@placeholderVisible: {
-  opacity: 0.42;
-};
+@import '../theme.less';
 
-.Sui_Input-root {
+.Sui_Input_root {
   display: inline-flex;
   align-items: baseline;
   position: relative;
@@ -19,13 +8,13 @@
   font-size: 16px,
 }
 
-.Sui_Input-form-control {
+.Sui_Input_form-control {
   label + & {
-    margin-top: @unit;
+    margin-top: @spacing_unit;
   }
 }
 
-.Sui_Input-inkbar {
+.Sui_Input_inkbar {
   &:after {
     background-color: #1976d2;
     left: 0;
@@ -39,16 +28,16 @@
     transition: transform 200ms cubic-bezier(0, 0, 0.2, 1) 0ms;
     pointer-events: none; // Transparent to the hover style.
   }
-  &.Sui_Input-focused:after {
+  &.Sui_Input_focused:after {
     transform: scaleX(1);
   }
 }
 
-.Sui_Input-disabled {
+.Sui_Input_disabled {
   color: rgba(0,0,0,0.3)
 }
 
-.Sui_Input-underline {
+.Sui_Input_underline {
   &:before {
     background-color: rgba(0, 0, 0, 0.42);
     left: 0;
@@ -61,11 +50,11 @@
     transition: background-color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
     pointer-events: none; // Transparent to the hover style.
   }
-  &:hover:not(.Sui_Input-disabled):before {
+  &:hover:not(.Sui_Input_disabled):before {
     height: 2px;
     background-color: rgba(0,0,0,0.87);
   }
-  &.Sui_Input-disabled:before {
+  &.Sui_Input_disabled:before {
     background: transparent;
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0.42) 33%, transparent 0%);
     background-position: left top;
@@ -74,18 +63,18 @@
   }
 }
 
-.Sui_Input-multiline {
-  padding: (@unit - 2) 0 (@unit - 1);
+.Sui_Input_multiline {
+  padding: (@spacing_unit - 2) 0 (@spacing_unit - 1);
 }
 
-.Sui_Input-full-width {
+.Sui_Input_full-width {
   width: 100%;
 }
 
-.Sui_Input-input {
+.Sui_Input_input {
   font: inherit;
   color: currentColor;
-  padding: (@unit - 2) 0px (@unit - 1);
+  padding: (@spacing_unit - 2) 0px (@spacing_unit - 1);
   border: 0;
   box-sizing: content-box;
   vertical-align: middle;
@@ -118,7 +107,7 @@
     appearance: none;
   }
   // Show and hide the placeholder logic
-  label[data-shrink=false] + .Sui_Input-form-control & {
+  label[data-shrink=false] + .Sui_Input_form-control & {
     &::-webkit-input-placeholder {
       opacity: 0;
     }
@@ -134,23 +123,23 @@
   }
 }
 
-.Sui_Input-input-dense {
-  padding-top: ((@unit / 2) - 1);
+.Sui_Input_input-dense {
+  padding-top: ((@spacing_unit / 2) - 1);
 }
 
-.Sui_Input-input-disabled {
+.Sui_Input_input-disabled {
   opacity: 1; // Reset iOS opacity
 }
 
-.Sui_Input-input-singleline {
+.Sui_Input_input-singleline {
   height: 1.1875em; // Reset (19px)
 }
 
-.Sui_Input-input-multiline {
+.Sui_Input_input-multiline {
   resize: none;
   padding: 0;
 }
 
-.Sui_Input-input-search {
+.Sui_Input_input-search {
   appearance: textfield; // Improve type search style.
 }

@@ -6,7 +6,22 @@ import Ripple from '../Ripple'
 const DURATION = 550
 export const DELAY_RIPPLE = 80
 
-export default class TouchRipple extends React.Component<any, any> {
+export interface Props {
+  /**
+   * If `true`, the ripple starts at the center of the component
+   * rather than at the point of interaction.
+   */
+  center?: boolean,
+  /**
+   * @ignore
+   */
+  className?: string,
+}
+
+export default class TouchRipple extends React.Component<Props, any> {
+  public static defaultProps = {
+    center: false,
+  }
 
   public startTimer: any
   public startTimerCommit: any
@@ -22,7 +37,10 @@ export default class TouchRipple extends React.Component<any, any> {
   }
 
   public pulsate() {
-    this.startTimer({}, { pulsate: true })
+    console.log(this.startTimer)
+    if (this.startTimer) {
+      this.startTimer({}, { pulsate: true })
+    }
   }
 
   public start(event: any = {}, options: any = {}, cb: any) {

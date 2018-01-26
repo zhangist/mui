@@ -360,28 +360,28 @@ class Input extends React.Component<Props, {}> {
     const { disabled, error, margin } = formControlState(this.props, this.context)
 
     const className = classNames(
-      'Sui_Input-root',
+      'Sui_Input_root',
       {
-        'Sui_Input-disabled': disabled,
-        'Sui_Input-error': error,
-        'Sui_Input-full-width': fullWidth,
-        'Sui_Input-focused': this.state.focused,
-        'Sui_Input-form-control': muiFormControl,
-        'Sui_Input-inkbar': !disableUnderline,
-        'Sui_Input-multiline': multiline,
-        'Sui_Input-underline': !disableUnderline,
+        'Sui_Input_disabled': disabled,
+        'Sui_Input_error': error,
+        'Sui_Input_full-width': fullWidth,
+        'Sui_Input_focused': this.state.focused,
+        'Sui_Input_form-control': muiFormControl,
+        'Sui_Input_inkbar': !disableUnderline,
+        'Sui_Input_multiline': multiline,
+        'Sui_Input_underline': !disableUnderline,
       },
       classNameProp,
     )
 
     const inputClassName = classNames(
-      'Sui_Input-input',
+      'Sui_Input_input',
       {
-        'Sui_Input-input-disabled': disabled,
-        'Sui_Input-input-singleline': !multiline,
-        'Sui_Input-input-multiline': multiline,
-        'Sui_Input-input-search': type === 'search',
-        'Sui_Input-input-dense': margin === 'dense',
+        'Sui_Input_input-disabled': disabled,
+        'Sui_Input_input-singleline': !multiline,
+        'Sui_Input_input-multiline': multiline,
+        'Sui_Input_input-search': type === 'search',
+        'Sui_Input_input-dense': margin === 'dense',
       },
       inputPropsClassName,
     )

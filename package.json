@@ -27,6 +27,7 @@
   "dependencies": {
     "@types/classnames": "^2.2.3",
     "@types/lodash": "^4.14.93",
+    "@types/prop-types": "^15.5.2",
     "@types/react": "^16.0.34",
     "@types/react-dom": "^16.0.3",
     "@types/react-event-listener": "^0.4.4",
@@ -37,6 +38,7 @@
     "fs-extra": "^5.0.0",
     "keycode": "^2.1.9",
     "lodash": "^4.17.4",
+    "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-event-listener": "^0.5.3",

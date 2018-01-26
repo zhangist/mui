@@ -263,12 +263,12 @@ class SelectInput extends React.Component<Props, any> {
       )
 
       return (
-        <div className="Sui_SelectInput-root">
+        <div className="Sui_SelectInput_root">
           <select
             className={classNames(
-              'Sui_SelectInput-select',
+              'Sui_SelectInput_select',
               {
-                'Sui_SelectInput-disabled': disabled,
+                'Sui_SelectInput_disabled': disabled,
               },
               classNameProp,
             )}
@@ -283,7 +283,7 @@ class SelectInput extends React.Component<Props, any> {
           >
             {children}
           </select>
-          <ArrowDropDownIcon className="Sui_SelectInput-icon" />
+          <ArrowDropDownIcon className="Sui_SelectInput_icon" />
         </div>
       )
     }
@@ -350,13 +350,13 @@ class SelectInput extends React.Component<Props, any> {
       this.state.anchorEl != null && !autoWidth ? anchorEl.clientWidth : undefined
 
     return (
-      <div className="Sui_SelectInput-root">
+      <div className="Sui_SelectInput_root">
         <div
           className={classNames(
-            'Sui_SelectInput-select',
-            'Sui_SelectInput-select-menu',
+            'Sui_SelectInput_select',
+            'Sui_SelectInput_select-menu',
             {
-              'Sui_SelectInput-disabled': disabled,
+              'Sui_SelectInput_disabled': disabled,
             },
             classNameProp,
           )}
@@ -381,7 +381,7 @@ class SelectInput extends React.Component<Props, any> {
           {...other}
           type="hidden"
         />
-        <ArrowDropDownIcon className="Sui_SelectInput-icon" />
+        <ArrowDropDownIcon className="Sui_SelectInput_icon" />
         <Menu
           id={`menu-${name || ''}`}
           anchorEl={this.state.anchorEl}

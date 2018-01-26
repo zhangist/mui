@@ -162,8 +162,8 @@ export default class Modal extends React.Component<Props, any> {
       childProps.onExited = createChainedFunction(this.handleExited, children.props.onExited)
     }
 
-    const modalRootClassName = classNames('Sui_Modal-root', {
-      'Sui_Modal-hidden': exited,
+    const modalRootClassName = classNames('Sui_Modal_root', {
+      'Sui_Modal_hidden': exited,
     })
 
     return (
@@ -176,7 +176,7 @@ export default class Modal extends React.Component<Props, any> {
       >
         <div className={modalRootClassName} style={...rootStyle}>
           <Fade appear in={open} timeout={DURATION}>
-            <div className="Sui_Backdrop-root"  onClick={this.handleBackdropClick}></div>
+            <div className="Sui_Backdrop_root"  onClick={this.handleBackdropClick}></div>
           </Fade>
           <RefHolder
             ref={(node: any) => {

@@ -42,10 +42,10 @@ function Paper(props: Props) {
   )
 
   const className = classNames(
-    'Sui_Paper-root',
+    'Sui_Paper_root',
     // classes[`shadow${elevation >= 0 ? elevation : 0}`],
     {
-      'Sui_Paper-rounded': !square,
+      'Sui_Paper_rounded': !square,
     },
     classNameProp,
   )

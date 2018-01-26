@@ -1,7 +1,9 @@
+// tslint:disable:ordered-imports
+import './ButtonBase/style.less'
 import './Button/style.less'
 import './Dialog/style.less'
 import './Drawer/style.less'
+import './Form/style.less'
 import './Input/style.less'
 import './Modal/style.less'
-import './Ripple/style.less'
-import './TouchRipple/style.less'
+import './style.less'

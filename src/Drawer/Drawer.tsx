@@ -96,16 +96,19 @@ class Drawer extends React.Component<Props, any> {
       ...other,
     } = this.props
 
-    const rootClassName = classNames('Sui_Drawer-root', {
-      'Sui_Drawer-root-anchor-left': anchor === 'left',
-      'Sui_Drawer-root-anchor-right': anchor === 'right',
-      'Sui_Drawer-root-anchor-top': anchor === 'top',
-      'Sui_Drawer-root-anchor-bottom': anchor === 'bottom',
-      'Sui_Drawer-root-anchor-docked-left': anchor === 'left' && type !== 'temporary',
-      'Sui_Drawer-root-anchor-docked-right': anchor === 'right' && type !== 'temporary',
-      'Sui_Drawer-root-anchor-docked-top': anchor === 'top' && type !== 'temporary',
-      'Sui_Drawer-root-anchor-docked-bottom': anchor === 'bottom' && type !== 'temporary',
-    })
+    const rootClassName = classNames(
+      'Sui_Drawer_root',
+      {
+        'Sui_Drawer_root-anchor-left': anchor === 'left',
+        'Sui_Drawer_root-anchor-right': anchor === 'right',
+        'Sui_Drawer_root-anchor-top': anchor === 'top',
+        'Sui_Drawer_root-anchor-bottom': anchor === 'bottom',
+        'Sui_Drawer_root-anchor-docked-left': anchor === 'left' && type !== 'temporary',
+        'Sui_Drawer_root-anchor-docked-right': anchor === 'right' && type !== 'temporary',
+        'Sui_Drawer_root-anchor-docked-top': anchor === 'top' && type !== 'temporary',
+        'Sui_Drawer_root-anchor-docked-bottom': anchor === 'bottom' && type !== 'temporary',
+      },
+    )
 
     const drawer = (
       <div className={rootClassName} style={...rootStyle}>
@@ -115,7 +118,7 @@ class Drawer extends React.Component<Props, any> {
 
     if (type === 'permanent') {
       return (
-        <div className={classNames('Sui_Drawer-docked', className)}>
+        <div className={classNames('Sui_Drawer_docked', className)}>
           {drawer}
         </div>
       )
@@ -135,7 +138,7 @@ class Drawer extends React.Component<Props, any> {
 
     if (type === 'persistent') {
       return (
-        <div className={classNames('Sui_Drawer-docked', className)} {...other}>
+        <div className={classNames('Sui_Drawer_docked', className)} {...other}>
           {slidingDrawer}
         </div>
       )

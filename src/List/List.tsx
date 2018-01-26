@@ -1,4 +1,5 @@
 import * as classNames from 'classnames'
+import * as PropTypes from 'prop-types'
 import * as React from 'react'
 
 export interface Props {
@@ -44,8 +45,11 @@ class List extends React.Component<Props, {}> {
     dense: false,
     disablePadding: false,
   }
+  public static childContextTypes = {
+    dense: PropTypes.bool,
+  }
 
-  public getChildContext() {
+  public getChildContext(): ChildContextTypes {
     return {
       dense: this.props.dense,
     }
@@ -62,11 +66,11 @@ class List extends React.Component<Props, {}> {
       ...other,
     } = this.props
     const className = classNames(
-      'Sui_List-root',
+      'Sui_List_root',
       {
-        'Sui_List-dense': dense && !disablePadding,
-        'Sui_List-padding': !disablePadding,
-        'Sui_List-subheader': subheader,
+        'Sui_List_dense': dense && !disablePadding,
+        'Sui_List_padding': !disablePadding,
+        'Sui_List_subheader': subheader,
       },
       classNameProp,
     )

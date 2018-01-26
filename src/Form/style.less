@@ -1,0 +1,35 @@
+@import '../theme.less';
+
+.Sui_FormControl_root {
+  display: inline-flex;
+  flex-direction: column;
+  position: relative;
+  // Reset fieldset default style
+  min-width: 0;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+.Sui_FormControl_margin-normal {
+  margin-top: (@spacing_unit * 2);
+  margin-bottom: @spacing_unit;
+}
+
+.Sui_FormControl_margin-dense {
+  margin-top: @spacing_unit;
+  margin-bottom: (@spacing_unit / 2);
+}
+
+.Sui_FormControl_full-width {
+  width: 100%;
+}
+
+// FormLabel
+.Sui_FormLabel_root {
+  font-family: @typography_fontFamily;
+  color: @palette_input_labelText;
+  font-size: @typography_pxToRem_16;
+  line-height: 1;
+  padding: 0;
+}

@@ -23,9 +23,12 @@ class Dialog extends React.Component<Props, any> {
       ...other,
     } = this.props
 
-    const dialogRootClassName = classNames('Sui_Dialog-root', {
-      'Sui_Dialog-root-full-height': fullHeight,
-    })
+    const dialogRootClassName = classNames(
+      'Sui_Dialog_root',
+      {
+        'Sui_Dialog_full-height': fullHeight,
+      },
+    )
 
     return (
       <Modal

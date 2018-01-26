@@ -72,17 +72,17 @@ function FormLabel(props: Props, context: ContextTypes) {
   }
 
   const className = classNames(
-    'Sui_FormLabel-root',
+    'Sui_FormLabel_root',
     {
-      'Sui_FormLabel-focused': focused,
-      'Sui_FormLabel-disabled': disabled,
-      'Sui_FormLabel-error': error,
+      'Sui_FormLabel_focused': focused,
+      'Sui_FormLabel_disabled': disabled,
+      'Sui_FormLabel_error': error,
     },
     classNameProp,
   )
 
   const asteriskClassName = classNames({
-    'Sui_FormLabel-error': error,
+    'Sui_FormLabel_error': error,
   })
 
   return (

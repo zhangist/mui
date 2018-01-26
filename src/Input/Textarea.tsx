@@ -159,11 +159,11 @@ class Textarea extends React.Component<Props, any> {
     const defaultValueStringOrArray: any = defaultValue
 
     return (
-      <div className="Sui_Textarea-root" style={{ height: this.state.height }}>
+      <div className="Sui_Textarea_root" style={{ height: this.state.height }}>
         <EventListener target="window" onResize={this.handleResize} />
         <textarea
           ref={this.handleRefSinglelineShadow}
-          className={classnames('Sui_Textarea-shadow', 'Sui_Textarea-textarea')}
+          className={classnames('Sui_Textarea_shadow', 'Sui_Textarea_textarea')}
           tabIndex={-1}
           rows={1}
           readOnly
@@ -172,7 +172,7 @@ class Textarea extends React.Component<Props, any> {
         />
         <textarea
           ref={this.handleRefShadow}
-          className={classnames('Sui_Textarea-shadow', 'Sui_Textarea-textarea')}
+          className={classnames('Sui_Textarea_shadow', 'Sui_Textarea_textarea')}
           tabIndex={-1}
           rows={rowsNumber}
           aria-hidden="true"
@@ -182,7 +182,7 @@ class Textarea extends React.Component<Props, any> {
         />
         <textarea
           rows={rowsNumber}
-          className={classnames('Sui_Textarea-textarea', className)}
+          className={classnames('Sui_Textarea_textarea', className)}
           defaultValue={defaultValueStringOrArray}
           value={value}
           onChange={this.handleChange}

@@ -1,4 +1,5 @@
 import * as classNames from 'classnames'
+import * as PropTypes from 'prop-types'
 import * as React from 'react'
 import { isAdornedStart, isDirty } from '../Input/Input'
 import { isMuiElement } from '../utils/reactHelpers'
@@ -63,6 +64,9 @@ export interface ChildContextTypes {
  *  - InputLabel
  */
 class FormControl extends React.Component<Props, {}> {
+  public static childContextTypes = {
+    muiFormControl: PropTypes.object.isRequired,
+  }
   public state = {
     adornedStart: false,
     dirty: false,
@@ -87,7 +91,7 @@ class FormControl extends React.Component<Props, {}> {
     }
   }
 
-  public getChildContext() {
+  public getChildContext(): ChildContextTypes {
     const { disabled, error, required = false, margin } = this.props
     const { adornedStart, dirty, focused } = this.state
 
@@ -156,11 +160,11 @@ class FormControl extends React.Component<Props, {}> {
     return (
       <ComponentProp
         className={classNames(
-          'Sui_FormControl-root',
+          'Sui_FormControl_root',
           {
-            'Sui_FormControl-margin-normal': margin === 'normal',
-            'Sui_FormControl-margin-dense': margin === 'dense',
-            'Sui_FormControl-full-width': fullWidth,
+            'Sui_FormControl_margin-normal': margin === 'normal',
+            'Sui_FormControl_margin-dense': margin === 'dense',
+            'Sui_FormControl_full-width': fullWidth,
           },
           className,
         )}

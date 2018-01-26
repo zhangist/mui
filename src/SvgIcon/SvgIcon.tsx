@@ -47,14 +47,14 @@ function SvgIcon(props: Props) {
   } = props
 
   const className = classNames(
-    'Sui_SvgIcon-root',
+    'Sui_SvgIcon_root',
     {
-      'Sui_SvgIcon-color-accent': color === 'accent',
-      'Sui_SvgIcon-color-action': color === 'action',
-      'Sui_SvgIcon-color-contrast': color === 'contrast',
-      'Sui_SvgIcon-color-disabled': color === 'disabled',
-      'Sui_SvgIcon-color-error': color === 'error',
-      'Sui_SvgIcon-color-primary': color === 'primary',
+      'Sui_SvgIcon_color-accent': color === 'accent',
+      'Sui_SvgIcon_color-action': color === 'action',
+      'Sui_SvgIcon_color-contrast': color === 'contrast',
+      'Sui_SvgIcon_color-disabled': color === 'disabled',
+      'Sui_SvgIcon_color-error': color === 'error',
+      'Sui_SvgIcon_color-primary': color === 'primary',
     },
     classNameProp,
   )

@@ -81,23 +81,23 @@
 }
 
 .Sui_Button_raised {
-  color: (@palette_grey_300 * 1.6);
+  color: desaturate(@palette_grey_300, 1.6);
   background-color: @palette_grey_300;
 
   // box-shadow
-  .boxShadow(2);
+  .boxShadow_2;
 
   &.Sui_Button_keyboard-focused {
     // box-shadow
-    .boxShadow(6);
+    .boxShadow_6;
   }
   &:active {
     // box-shadow
-    .boxShadow(8);
+    .boxShadow_8;
   }
   &.Sui_Button_disabled {
     // box-shadow
-    .boxShadow(0);
+    .boxShadow_0;
     background-color: @palette_text_divider;
   }
   &:hover {
@@ -158,11 +158,11 @@
   height: 56px;
 
   // box-shadow
-  .boxShadow(6);
+  .boxShadow_6;
 
   &:active {
     // box-shadow
-    .boxShadow(12);
+    .boxShadow_12;
   }
 }
 

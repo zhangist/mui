@@ -1,7 +1,7 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 import * as TransitionGroup from 'react-transition-group/TransitionGroup'
-import Ripple from '../Ripple'
+import Ripple from './Ripple'
 
 const DURATION = 550
 export const DELAY_RIPPLE = 80
@@ -23,8 +23,8 @@ export default class TouchRipple extends React.Component<Props, any> {
     center: false,
   }
 
-  public startTimer: any
-  public startTimerCommit: any
+  public startTimer: any = null
+  public startTimerCommit: any = null
   public ignoringMouseDown = false
 
   public state = {
@@ -37,13 +37,10 @@ export default class TouchRipple extends React.Component<Props, any> {
   }
 
   public pulsate() {
-    console.log(this.startTimer)
-    if (this.startTimer) {
-      this.startTimer({}, { pulsate: true })
-    }
+    this.start({}, { pulsate: true })
   }
 
-  public start(event: any = {}, options: any = {}, cb: any) {
+  public start(event: any = {}, options: any = {}, cb?: any) {
     const {
       pulsate = false,
       center = this.props.center || options.pulsate,

@@ -80,7 +80,7 @@ class Examples extends React.Component {
             <DialogHeader>
               <Button onClick={() => this.setState({ openDialog2: false })}>Close / 关闭</Button>
             </DialogHeader>
-            <DialogContent style={{ padding: '0 16px 16px 16px'}}>
+            <DialogContent>
               <div>Dialog 2</div>
               <br /><br />
               {`<Dialog width={600} height="300px" open={openDialog2}>`}

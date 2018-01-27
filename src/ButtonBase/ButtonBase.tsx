@@ -160,6 +160,7 @@ class ButtonBase extends React.Component<Props, any> {
   public componentDidMount() {
     this.button = findDOMNode(this)
     listenForFocusKeys()
+    console.log(this.ripple)
   }
 
   public componentWillReceiveProps(nextProps: any) {

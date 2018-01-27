@@ -35,10 +35,6 @@
 /**
  * Ripple
  */
-.Sui_Ripple_wrapper {
-  opacity: 1;
-}
-
 .Sui_Ripple_root {
   display: block;
   position: absolute;
@@ -52,48 +48,23 @@
   z-index: 0;
 }
 
+.Sui_Ripple_wrapper {
+  opacity: 1;
+}
+
 .Sui_Ripple_wrapper-leaving {
   opacity: 0;
-  animation: sui-ripple-exit 550ms ease-in-out;
+  animation: sui-ripple-exit 550ms @transitions_easing_easeInOut;
 }
 
 .Sui_Ripple_wrapper-pulsating {
-  position: 'absolute';
-  left: 0;
-  top: 0;
-  display: 'block';
-  width: '100%';
-  height: '100%';
-  animation: sui-ripple-pulsate 1500ms ease-in-out 200ms infinite;
-  
-  &.Sui_Ripple_ripple-visible {
-    opacity: 0.2,
-  }
-}
-
-.Sui_Ripple_ripple {
-  width: 50px;
-  height: 50px;
-  left: 0;
-  top: 0;
-  opacity: 0;
   position: absolute;
-  border-radius: 50%;
-  background: currentColor;
-}
-
-.Sui_Ripple_ripple-visible {
-  opacity: 0.3;
-  transform: scale(1);
-  animation: sui-ripple-enter 550ms ease-in-out;
-}
-
-.Sui_Ripple_ripple-fast {
-  animation-duration: 200ms;
-}
-
-.Sui_Ripple_ripple-slow {
-  animation-duration: 900ms;
+  left: 0;
+  top: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  animation: sui-ripple-pulsate 2500ms @transitions_easing_easeInOut 200ms infinite;
 }
 
 @keyframes sui-ripple-enter {
@@ -124,4 +95,25 @@
   100% {
     transform: scale(1);
   }
+}
+
+.Sui_Ripple_ripple {
+  width: 50px;
+  height: 50px;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  position: absolute;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.Sui_Ripple_ripple-visible {
+  opacity: 0.3;
+  transform: scale(1);
+  animation: sui-ripple-enter 550ms @transitions_easing_easeInOut;
+}
+
+.Sui_Ripple_ripple-fast {
+  animation-duration: 200ms;
 }

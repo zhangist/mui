@@ -12,7 +12,7 @@ export interface Props {
   className?: string,
 }
 
-function DialogContent(props: Props) {
+function DialogContentText(props: Props) {
   const {
     children,
     className,
@@ -20,10 +20,10 @@ function DialogContent(props: Props) {
   } = props
 
   return (
-    <div className={classNames('Sui_DialogContent_root', className)} {...other}>
+    <p className={classNames('Sui_DialogContentText_root', className)} {...other}>
       {children}
-    </div>
+    </p>
   )
 }
 
-export default DialogContent
+export default DialogContentText

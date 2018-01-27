@@ -1,18 +1,20 @@
+// @inheritedComponent Portal
+
 import * as classNames from 'classnames'
+import activeElement = require('dom-helpers/activeElement')
 import ownerDocument = require('dom-helpers/ownerDocument')
-import css = require('dom-helpers/style')
-import getScrollbarSize = require('dom-helpers/util/scrollbarSize')
+import contains = require('dom-helpers/query/contains')
+import inDOM = require('dom-helpers/util/inDOM')
+import * as keycode from 'keycode'
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
-import Transition from 'react-transition-group/Transition'
+import * as warning from 'warning'
 import RefHolder from '../internal/RefHolder'
 import Portal from '../Portal'
-import Fade from '../transitions/Fade'
+import addEventListener from '../utils/addEventListener'
 import { createChainedFunction } from '../utils/helpers'
-import isOverflowing from './isOverflowing'
+import Backdrop from './Backdrop'
 import ModalManager from './ModalManager'
-
-const DURATION = 200
 
 function getContainer(container: any, defaultContainer: any) {
   container = typeof container === 'function' ? container() : container
@@ -27,50 +29,128 @@ function getHasTransition(props: any) {
   return props.children ? props.children.props.hasOwnProperty('in') : false
 }
 
-const defaultStyle = {
-  transition: `opacity ${DURATION}ms ease-out`, // cubic-bezier(0.4, 0, 0.2, 1) 0ms
-  opacity: 0.8,
-}
-
-const transitionStyles: any = {
-  entering: { opacity: 0.8 },
-  entered: { opacity: 1 },
-}
-
-function getPaddingRight(node: any) {
-  return parseInt(css(node, 'paddingRight') || 0, 10)
-}
-
 export interface Props {
+  /**
+   * A backdrop component. Useful for custom backdrop rendering.
+   */
+  BackdropComponent?: any,
+  /**
+   * Properties applied to the `Backdrop` element.
+   */
   BackdropProps?: any,
-  children: any,
-  closable?: boolean,
+  /**
+   * A single child content element.
+   */
+  children?: any,
+  /**
+   * @ignore
+   */
+  className?: string,
+  /**
+   * A node, component instance, or function that returns either.
+   * The `container` will have the portal children appended to it.
+   */
   container?: any,
-  disableBackdropClick?: false,
+  /**
+   * If `true`, the modal will not automatically shift focus to itself when it opens, and
+   * replace it to the last focused element when it closes.
+   * This also works correctly with any modal children that have the `disableAutoFocus` prop.
+   *
+   * Generally this should never be set to `true` as it makes the modal less
+   * accessible to assistive technologies, like screen readers.
+   */
+  disableAutoFocus?: boolean,
+  /**
+   * If `true`, clicking the backdrop will not fire any callback.
+   */
+  disableBackdropClick?: boolean,
+  /**
+   * If `true`, the modal will not prevent focus from leaving the modal while open.
+   *
+   * Generally this should never be set to `true` as it makes the modal less
+   * accessible to assistive technologies, like screen readers.
+   */
+  disableEnforceFocus?: boolean,
+  /**
+   * If `true`, hitting escape will not fire any callback.
+   */
+  disableEscapeKeyDown?: boolean,
+  /**
+   * If `true`, the modal will not restore focus to previously focused element once
+   * modal is hidden.
+   */
+  disableRestoreFocus?: boolean,
+  /**
+   * If `true`, the backdrop is not rendered.
+   */
+  hideBackdrop?: boolean,
+  /**
+   * Always keep the children in the DOM.
+   * This property can be useful in SEO situation or
+   * when you want to maximize the responsiveness of the Modal.
+   */
+  keepMounted?: boolean,
+  /**
+   * A modal manager used to track and manage the state of open
+   * Modals. Useful when customizing how modals interact within a container.
+   */
   manager?: ModalManager,
-  onClose?: (arg: any, arg2?: any) => any,
-  onBackdropClick?: (arg: any) => any,
-  handleRendered?: () => any,
+  /**
+   * Callback fired when the backdrop is clicked.
+   */
+  onBackdropClick?: (arg?: any) => any,
+  /**
+   * Callback fired when the component requests to be closed.
+   * The `reason` parameter can optionally be used to control the response to `onClose`.
+   *
+   * @param {object} event The event source of the callback
+   * @param {string} reason Can be:`"escapeKeyDown"`, `"backdropClick"`
+   */
+  onClose?: (arg?: any, arg2?: any) => any,
+  /**
+   * Callback fired when the escape key is pressed,
+   * `disableEscapeKeyDown` is false and the modal is in focus.
+   */
+  onEscapeKeyDown?: (arg?: any) => any,
+  /**
+   * Callback fired once the children has been mounted into the `container`.
+   * It signals that the `open={true}` property took effect.
+   */
+  onRendered?: (arg?: any) => any,
+  /**
+   * If `true`, the modal is open.
+   */
   open: boolean,
-  rootStyle?: any,
+  role?: string,
 }
 
-export default class Modal extends React.Component<Props, any> {
+class Modal extends React.Component<Props, any> {
   public static defaultProps = {
+    disableAutoFocus: false,
+    disableBackdropClick: false,
+    disableEnforceFocus: false,
+    disableEscapeKeyDown: false,
+    disableRestoreFocus: false,
+    hideBackdrop: false,
+    keepMounted: false,
+    // Modals don't open on the server so this won't conflict with concurrent requests.
     manager: new ModalManager(),
+    BackdropComponent: Backdrop,
   }
 
-  public modalNode: any = null
-  public mountNode: any = null
   public dialogNode: any = null
-  public mounted: boolean = false
-  public data = {
-    overflowing: false,
-    prevPaddings: [],
-  }
+  public modalNode = null
+  public mounted = false
+  public mountNode = null
+  public lastFocus: any = null
+  public onDocumentKeydownListener: any = null
+  public onFocusinListener: any = null
 
-  public state = {
-    exited: !this.props.open,
+  constructor(props: Props, context: any) {
+    super(props, context)
+    this.state = {
+      exited: !this.props.open,
+    }
   }
 
   public componentDidMount() {
@@ -89,6 +169,12 @@ export default class Modal extends React.Component<Props, any> {
     }
   }
 
+  public componentWillUpdate(nextProps: any) {
+    if (!this.props.open && nextProps.open) {
+      this.checkForFocus()
+    }
+  }
+
   public componentDidUpdate(prevProps: any) {
     if (prevProps.open && !this.props.open && !getHasTransition(this.props)) {
       // Otherwise handleExited will call this.
@@ -100,8 +186,21 @@ export default class Modal extends React.Component<Props, any> {
 
   public componentWillUnmount() {
     this.mounted = false
+
     if (this.props.open || (getHasTransition(this.props) && !this.state.exited)) {
       this.handleClose()
+    }
+  }
+
+  public getDialogElement() {
+    return ReactDOM.findDOMNode(this.dialogNode)
+  }
+
+  public handleRendered = () => {
+    this.autoFocus()
+
+    if (this.props.onRendered) {
+      this.props.onRendered()
     }
   }
 
@@ -112,12 +211,17 @@ export default class Modal extends React.Component<Props, any> {
     if (this.props.manager) {
       this.props.manager.add(this, container)
     }
+    this.onDocumentKeydownListener = addEventListener(doc, 'keydown', this.handleDocumentKeyDown)
+    this.onFocusinListener = addEventListener(document, 'focus', this.enforceFocus, true)
   }
 
   public handleClose = () => {
     if (this.props.manager) {
       this.props.manager.remove(this)
     }
+    this.onDocumentKeydownListener.remove()
+    this.onFocusinListener.remove()
+    this.restoreLastFocus()
   }
 
   public handleExited = () => {
@@ -139,21 +243,110 @@ export default class Modal extends React.Component<Props, any> {
     }
   }
 
+  public handleDocumentKeyDown = (event: any) => {
+    if (!this.isTopModal() || keycode(event) !== 'esc') {
+      return
+    }
+
+    if (this.props.onEscapeKeyDown) {
+      this.props.onEscapeKeyDown(event)
+    }
+
+    if (!this.props.disableEscapeKeyDown && this.props.onClose) {
+      this.props.onClose(event, 'escapeKeyDown')
+    }
+  }
+
+  public checkForFocus = () => {
+    if (inDOM) {
+      this.lastFocus = activeElement()
+    }
+  }
+
+  public autoFocus() {
+    if (this.props.disableAutoFocus) {
+      return
+    }
+
+    const dialogElement: any = this.getDialogElement()
+    const currentActiveElement = activeElement(getOwnerDocument(this))
+
+    if (dialogElement && !contains(dialogElement, currentActiveElement)) {
+      this.lastFocus = currentActiveElement
+
+      if (!dialogElement.hasAttribute('tabIndex')) {
+        warning(
+          false,
+          [
+            'Material-UI: the modal content node does not accept focus.',
+            'For the benefit of assistive technologies, ' +
+              'the tabIndex of the node is being set to "-1".',
+          ].join('\n'),
+        )
+        dialogElement.setAttribute('tabIndex', -1)
+      }
+
+      dialogElement.focus()
+    }
+  }
+
+  public restoreLastFocus() {
+    if (this.props.disableRestoreFocus) {
+      return
+    }
+
+    if (this.lastFocus) {
+      this.lastFocus.focus()
+      this.lastFocus = null
+    }
+  }
+
+  public enforceFocus = () => {
+    if (this.props.disableEnforceFocus || !this.mounted || !this.isTopModal()) {
+      return
+    }
+
+    const dialogElement: any = this.getDialogElement()
+    const currentActiveElement = activeElement(getOwnerDocument(this))
+
+    if (dialogElement && !contains(dialogElement, currentActiveElement)) {
+      dialogElement.focus()
+    }
+  }
+
+  public isTopModal() {
+    if (this.props.manager) {
+      return this.props.manager.isTopModal(this)
+    }
+  }
+
   public render() {
     const {
+      BackdropComponent,
+      BackdropProps,
       children,
+      className,
       container,
-      handleRendered,
+      disableAutoFocus,
+      disableBackdropClick,
+      disableEnforceFocus,
+      disableEscapeKeyDown,
+      disableRestoreFocus,
+      hideBackdrop,
+      keepMounted,
+      onBackdropClick,
+      onClose,
+      onEscapeKeyDown,
+      onRendered,
       open,
-      rootStyle,
+      manager,
+      ...other,
     } = this.props
-    const {
-      exited,
-    } = this.state
+    const { exited } = this.state
     const hasTransition = getHasTransition(this.props)
     const childProps: any = {}
 
-    if (!open && (exited)) {
+    if (!keepMounted && !open && (!hasTransition || exited)) {
       return null
     }
 
@@ -162,9 +355,13 @@ export default class Modal extends React.Component<Props, any> {
       childProps.onExited = createChainedFunction(this.handleExited, children.props.onExited)
     }
 
-    const modalRootClassName = classNames('Sui_Modal_root', {
-      'Sui_Modal_hidden': exited,
-    })
+    if (children.props.role === undefined) {
+      childProps.role = children.props.role || 'document'
+    }
+
+    if (children.props.tabIndex === undefined) {
+      childProps.tabIndex = children.props.tabIndex || '-1'
+    }
 
     return (
       <Portal
@@ -172,12 +369,21 @@ export default class Modal extends React.Component<Props, any> {
           this.mountNode = node ? node.getMountNode() : node
         }}
         container={container}
-        onRendered={handleRendered}
+        onRendered={this.handleRendered}
       >
-        <div className={modalRootClassName} style={...rootStyle}>
-          <Fade appear in={open} timeout={DURATION}>
-            <div className="Sui_Backdrop_root"  onClick={this.handleBackdropClick}></div>
-          </Fade>
+        <div
+          data-mui-test="Modal"
+          ref={(node: any) => {
+            this.modalNode = node
+          }}
+          className={classNames('Sui_Modal_root', className, {
+            'Sui_Modal_hidden': exited,
+          })}
+          {...other}
+        >
+          {hideBackdrop ? null : (
+            <BackdropComponent open={open} onClick={this.handleBackdropClick} {...BackdropProps} />
+          )}
           <RefHolder
             ref={(node: any) => {
               this.dialogNode = node
@@ -190,3 +396,5 @@ export default class Modal extends React.Component<Props, any> {
     )
   }
 }
+
+export default Modal

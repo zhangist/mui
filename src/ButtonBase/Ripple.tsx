@@ -19,13 +19,13 @@ export default class Ripple extends React.Component<Props, any> {
     rippleLeaving: false,
   }
 
-  public handleEnter() {
+  public handleEnter = () => {
     this.setState({
       rippleVisible: true,
     })
   }
 
-  public handleExit() {
+  public handleExit = () => {
     this.setState({
       rippleLeaving: true,
     })
@@ -42,7 +42,7 @@ export default class Ripple extends React.Component<Props, any> {
     } = this.props
     const { rippleVisible, rippleLeaving } = this.state
 
-    const className = classnames(
+    const wrapperClassName = classnames(
       'Sui_Ripple_wrapper',
       {
         'Sui_Ripple_wrapper-leaving': rippleLeaving,
@@ -65,8 +65,8 @@ export default class Ripple extends React.Component<Props, any> {
     }
 
     return (
-      <Transition onEnter={() => this.handleEnter()} onExit={() => this.handleExit()} timeout={timeout} {...other}>
-        <span className={className}>
+      <Transition onEnter={this.handleEnter} onExit={this.handleExit} timeout={timeout} {...other}>
+        <span className={wrapperClassName}>
           <span className={rippleClassName} style={rippleStyles} />
         </span>
       </Transition>

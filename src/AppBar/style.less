@@ -1,0 +1,45 @@
+@import '../theme.less';
+
+// AppBar
+.Sui_AppBar_root {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  box-sizing: border-box; // Prevent padding issue with the Modal and fixed positioned AppBar.
+  z-index: @zIndex_appBar;
+  flex-shrink: 0;
+}
+
+.Sui_AppBar_position-fixed {
+  position: fixed;
+  top: 0;
+  left: auto;
+  right: 0;
+}
+
+.Sui_AppBar_position-absolute {
+  position: absolute;
+  top: 0;
+  left: auto;
+  right: 0;
+}
+
+.Sui_AppBar_position-static {
+  position: static;
+  flex-shrink: 0;
+}
+
+.Sui_AppBar_color-default {
+  background-color: @palette_background_appBar;
+  color: @palette_text_primary; // ? theme.palette.getContrastText(theme.palette.background.appBar)
+}
+
+.Sui_AppBar_color-primary {
+  background-color: @palette_primary_main;
+  color: @palette_primary_contrastText;
+}
+
+.Sui_AppBar_color-secondary {
+  background-color: @palette_secondary_main;
+  color: @palette_secondary_contrastText;
+}

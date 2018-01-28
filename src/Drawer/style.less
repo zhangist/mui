@@ -1,39 +1,40 @@
-.Sui_Drawer_root {
-  overflow-y: auto;
-  display: flex;
-  background-color: #fff;
-  flex-direction: column;
-  height: 100vh;
-  flex: 1 0 auto;
-  z-index: 111;
-  -webkit-overflow-scrolling: touch; // Add iOS momentum scrolling.
-  // temporary style
-  position: fixed;
-  top: 0;
-  // We disable the focus ring for mouse; touch and keyboard users.
-  // At some point; it would be better to keep it for keyboard users.
-  // :focus-ring CSS pseudo-class will help.
-  
-  &:focus {
-    outline: none;
-  }
-}
+@import '../theme.less';
 
+// Drawer
 .Sui_Drawer_docked {
   flex: 0 0 auto;
 }
 
-.Sui_Drawer_root-anchor-left {
+.Sui_Drawer_paper {
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  flex: 1 0 auto;
+  z-index: @zIndex_drawer;
+  -webkit-overflow-scrolling: touch; // Add iOS momentum scrolling.
+  // temporary style
+  position: fixed;
+  top: 0;
+  // We disable the focus ring for mouse, touch and keyboard users.
+  // At some point, it would be better to keep it for keyboard users.
+  // :focus-ring CSS pseudo-class will help.
+  &:focus {
+    outline: 'none',
+  }
+}
+
+.Sui_Drawer_paper-anchor-left {
   left: 0;
   right: auto;
 }
 
-.Sui_Drawer_root-anchor-right {
+.Sui_Drawer_paper-anchor-right {
   left: auto;
   right: 0;
 }
 
-.Sui_Drawer_root-anchor-top {
+.Sui_Drawer_paper-anchor-top {
   top: 0;
   left: 0;
   bottom: auto;
@@ -42,7 +43,7 @@
   max-height: 100vh;
 }
 
-.Sui_Drawer_root-anchor-bottom {
+.Sui_Drawer_paper-anchor-bottom {
   top: auto;
   left: 0;
   bottom: 0;
@@ -51,19 +52,20 @@
   max-height: 100vh;
 }
 
-.Sui_Drawer_root-anchor-docked-left {
-  border-right: 1px solid rgba(0, 0, 0, 0.12);
+.Sui_Drawer_paper-anchor-docked-left {
+  border-right: 1px solid @palette_divider;
 }
 
-.Sui_Drawer_root-anchor-docked-top {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+.Sui_Drawer_paper-anchor-docked-top {
+  border-bottom: 1px solid @palette_divider;
 }
 
-.Sui_Drawer_root-anchor-docked-right {
-  border-left: 1px solid rgba(0, 0, 0, 0.12);
+.Sui_Drawer_paper-anchor-docked-right {
+  border-left: 1px solid @palette_divider;
 }
 
-.Sui_Drawer_root-anchor-docked-bottom {
-  border-top: 1px solid rgba(0, 0, 0, 0.12);
+.Sui_Drawer_paper-anchor-docked-bottom {
+  border-top: 1px solid @palette_divider;
 }
 
+.Sui_Drawer_modal {} // Just here so people can override the style.

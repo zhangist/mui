@@ -7,6 +7,7 @@ import {
   DialogFooter,
   DialogHeader,
   Drawer,
+  Menu,
   MenuItem,
   TextField,
 } from '../src'
@@ -23,6 +24,7 @@ class Examples extends React.Component {
     textFieldValue3: '',
     textFieldValue4: '',
     textFieldValue5: '',
+    anchorElMenu: null,
   }
 
   public handleChange = (name: string) => (event: any) => {
@@ -195,6 +197,7 @@ class Examples extends React.Component {
               margin="normal"
             />
             <TextField
+              className="margin-left-unit margin-right-unit"
               id="select-currency"
               select
               label="Select"
@@ -210,24 +213,52 @@ class Examples extends React.Component {
               ))}
             </TextField>
             <TextField
+              className="margin-left-unit margin-right-unit"
               id="select-currency-native"
               select
               label="Native select"
               value={this.state.textFieldValue5}
               onChange={this.handleChange('textFieldValue5')}
+              SelectProps={{
+                native: true,
+              }}
               helperText="Please select your currency"
               margin="normal"
             >
-              {[{value: 'value', label: 'label'}].map((option: any) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
+              [<option key="key" value="value">
+                label
+              </option>]
             </TextField>
           </div>
           <div className="margin-unit">
             <span>TextField: {this.state.textFieldValue}</span>
           </div>
+        </div>
+      </section>
+    )
+  }
+
+  public renderSectionMenu() {
+    return (
+      <section>
+        <div className="title">
+          Menu / 菜单
+        </div>
+        <div className="content">
+          <Button
+            aria-owns={this.state.anchorElMenu ? 'simple-menu' : null}
+            onClick={(event) => this.setState({anchorElMenu: event.currentTarget})}
+          >Open Menu / 打开菜单</Button>
+          <Menu
+            id="simple-menu"
+            anchorEl={this.state.anchorElMenu}
+            open={Boolean(this.state.anchorElMenu)}
+            onClose={() => this.setState({anchorElMenu: null})}
+          >
+            <MenuItem onClick={() => this.setState({anchorElMenu: null})}>Profile</MenuItem>
+            <MenuItem onClick={() => this.setState({anchorElMenu: null})}>My account</MenuItem>
+            <MenuItem onClick={() => this.setState({anchorElMenu: null})}>Logout</MenuItem>
+          </Menu>
         </div>
       </section>
     )
@@ -249,6 +280,7 @@ class Examples extends React.Component {
         {this.renderSectionDialog()}
         {this.renderSectionDrawer()}
         {this.renderSectionInput()}
+        {this.renderSectionMenu()}
         <br /><br /><br /><br /><br /><br /><br />
         <div className="remark">
           Remarks / 备注

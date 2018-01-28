@@ -123,7 +123,8 @@ class MenuList extends React.Component<Props, any> {
   public resetTabIndex() {
     const list: any = findDOMNode(this.list)
     const currentFocus = activeElement(ownerDocument(list))
-    const items = [...list.children]
+    // const items = [...list.children] <- this line error
+    const items = Array().concat(list.children)
     const currentFocusIndex = items.indexOf(currentFocus)
 
     if (currentFocusIndex !== -1) {
@@ -138,7 +139,13 @@ class MenuList extends React.Component<Props, any> {
   }
 
   public render() {
-    const { children, className, onBlur, onKeyDown, ...other } = this.props
+    const {
+      children,
+      className,
+      onBlur,
+      onKeyDown,
+      ...other,
+    } = this.props
 
     return (
       <List

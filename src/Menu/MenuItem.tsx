@@ -27,6 +27,7 @@ export interface Props {
    */
   selected?: boolean,
   value?: any,
+  onClick?: (arg?: any) => any,
 }
 
 function MenuItem(props: Props) {

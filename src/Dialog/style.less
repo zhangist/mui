@@ -20,7 +20,7 @@
 }
 
 .Sui_Dialog_paper-width-xs {
-  max-width: @breakpoints_values_xs;
+  max-width: max(@breakpoints_values_xs, 360px);
 }
 
 .Sui_Dialog_paper-width-sm {
@@ -73,6 +73,8 @@
 
 // DialogContentText
 .Sui_DialogContentText_root {
+  // typography subheading
+  .typography_subheading();
   color: @palette_text_secondary;
   margin: 0;
 }

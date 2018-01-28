@@ -1,5 +1,17 @@
 @import '../theme.less';
 
+// light
+.lightOrDark() when (@palette_type = 'light') {
+  @formLabel_focused_color: @palette_primary_dark;
+}
+// dark
+.lightOrDark() when (@palette_type = 'dark') {
+  @formLabel_focused_color: @palette_primary_light;
+}
+// light or dark
+.lightOrDark();
+
+// FormControl
 .Sui_FormControl_root {
   display: inline-flex;
   flex-direction: column;
@@ -25,11 +37,49 @@
   width: 100%;
 }
 
+// FormHelperText
+.Sui_FormHelperText_root {
+  color: @palette_text_secondary;
+  font-family: @typography_fontFamily;
+  // font-szie
+  .typography_fontSize_pxToRem(12);
+  text-align: left;
+  margin: 0;
+  margin-top: @spacing_unit;
+  line-height: 1em;
+  min-height: 1em;
+}
+
+.Sui_FormHelperText_dense {
+  margin-top: (@spacing_unit / 2);
+}
+
+.Sui_FormHelperText_error {
+  color: @palette_error_main;
+}
+
+.Sui_FormHelperText_disabled {
+  color: @palette_text_disabled;
+}
+
 // FormLabel
 .Sui_FormLabel_root {
   font-family: @typography_fontFamily;
-  color: @palette_input_labelText;
-  font-size: @typography_pxToRem_16;
+  color: @palette_text_secondary;
+  // font-size
+  .typography_fontSize_pxToRem(16);
   line-height: 1;
   padding: 0;
+}
+
+.Sui_FormLabel_focused {
+  color: @formLabel_focused_color;
+}
+
+.Sui_FormLabel_error {
+  color: @palette_error_main;
+}
+
+.Sui_FormLabel_disabled {
+  color: @palette_text_disabled;
 }

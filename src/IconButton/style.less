@@ -1,0 +1,45 @@
+@import '../theme.less';
+
+// IconButton
+.Sui_IconButton_root {
+  text-align: center;
+  flex: 0 0 auto;
+
+  // font-size
+  .typography_fontSize_pxToRem(24);
+
+  width: (@spacing_unit * 6);
+  height: (@spacing_unit * 6);
+  padding: 0;
+  border-radius: 50%;
+  color: @palette_action_active;
+  transition: background-color @transitions_duration_shortest;
+}
+
+.Sui_IconButton_color-inherit {
+  color: inherit;
+}
+
+.Sui_IconButton_color-primary {
+  color: @palette_primary_main;
+}
+
+.Sui_IconButton_colorSecondary {
+  color: @palette_secondary_main;
+}
+
+.Sui_IconButton_disabled {
+  color: @palette_action_disabled;
+}
+
+.Sui_IconButton_label {
+  width: 100%;
+  display: flex;
+  align-items: inherit;
+  justify-content: inherit;
+}
+
+.Sui_IconButton_icon {
+  width: 1em;
+  height: 1em;
+}

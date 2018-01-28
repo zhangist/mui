@@ -49,7 +49,7 @@ class List extends React.Component<Props, {}> {
     dense: PropTypes.bool,
   }
 
-  public getChildContext(): ChildContextTypes {
+  public getChildContext() {
     return {
       dense: this.props.dense,
     }

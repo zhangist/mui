@@ -1,7 +1,10 @@
 // @inheritedComponent Modal
+
 import * as classNames from 'classnames'
 import * as React from 'react'
 import Modal from '../Modal'
+import Paper from '../Paper'
+import { duration } from '../styles/transitions'
 import Slide from '../transitions/Slide'
 import { capitalizeFirstLetter } from '../utils/helpers'
 
@@ -22,15 +25,19 @@ export interface Props {
   /**
    * Side from which the drawer will appear.
    */
-  anchor?: 'left'|'top'|'right'|'bottom',
+  anchor: 'left'|'top'|'right'|'bottom',
   /**
    * The contents of the drawer.
    */
-  children: any,
+  children?: React.ReactNode,
   /**
    * @ignore
    */
   className?: string,
+  /**
+   * The elevation of the drawer.
+   */
+  elevation?: number,
   /**
    * Properties applied to the `Modal` element.
    */
@@ -40,12 +47,11 @@ export interface Props {
    *
    * @param {object} event The event source of the callback
    */
-  onClose?: (arg: any, arg2: any) => any,
+  onClose?: (arg?: any) => any,
   /**
    * If `true`, the drawer is open.
    */
   open?: boolean,
-  rootStyle?: any,
   /**
    * Properties applied to the `Slide` element.
    */
@@ -54,18 +60,20 @@ export interface Props {
    * The duration for the transition, in milliseconds.
    * You may specify a single timeout for all transitions, or individually with an object.
    */
-  transitionDuration?: number | { enter?: number, exit?: number },
+  transitionDuration?: number|{ enter?: number, exit?: number },
   /**
    * The type of drawer.
    */
   type?: 'permanent'|'persistent'|'temporary',
+  rootStyle?: any,
 }
 
 class Drawer extends React.Component<Props, any> {
   public static defaultProps = {
     anchor: 'left',
+    elevation: 16,
     open: false,
-    transitionDuration: { enter: 200, exit: 200 },
+    transitionDuration: { enter: duration.enteringScreen, exit: duration.leavingScreen },
     type: 'temporary', // Mobile first.
   }
 
@@ -84,10 +92,12 @@ class Drawer extends React.Component<Props, any> {
 
   public render() {
     const {
-      anchor,
+      anchor: anchorProp,
       children,
       className,
+      elevation,
       ModalProps,
+      onClose,
       open,
       rootStyle,
       SlideProps,
@@ -96,29 +106,32 @@ class Drawer extends React.Component<Props, any> {
       ...other,
     } = this.props
 
-    const rootClassName = classNames(
-      'Sui_Drawer_root',
-      {
-        'Sui_Drawer_root-anchor-left': anchor === 'left',
-        'Sui_Drawer_root-anchor-right': anchor === 'right',
-        'Sui_Drawer_root-anchor-top': anchor === 'top',
-        'Sui_Drawer_root-anchor-bottom': anchor === 'bottom',
-        'Sui_Drawer_root-anchor-docked-left': anchor === 'left' && type !== 'temporary',
-        'Sui_Drawer_root-anchor-docked-right': anchor === 'right' && type !== 'temporary',
-        'Sui_Drawer_root-anchor-docked-top': anchor === 'top' && type !== 'temporary',
-        'Sui_Drawer_root-anchor-docked-bottom': anchor === 'bottom' && type !== 'temporary',
-      },
-    )
+    // let anchor = anchorProp
+    // if (theme.direction === 'rtl' && ['left', 'right'].indexOf(anchor) > -1) {
+    //   anchor = anchor === 'left' ? 'right' : 'left'
+    // }
+    const anchor = anchorProp
 
     const drawer = (
-      <div className={rootClassName} style={...rootStyle}>
+      <Paper
+        elevation={type === 'temporary' ? elevation : 0}
+        square
+        className={classNames(
+          'Sui_Drawer_paper',
+          'Sui_Drawer_paper-anchor-' + anchor,
+          {
+            ['Sui_Drawer_paper-anchor-docked-' + anchor]: type !== 'temporary',
+          },
+        )}
+        style={...rootStyle}
+      >
         {children}
-      </div>
+      </Paper>
     )
 
     if (type === 'permanent') {
       return (
-        <div className={classNames('Sui_Drawer_docked', className)}>
+        <div className={classNames('Sui_Drawer_docked', className)} {...other}>
           {drawer}
         </div>
       )
@@ -147,7 +160,12 @@ class Drawer extends React.Component<Props, any> {
     // type === temporary
     return (
       <Modal
+        BackdropProps={{
+          transitionDuration,
+        }}
+        className={classNames('Sui_Drawer_modal', className)}
         open={open}
+        onClose={onClose}
         {...other}
         {...ModalProps}
       >

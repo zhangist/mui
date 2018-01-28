@@ -8,21 +8,17 @@
   padding: @spacing_unit @spacing_unit * 2;
   border-radius: 0;
   color: @palette_text_primary;
-  transition: @transitions_backgroundColor,@transitions_boxShadow;
+  transition: @transitions_backgroundColor, @transitions_boxShadow;
 
   &:hover {
     text-decoration: none;
-    background-color: rgba(0, 0, 0, 0.16);
-
+    // Reset on mouse devices
+    background-color: fade(@palette_text_primary, 12%);
     @media (hover: none) {
       background-color: transparent;
     }
     &.Sui_Button_disabled {
-      background-color: @palette_text_divider;
-      // Reset on mouse devices
-      @media (hover: none) {
-        background-color: @palette_grey_300;
-      }
+      background-color: transparent;
     }
   }
 }
@@ -31,7 +27,6 @@
   padding: (@spacing_unit - 1) @spacing_unit;
   min-width: 64px;
   min-height: 32px;
-
   // font-size
   .typography_fontSize_pxToRem(@typography_fontSize - 1);
 }
@@ -46,7 +41,7 @@
 .Sui_Button_flat-primary {
   color: @palette_primary_main;
   &:hover {
-    background-color: (@palette_primary_main / 10);
+    background-color: fade(@palette_primary_main, 12%);
     // Reset on mouse devices
     @media (hover: none) {
       backgroundColor: transparent;
@@ -54,21 +49,10 @@
   }
 }
 
-.Sui_Button_flat-accent {
-  color: @palette_secondary_light;
+.Sui_Button_flat-secondary {
+  color: @palette_secondary_main;
   &:hover {
-    backgroundColor: (@palette_secondary_light / 10);
-    // Reset on mouse devices
-    @media (hover: none) {
-      background-color: transparent;
-    }
-  }
-}
-
-.Sui_Button_flat-contrast {
-  color: @palette_primary_contrastText;
-  &:hover {
-    background-color: (@palette_primary_contrastText / 10);
+    background-color: fade(@palette_secondary_main, 12%);
     // Reset on mouse devices
     @media (hover: none) {
       background-color: transparent;
@@ -81,24 +65,22 @@
 }
 
 .Sui_Button_raised {
-  color: desaturate(@palette_grey_300, 1.6);
+  color: @palette_text_primary; // ? theme.palette.getContrastText(theme.palette.grey[300])
   background-color: @palette_grey_300;
-
   // box-shadow
-  .boxShadow_2;
-
+  .shadows_2();
   &.Sui_Button_keyboard-focused {
     // box-shadow
-    .boxShadow_6;
+    .shadows_6();
   }
   &:active {
     // box-shadow
-    .boxShadow_8;
+    .shadows_8();
   }
   &.Sui_Button_disabled {
     // box-shadow
-    .boxShadow_0;
-    background-color: @palette_text_divider;
+    .shadows_0();
+    background-color: @palette_action_disabledBackground;
   }
   &:hover {
     background-color: @palette_grey_A100;
@@ -107,11 +89,7 @@
       backgroundColor: @palette_grey_300;
     }
     &.Sui_Button_disabled {
-      background-color: @palette_text_divider;
-      // Reset on mouse devices
-      @media (hover: none) {
-        background-color: @palette_grey_300;
-      }
+      background-color: @palette_action_disabledBackground;
     }
   }
 }
@@ -130,20 +108,16 @@
   }
 }
 
-.Sui_Button_raised-accent {
-  color: @palette_secondary_light;
-  background-color: (@palette_secondary_light / 10);
+.Sui_Button_raised-secondary {
+  color: @palette_secondary_contrastText;
+  background-color: @palette_secondary_main;
   &:hover {
-    background-color: @palette_secondary_main;
+    background-color: @palette_secondary_dark;
     // Reset on mouse devices
     @media (hover: none) {
-      background-color: @palette_secondary_light;
+      background-color: @palette_secondary_main;
     }
   }
-}
-
-.Sui_Button_raised-contrast {
-  color: @palette_primary_contrastText;
 }
 
 .Sui_Button_disabled {
@@ -158,11 +132,11 @@
   height: 56px;
 
   // box-shadow
-  .boxShadow_6;
+  .shadows_6();
 
   &:active {
     // box-shadow
-    .boxShadow_12;
+    .shadows_12();
   }
 }
 
@@ -173,8 +147,4 @@
 
 .Sui_Button_full-width {
   width: 100%;
-}
-
-.Sui_Button_disabled {
-  color: rgba(0, 0, 0, 0.26);
 }

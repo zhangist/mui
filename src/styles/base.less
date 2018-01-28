@@ -1,0 +1,12 @@
+// var
+@fontSize: 14px;
+@htmlFontSize: 16px;
+
+// func
+.fontFamily(){font-family: "Roboto", "Helvetica", "Arial", sans-serif;}
+.fontWeightLight(){font-weight: 300;}
+.fontWeightRegular(){font-weight: 400;}
+.fontWeightMedium(){font-weight: 500;}
+.fontSize-pxToRem(@n) {
+  font-size: unit((@n / @htmlFontSize), rem);
+}

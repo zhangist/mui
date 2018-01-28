@@ -25,6 +25,7 @@ export interface Props {
    * If `true`, rounded corners are disabled.
    */
   square?: boolean,
+  style?: any,
 }
 
 function Paper(props: Props) {

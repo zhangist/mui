@@ -1,0 +1,84 @@
+@import '../theme.less';
+
+// List
+.Sui_List_root {
+  flex: 1 1 auto;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+.Sui_List_padding {
+  padding-top: @spacing_unit;
+  padding-bottom: @spacing_unit;
+}
+
+.Sui_List_dense {
+  padding-top: (@spacing_unit / 2);
+  padding-bottom: (@spacing_unit / 2);
+}
+
+.Sui_List_subheader {
+  padding-top: 0;
+}
+
+// ListItem
+.Sui_ListItem_root {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+  text-decoration: none;
+}
+
+.Sui_ListItem_container {
+  position: relative;
+}
+
+.Sui_ListItem_keyboard-focused {
+  background-color: @palette_action_hover,
+}
+
+.Sui_ListItem_default {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+.Sui_ListItem_dense {
+  padding-top: @spacing_unit;
+  padding-bottom: @spacing_unit;
+}
+
+.Sui_ListItem_disabled {
+  opacity: 0.5;
+}
+
+.Sui_ListItem_divider {
+  border-bottom: 1px solid @palette_divider;
+}
+
+.Sui_ListItem_gutters {
+  padding-left: (@spacing_unit * 2);
+  padding-right: (@spacing_unit * 2);
+}
+
+.Sui_ListItem_button {
+  transition: background-color @transitions_duration_shortest @transitions_easing_easeInOut @transitions_delay;
+  &:hover {
+    text-decoration: none;
+    background-color: @palette_action_hover;
+    // Reset on mouse devices
+    @media (hover: none) {
+      background-color: transparent;
+    }
+    &.Sui_ListItem_disabled {
+      background-color: transparent;
+    }
+  }
+}
+.Sui_ListItem_secondary-action {
+  // Add some space to avoid collision as `ListItemSecondaryAction`
+  // is absolutely positionned.
+  padding-right: (@spacing_unit * 4);
+}

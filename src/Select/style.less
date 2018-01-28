@@ -1,0 +1,61 @@
+@import '../theme.less';
+
+@Select_select-padding-right: @spacing_unit * 4;
+
+// Select
+.Sui_Select_root {
+  position: relative;
+  width: 100%;
+}
+
+.Sui_Select_select {
+  -moz-appearance: none; // Remove Firefox custom style
+  -webkit-appearance: none; // Fix SSR issue
+  appearance: none; // Reset
+  // When interacting quickly, the text can end up selected.
+  // Native select can't be selected either.
+  user-select: none;
+  padding-right: @Select_select-padding-right;
+  width: calc(~'100% - @{Select_select-padding-right}');
+  min-width: (@spacing_unit * 2); // So it doesn't collapse.
+  cursor: pointer;
+  &:focus {
+    // Show that it's not an text input
+    // theme.palette.type === 'light' ? 'rgba(0, 0, 0, 0.05)' : 'rgba(255, 255, 255, 0.05)',
+    & when (@palette_type = 'light') {
+      background: rgba(0, 0, 0, 0.05);
+    }
+    & when (@palette_type = 'dark') {
+      background: rgba(255, 255, 255, 0.05)
+    }
+    border-radius: 0; // Reset Chrome style
+  }
+  // Remove Firefox focus border
+  &:-moz-focusring {
+    color: transparent;
+    text-shadow: 0 0 0 #000;
+  }
+  // Remove IE11 arrow
+  &::-ms-expand {
+    display: none;
+  }
+}
+.Sui_Select_select-menu {
+  width: auto; // Fix Safari textOverflow
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  line-height: 1.1875em; // Reset (19px), match the native input line-height
+}
+
+.Sui_Select_disabled {
+  cursor: default;
+}
+
+.Sui_Select_icon {
+  position: absolute;
+  right: 0;
+  top: 4px;
+  color: @palette_text_secondary;
+  pointer-events: none; // Don't block pointer events on the select under the icon.
+}

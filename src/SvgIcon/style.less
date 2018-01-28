@@ -1,0 +1,32 @@
+@import '../theme.less';
+
+// SvgIcon
+.Sui_SvgIcon_root {
+  display: inline-block;
+  fill: currentColor;
+  height: 24px;
+  width: 24px;
+  user-select: none;
+  flex-shrink: 0;
+  transition: fill @transitions_duration_shorter @transitions_easing_easeInOut @transitions_delay;
+}
+
+.Sui_SvgIcon_color-primary {
+  color: @palette_primary_main;
+}
+
+.Sui_SvgIcon_color-secondary {
+  color: @palette_secondary_main;
+}
+
+.Sui_SvgIcon_color-action {
+  color: @palette_action_active;
+}
+
+.Sui_SvgIcon_color-disabled {
+  color: @palette_action_disabled;
+}
+
+.Sui_SvgIcon_color-error {
+  color: @palette_error_main;
+}

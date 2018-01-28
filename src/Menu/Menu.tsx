@@ -76,6 +76,7 @@ export interface Props {
    */
   transitionDuration?: number|{ enter?: number, exit?: number }|'auto',
   direction?: 'rtl'|'ltr',
+  id?: string,
 }
 
 class Menu extends React.Component<Props, any> {

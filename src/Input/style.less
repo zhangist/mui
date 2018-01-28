@@ -1,22 +1,41 @@
 @import '../theme.less';
 
+// dark
+.lightOrDark() when (@palette_type = 'light') {
+  @Input_root_color: rgba(0, 0, 0, 0.87);
+  @Input_inkbar-after-background-color: @palette_primary_dark;
+  @bottomLineColor: rgba(0, 0, 0, 0.42);
+  @Input_input-placeholder-opacity: 0.42;
+}
+// light
+.lightOrDark() when (@palette_type = 'dark') {
+  @Input_root_color: @palette_common_fullWhite;
+  @Input_inkbar-after-background-color: @palette_primary_light;
+  @bottomLineColor: rgba(255, 255, 255, 0.7);
+  @Input_input-placeholder-opacity: 0.5;
+}
+// light or dark
+.lightOrDark();
+
+// Input
 .Sui_Input_root {
   display: inline-flex;
   align-items: baseline;
   position: relative;
-  color: rgba(0, 0, 0, 0.87);
-  font-size: 16px,
+  color: @Input_root_color;
+  // font-size
+  .typography_fontSize_pxToRem(16);
 }
 
 .Sui_Input_form-control {
   label + & {
-    margin-top: @spacing_unit;
+    margin-top: (@spacing_unit * 2);
   }
 }
 
 .Sui_Input_inkbar {
   &:after {
-    background-color: #1976d2;
+    background-color: @Input_inkbar-after-background-color;
     left: 0;
     bottom: 0;
     // Doing the other way around crash on IE11 "''" https://github.com/cssinjs/jss/issues/242
@@ -25,7 +44,7 @@
     position: absolute;
     right: 0;
     transform: scaleX(0);
-    transition: transform 200ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+    transition: transform @transitions_duration_shorter @transitions_easing_easeOut @transitions_delay;
     pointer-events: none; // Transparent to the hover style.
   }
   &.Sui_Input_focused:after {
@@ -33,13 +52,22 @@
   }
 }
 
+.Sui_Input_error {
+  &:after {
+    background-color: @palette_error_main;
+    transform: scaleX(1); // error is always underlined in red
+  }
+}
+
+.Sui_Input_focused {}
+
 .Sui_Input_disabled {
-  color: rgba(0,0,0,0.3)
+  color: @palette_text_disabled;
 }
 
 .Sui_Input_underline {
   &:before {
-    background-color: rgba(0, 0, 0, 0.42);
+    background-color: @bottomLineColor;
     left: 0;
     bottom: 0;
     // Doing the other way around crash on IE11 "''" https://github.com/cssinjs/jss/issues/242
@@ -47,16 +75,16 @@
     height: 1px;
     position: absolute;
     right: 0;
-    transition: background-color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    transition: background-color @transitions_duration_shorter @transitions_easing_easeInOut @transitions_delay;
     pointer-events: none; // Transparent to the hover style.
   }
   &:hover:not(.Sui_Input_disabled):before {
+    background-color: @palette_text_primary;
     height: 2px;
-    background-color: rgba(0,0,0,0.87);
   }
   &.Sui_Input_disabled:before {
     background: transparent;
-    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.42) 33%, transparent 0%);
+    background-image: linear-gradient(to right, @bottomLineColor 33%, transparent 0%);
     background-position: left top;
     background-repeat: repeat-x;
     background-size: 5px 1px;
@@ -81,14 +109,14 @@
   background: none;
   margin: 0; // Reset for Safari
   // Remove grey highlight
-  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: @palette_common_transparent;
   display: block;
   // Make the flex item shrink with Firefox
   min-width: 0;
   width: 100%;
   &::-webkit-input-placeholder {
     color: currentColor;
-    opacity: 0.42;
+    opacity: @Input_input-placeholder-opacity;
     transition: opacity 200ms ease-in-out;
   }
   // &::-moz-placeholder @{placeholder} // Firefox 19+
@@ -115,7 +143,7 @@
     // &:-ms-input-placeholder @placeholderHidden // IE 11
     // &::-ms-input-placeholder @placeholderHidden // Edge
     &:focus::-webkit-input-placeholder {
-      opacity: 0.42;
+      opacity: @Input_input-placeholder-opacity;
     }
     // &:focus::-moz-placeholder @placeholderVisible // Firefox 19+
     // &:focus:-ms-input-placeholder @placeholderVisible // IE 11
@@ -142,4 +170,67 @@
 
 .Sui_Input_input-search {
   appearance: textfield; // Improve type search style.
+}
+
+// InputLabel
+.Sui_InputLabel_root {
+  transform-origin: top left;
+}
+
+.Sui_InputLabel_form-control {
+  position: absolute;
+  left: 0;
+  top: 0;
+  // slight alteration to spec spacing to match visual spec result
+  transform: translate(0, (@spacing_unit * 3)) scale(1);
+}
+
+.Sui_InputLabel_label-dense {
+  // Compensation for the `Input.inputDense` style.
+  transform: translate(0, ((@spacing_unit * 2.5) + 1)) scale(1);
+}
+
+.Sui_InputLabel_shrink {
+  transform: translate(0, 1.5px) scale(0.75);
+  transform-origin: top left;
+}
+
+.Sui_InputLabel_animated {
+  transition: transform @transitions_duration_shorter @transitions_easing_easeOut @transitions_delay;
+}
+
+.Sui_InputLabel_disabled {
+  color: @palette_text_disabled;
+}
+
+// Textarea
+.Sui_Textarea_root {
+  position: relative; // because the shadow has position: 'absolute',
+  width: 100%;
+}
+
+.Sui_Textarea_textarea {
+  width: 100%;
+  height: 100%;
+  resize: none;
+  font: inherit;
+  padding: 0;
+  cursor: inherit;
+  box-sizing: border-box;
+  line-height: inherit;
+  border: none;
+  outline: none;
+  background: transparent;
+}
+
+.Sui_Textarea_shadow {
+  resize: none;
+  // Overflow also needed to here to remove the extra row
+  // added to textareas in Firefox.
+  overflow: hidden;
+  // Visibility needed to hide the extra text area on ipads
+  visibility: hidden;
+  position: absolute;
+  height: auto;
+  white-space: pre-wrap;
 }

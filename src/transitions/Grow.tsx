@@ -118,8 +118,8 @@ class Grow extends React.Component<Props, any> {
     }
 
     node.style.transition = [
-      'opacity' + duration + 'ms',
-      'transform' + duration * 0.666 + 'ms',
+      'opacity ' + duration + 'ms',
+      'transform ' + duration * 0.666 + 'ms',
     ].join(',')
 
     node.style.opacity = '1'

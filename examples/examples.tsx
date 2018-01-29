@@ -35,7 +35,7 @@ class Examples extends React.Component {
 
   public renderSectionButton() {
     return (
-      <section>
+      <section id="Button">
         <div className="title">
           Button / 按钮
           <sup><a href="#remark-1">1</a></sup>
@@ -55,7 +55,7 @@ class Examples extends React.Component {
       openDialog3,
     } = this.state
     return (
-      <section>
+      <section id="Dialog">
         <div className="title">
           Dialog / 模态框
           <sup><a href="#remark-2">2</a></sup>
@@ -115,7 +115,7 @@ class Examples extends React.Component {
 
   public renderSectionDrawer() {
     return (
-      <section>
+      <section id="Drawer">
         <div className="title">
           Drawer / 抽屉
         </div>
@@ -162,7 +162,7 @@ class Examples extends React.Component {
 
   public renderSectionInput() {
     return (
-      <section>
+      <section id="TextField">
         <div className="title">
           TextField / 输入框
         </div>
@@ -240,7 +240,7 @@ class Examples extends React.Component {
 
   public renderSectionMenu() {
     return (
-      <section>
+      <section id="Menu">
         <div className="title">
           Menu / 菜单
         </div>

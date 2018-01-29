@@ -82,7 +82,7 @@ export interface Props {
 class Menu extends React.Component<Props, any> {
   public static defaultProps = {
     transitionDuration: 'auto',
-    direction: 'rtl',
+    direction: 'ltr',
   }
 
   public menuList: any = undefined

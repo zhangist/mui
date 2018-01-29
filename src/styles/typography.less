@@ -6,22 +6,10 @@
 @typography_pxToRem_16: 1rem;
 @typography_fontSize: 16px;
 
-.typography_button() {
-  font-size: 0.875rem;
-  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
-  font-weight: 500;
-  border: none;
-  outline: none;
-  position: relative;
-  background-color: rgba(0, 0, 0, 0);
-  cursor: pointer;
-};
-
 .typography_fontSize_pxToRem(@n) {
   .fontSize-pxToRem(@n);
 }
 
-// typography subheading
 .typography_display4() {
   .fontSize-pxToRem(112);
   .fontWeightLight();
@@ -31,6 +19,7 @@
   margin-left: -.06em;
   color: @palette_text_secondary;
 }
+
 .typography_display3() {
   .fontSize-pxToRem(56);
   .fontWeightRegular();
@@ -40,6 +29,7 @@
   margin-left: -.04em;
   color: @palette_text_secondary;
 }
+
 .typography_display2() {
   .fontSize-pxToRem(45);
   .fontWeightRegular();
@@ -48,6 +38,7 @@
   margin-left: -.04em;
   color: @palette_text_secondary;
 }
+
 .typography_display1() {
   .fontSize-pxToRem(34);
   .fontWeightRegular();
@@ -56,6 +47,7 @@
   margin-left: -.04em;
   color: @palette_text_secondary;
 }
+
 .typography_headline() {
   .fontSize-pxToRem(24);
   .fontWeightRegular();
@@ -63,6 +55,7 @@
   line-height: (round(32.5 / 24) - 0em);
   color: @palette_text_primary;
 }
+
 .typography_title() {
   .fontSize-pxToRem(21);
   .fontWeightMedium();
@@ -70,6 +63,7 @@
   line-height: (round(24.5 / 21) - 0em);
   color: @palette_text_primary;
 }
+
 .typography_subheading() {
   .fontSize-pxToRem(16);
   .fontWeightRegular();
@@ -77,6 +71,7 @@
   line-height: (round(24 / 16) - 0em);
   color: @palette_text_primary;
 }
+
 .typography_body2() {
   .fontSize-pxToRem(14);
   .fontWeightMedium();
@@ -84,6 +79,7 @@
   line-height: (round(24 / 14) - 0em);
   color: @palette_text_primary;
 }
+
 .typography_body1() {
   .fontSize-pxToRem(14);
   .fontWeightRegular();
@@ -91,6 +87,7 @@
   line-height: (round(20.5 / 14) - 0em);
   color: @palette_text_primary;
 }
+
 .typography_caption() {
   .fontSize-pxToRem(12);
   .fontWeightRegular();
@@ -98,6 +95,7 @@
   line-height: (round(16.5 / 12) - 0em);
   color: @palette_text_secondary;
 }
+
 .typography_button() {
   .fontSize-pxToRem(@fontSize);
   text-transform: uppercase;

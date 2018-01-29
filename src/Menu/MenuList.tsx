@@ -123,7 +123,7 @@ class MenuList extends React.Component<Props, any> {
   public resetTabIndex() {
     const list: any = findDOMNode(this.list)
     const currentFocus = activeElement(ownerDocument(list))
-    // const items = [...list.children] <- this line error
+    // const items = [...list.children] <- this line error: list.children.slice() is not function
     const items = Array().concat(list.children)
     const currentFocusIndex = items.indexOf(currentFocus)
 

@@ -1,118 +1,55 @@
 @import '../theme.less';
 
-// Typography
+/**
+ * Typography
+ */
 .Sui_Typography_root {
   display: block;
   margin: 0;
 }
 
-@fontSize: 14px;
-@fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif';
-@fontWeightLight: 300;
-@fontWeightRegular: 400;
-@fontWeightMedium: 500;
 .Sui_Typography_display4 {
-  // font-size
-  .typography_fontSize_pxToRem(112);
-
-  font-weight: @fontWeightLight;
-  font-family: @fontFamily;
-  letter-spacing: -.04em;
-  line-height: (128 / 112em);
-  margin-left: -.06em;
-  color: @palette_text_secondary;
+  .typography_display4();
 }
+
 .Sui_Typography_display3 {
-  // font-size
-  .typography_fontSize_pxToRem(56);
-
-  font-weight: @fontWeightRegular;
-  font-family: @fontFamily;
-  letter-spacing: -.02em;
-  line-height: (73 / 56em);
-  margin-left: -.04em;
-  color: @palette_text_secondary;
+  .typography_display3();
 }
+
 .Sui_Typography_display2 {
-  // font-size
-  .typography_fontSize_pxToRem(45);
-
-  font-weight: @fontWeightRegular;
-  font-family: @fontFamily;
-  line-height: (48 / 45em);
-  margin-left: -.04em;
-  color: @palette_text_secondary;
+  .typography_display2();
 }
+
 .Sui_Typography_display1 {
-  // font-size
-  .typography_fontSize_pxToRem(34);
-
-  font-weight: @fontWeightRegular;
-  font-family: @fontFamily;
-  line-height: (41 / 34em);
-  margin-left: -.04em;
-  color: @palette_text_secondary;
+  .typography_display1();
 }
+
 .Sui_Typography_headline {
-  // font-size
-  .typography_fontSize_pxToRem(24);
-
-  font-weight: @fontWeightRegular;
-  font-family: @fontFamily;
-  line-height: (32.5 / 24em);
-  color: @palette_text_primary;
+  .typography_headline();
 }
+
 .Sui_Typography_title {
-  // font-size
-  .typography_fontSize_pxToRem(21);
-
-  font-weight: @fontWeightMedium;
-  font-family: @fontFamily;
-  line-height: (24.5 / 21em);
-  color: @palette_text_primary;
+  .typography_title();
 }
+
 .Sui_Typography_subheading {
-  // font-size
-  .typography_fontSize_pxToRem(16);
-
-  font-weight: @fontWeightRegular;
-  font-family: @fontFamily;
-  line-height: (24 / 16em);
-  color: @palette_text_primary;
+  .typography_subheading();
 }
+
 .Sui_Typography_body2 {
-  // font-size
-  .typography_fontSize_pxToRem(14);
-
-  font-weight: @fontWeightMedium;
-  font-family: @fontFamily;
-  line-height: (24 / 14em);
-  color: @palette_text_primary;
+  .typography_body2();
 }
+
 .Sui_Typography_body1 {
-  // font-size
-  .typography_fontSize_pxToRem(14);
-
-  font-weight: @fontWeightRegular;
-  font-family: @fontFamily;
-  line-height: (20.5 / 14em);
-  color: @palette_text_primary;
+  .typography_body1();
 }
+
 .Sui_Typography_caption {
-  // font-size
-  .typography_fontSize_pxToRem(12);
-
-  font-weight: @fontWeightRegular;
-  font-family: @fontFamily;
-  line-height: (16.5 / 12em);
-  color: @palette_text_secondary;
+  .typography_caption();
 }
+
 .Sui_Typography_button {
-  // font-size
-  .typography_fontSize_pxToRem(14);
-  text-transform: uppercase;
-  font-weight: @fontWeightMedium;
-  font-family: @fontFamily;
+  .typography_button();
 }
 
 .Sui_Typography_align-left {

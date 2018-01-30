@@ -198,7 +198,6 @@ class ButtonBase extends React.Component<Props, any> {
   }
 
   public handleKeyDown = (event: any) => {
-    console.log('down')
     const { component, focusRipple, onKeyDown, onClick } = this.props
     const key = keycode(event)
 
@@ -230,7 +229,6 @@ class ButtonBase extends React.Component<Props, any> {
   }
 
   public handleKeyUp = (event: any) => {
-    console.log('up')
     if (this.props.focusRipple && keycode(event) === 'space' && this.state.keyboardFocused) {
       this.keyDown = false
       event.persist()

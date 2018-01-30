@@ -30,33 +30,35 @@ export interface Props {
   onClick?: (arg?: any) => any,
 }
 
-function MenuItem(props: Props) {
-  const {
-    className: classNameProp,
-    component,
-    selected = false,
-    role = 'menuitem',
-    ...other,
-  } = props
+class MenuItem extends React.Component<Props, any> {
+  public render() {
+    const {
+      className: classNameProp,
+      component,
+      selected = false,
+      role = 'menuitem',
+      ...other,
+    } = this.props
 
-  const className = classNames(
-    'Sui_MenuItem_root',
-    {
-      'Sui_MenuItem_selected': selected,
-    },
-    classNameProp,
-  )
+    const className = classNames(
+      'Sui_MenuItem_root',
+      {
+        'Sui_MenuItem_selected': selected,
+      },
+      classNameProp,
+    )
 
-  return (
-    <ListItem
-      button
-      role={role}
-      tabIndex={-1}
-      className={className}
-      component={component}
-      {...other}
-    />
-  )
+    return (
+      <ListItem
+        button
+        role={role}
+        tabIndex={-1}
+        className={className}
+        component={component}
+        {...other}
+      />
+    )
+  }
 }
 
 export default MenuItem

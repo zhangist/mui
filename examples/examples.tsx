@@ -42,7 +42,7 @@ class Examples extends React.Component {
         </div>
         <div className="subtitle">(a | button)</div>
         <div className="content">
-          <Button fullWidth>Button / 按钮</Button>
+          <Button raised fullWidth>Button / 按钮</Button>
         </div>
       </section>
     )
@@ -128,7 +128,12 @@ class Examples extends React.Component {
               onClose={() => this.setState({openDrawer: false})}
               rootStyle={{height: '100%', position: 'relative'}}
             >
-              <Button onClick={() => this.setState({openDrawer: false})}>Close Drawer / 关闭抽屉</Button>
+              <Button
+                onClick={() => this.setState({openDrawer: false})}
+                disabled={!this.state.openDrawer}
+              >
+                Close Drawer / 关闭抽屉
+              </Button>
               <div style={{width: '200px'}}>Drawer</div>
             </Drawer>
             <Drawer

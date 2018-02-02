@@ -67,6 +67,7 @@ class FormControl extends React.Component<Props, {}> {
   public static childContextTypes = {
     muiFormControl: PropTypes.object.isRequired,
   }
+
   public state = {
     adornedStart: false,
     dirty: false,

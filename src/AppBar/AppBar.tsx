@@ -35,9 +35,9 @@ function AppBar(props: Props) {
 
   const className = classNames(
     'Sui_AppBar_root',
-    'Sui_AppBar_position' + position,
+    'Sui_AppBar_position-' + position,
     {
-      ['Sui_AppBar_position' + color]: color !== 'inherit',
+      ['Sui_AppBar_color-' + color]: color !== 'inherit',
       'mui-fixed': position === 'fixed', // Useful for the Dialog
     },
     classNameProp,

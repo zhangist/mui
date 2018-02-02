@@ -27,7 +27,7 @@ export interface Props {
   onKeyDown?: (arg?: any, arg2?: any) => any,
 }
 
-class MenuList extends React.Component<Props, any> {
+class MenuList extends React.Component<Props, {}> {
   public list: any = undefined
   public selectedItem: any = undefined
   public blurTimer: any = undefined

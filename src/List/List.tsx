@@ -35,18 +35,15 @@ export interface Props {
   role?: string,
 }
 
-export interface ChildContextTypes {
-  dense?: boolean,
-}
-
 class List extends React.Component<Props, {}> {
+  public static childContextTypes = {
+    dense: PropTypes.bool,
+  }
+
   public static defaultProps = {
     component: 'ul',
     dense: false,
     disablePadding: false,
-  }
-  public static childContextTypes = {
-    dense: PropTypes.bool,
   }
 
   public getChildContext() {
@@ -65,6 +62,7 @@ class List extends React.Component<Props, {}> {
       subheader,
       ...other,
     } = this.props
+
     const className = classNames(
       'Sui_List_root',
       {

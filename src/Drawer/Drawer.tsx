@@ -68,7 +68,7 @@ export interface Props {
   rootStyle?: any,
 }
 
-class Drawer extends React.Component<Props, any> {
+class Drawer extends React.Component<Props, {}> {
   public static defaultProps = {
     anchor: 'left',
     elevation: 16,

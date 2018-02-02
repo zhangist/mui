@@ -1,4 +1,5 @@
 import * as classNames from 'classnames'
+import * as PropTypes from 'prop-types'
 import * as React from 'react'
 
 export interface Props {
@@ -26,11 +27,7 @@ export interface Props {
   id?: string,
 }
 
-export interface ContextTypes {
-  muiFormControl?: any,
-}
-
-function FormHelperText(props: Props, context: ContextTypes) {
+const FormHelperText: React.SFC<Props> = (props, context) => {
   const {
     children,
     className: classNameProp,
@@ -74,6 +71,10 @@ function FormHelperText(props: Props, context: ContextTypes) {
       {children}
     </p>
   )
+}
+
+FormHelperText.contextTypes = {
+  muiFormControl: PropTypes.object,
 }
 
 export default FormHelperText

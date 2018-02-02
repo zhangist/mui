@@ -186,7 +186,7 @@ export interface Props {
   transitionDuration?: number|{ enter?: number, exit?: number }|'auto',
 }
 
-class Popover extends React.Component<Props, any> {
+class Popover extends React.Component<Props, {}> {
   public static defaultProps = {
     anchorReference: 'anchorEl',
     anchorOrigin: {

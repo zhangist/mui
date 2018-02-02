@@ -43,7 +43,7 @@ export interface Props {
 /**
  * @ignore - internal component.
  */
-class Textarea extends React.Component<Props, any> {
+class Textarea extends React.Component<Props, {}> {
   public static defaultProps = {
     rows: 1,
   }

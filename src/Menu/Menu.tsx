@@ -79,7 +79,7 @@ export interface Props {
   id?: string,
 }
 
-class Menu extends React.Component<Props, any> {
+class Menu extends React.Component<Props, {}> {
   public static defaultProps = {
     transitionDuration: 'auto',
     direction: 'ltr',

@@ -30,7 +30,7 @@ export interface Props {
   onClick?: (arg?: any) => any,
 }
 
-class MenuItem extends React.Component<Props, any> {
+class MenuItem extends React.Component<Props, {}> {
   public render() {
     const {
       className: classNameProp,

@@ -103,7 +103,7 @@ export interface Props {
 /**
  * @ignore - internal component.
  */
-class SelectInput extends React.Component<Props, any> {
+class SelectInput extends React.Component<Props, {}> {
   public state = {
     anchorEl: null,
     open: false,

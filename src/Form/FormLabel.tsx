@@ -1,4 +1,5 @@
 import * as classNames from 'classnames'
+import * as PropTypes from 'prop-types'
 import * as React from 'react'
 
 export interface Props {
@@ -33,11 +34,7 @@ export interface Props {
   required?: boolean,
 }
 
-export interface ContextTypes {
-  muiFormControl?: any,
-}
-
-function FormLabel(props: Props, context: ContextTypes) {
+const FormLabel: React.SFC<Props> = (props, context) => {
   const {
     children,
     className: classNameProp,
@@ -95,6 +92,10 @@ function FormLabel(props: Props, context: ContextTypes) {
       )}
     </Component>
   )
+}
+
+FormLabel.contextTypes = {
+  muiFormControl: PropTypes.object,
 }
 
 export default FormLabel

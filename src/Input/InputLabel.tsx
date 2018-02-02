@@ -1,4 +1,5 @@
 import * as classNames from 'classnames'
+import * as PropTypes from 'prop-types'
 import * as React from 'react'
 import { FormLabel } from '../Form'
 
@@ -51,7 +52,7 @@ export interface ContextTypes {
   muiFormControl?: any|object,
 }
 
-function InputLabel(props: Props, context: ContextTypes) {
+const InputLabel: React.SFC<Props> = (props, context) => {
   const {
     children,
     className: classNameProp,
@@ -92,6 +93,10 @@ function InputLabel(props: Props, context: ContextTypes) {
       {children}
     </FormLabel>
   )
+}
+
+InputLabel.contextTypes = {
+  muiFormControl: PropTypes.object,
 }
 
 export default InputLabel

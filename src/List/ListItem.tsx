@@ -42,7 +42,7 @@ export interface Props {
   tabIndex?: number,
 }
 
-class ListItem extends React.Component<Props, any> {
+class ListItem extends React.Component<Props, {}> {
   public static contextTypes = {
     dense: PropTypes.bool,
   }

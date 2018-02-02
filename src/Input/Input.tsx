@@ -1,4 +1,5 @@
 import * as classNames from 'classnames'
+import * as PropTypes from 'prop-types'
 import * as React from 'react'
 import { isMuiComponent } from '../utils/reactHelpers'
 import Textarea from './Textarea'
@@ -134,10 +135,6 @@ export interface Props {
   value?: string|number|string[]|number[],
 }
 
-export interface ContextTypes {
-  muiFormControl: object,
-}
-
 // Supports determination of isControlled().
 // Controlled input accepts its current value as a prop.
 //
@@ -201,12 +198,17 @@ function formControlState(props: any, context: any) {
 }
 
 class Input extends React.Component<Props, {}> {
+  public static contextTypes = {
+    muiFormControl: PropTypes.object,
+  }
+
   public static defaultProps = {
     disableUnderline: false,
     fullWidth: false,
     multiline: false,
     type: 'text',
   }
+
   public isControlled: any = null
   public muiName = 'Input'
   // Holds the input reference

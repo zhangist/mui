@@ -40,6 +40,41 @@
 }
 
 /**
+ * FormControlLabel
+ */
+.Sui_FormControlLabel_root {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  // For correct alignment with the text.
+  vertical-align: middle;
+  // Remove grey highlight
+  -webkit-tap-highlight-color: @palette_common_transparent;
+  margin-left: -14px;
+  margin-right: (@spacing_unit * 2); // used for row presentation of radio/checkbox
+}
+
+.Sui_FormControlLabel_disabled {
+  color: @palette_text_disabled;
+  cursor: default;
+}
+
+.Sui_FormControlLabel_label {}
+
+/**
+ * FormGroup
+ */
+.Sui_FormGroup_root {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.Sui_FormGroup_row {
+  flex-direction: row;
+}
+
+/**
  * FormHelperText
  */
 .Sui_FormHelperText_root {

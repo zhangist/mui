@@ -36,7 +36,7 @@ export interface Props {
  * But has been fork in order to fix some bugs, reduce the number of dependencies
  * and take the control of our destiny.
  */
-class Portal extends React.Component<Props, any> {
+class Portal extends React.Component<Props, {}> {
   public mountNode: any
 
   public componentDidMount() {

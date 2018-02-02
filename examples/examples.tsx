@@ -2,11 +2,13 @@ import * as React from 'react'
 import { render } from 'react-dom'
 import {
   Button,
+  CircularProgress,
   Dialog,
   DialogContent,
   DialogFooter,
   DialogHeader,
   Drawer,
+  LinearProgress,
   Menu,
   MenuItem,
   TextField,
@@ -269,6 +271,23 @@ class Examples extends React.Component {
     )
   }
 
+  public renderSectionProgress() {
+    return (
+      <section id="Progress">
+        <div className="title">
+          Progress / 进度
+        </div>
+        <div className="content">
+          <CircularProgress />
+          <CircularProgress color="secondary" size={32} thickness={5} />
+          <br />
+          <LinearProgress rootStyle={{marginTop: '30px'}} />
+          <LinearProgress color="secondary" rootStyle={{marginTop: '30px'}} />
+        </div>
+      </section>
+    )
+  }
+
   public render() {
 
     return (
@@ -286,6 +305,7 @@ class Examples extends React.Component {
         {this.renderSectionDrawer()}
         {this.renderSectionInput()}
         {this.renderSectionMenu()}
+        {this.renderSectionProgress()}
         <br /><br /><br /><br /><br /><br /><br />
         <div className="remark">
           Remarks / 备注

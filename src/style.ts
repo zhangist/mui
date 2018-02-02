@@ -14,6 +14,7 @@ import './Menu/style.less'
 import './Modal/style.less'
 import './Paper/style.less'
 import './Popover/style.less'
+import './Progress/style.less'
 import './Select/style.less'
 import './SvgIcon/style.less'
 

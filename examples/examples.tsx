@@ -289,7 +289,6 @@ class Examples extends React.Component {
   }
 
   public render() {
-
     return (
       <div className="page">
         <header>

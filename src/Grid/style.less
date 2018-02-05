@@ -1,6 +1,13 @@
 @import '../theme.less';
 
 /**
+ * some list
+ */
+// breakpointKeys = ['xs', 'sm', 'md', 'lg', 'xl']
+// GUTTERS = [0, 8, 16, 24, 40]
+// GRID_SIZES = [true, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+
+/**
  * Grid
  */
 .Sui_Grid_type-container {
@@ -121,11 +128,17 @@
   }
 }
 
+// No need for a media query for the first size.
+.Sui_Grid_grid-xs {
+  flex-basis: 0;
+  flex-grow: 1;
+  max-width: 100%;
+}
 // Sui_Grid_grid-xs-{size} function
 .Sui_Grid_grid-xs-loop(@n) {
-  flex-basis: unit(round(@n / 12 * pow(10, 6)) / pow(10, 4), '%');
+  flex-basis: unit(round(@n / 12 * pow(10, 6)) / pow(10, 4), %);
   flex-grow: 1;
-  max-width: unit(round(@n / 12 * pow(10, 6)) / pow(10, 4), '%');
+  max-width: unit(round(@n / 12 * pow(10, 6)) / pow(10, 4), %);
 }
 .Sui_Grid_grid-xs-1 {
   .Sui_Grid_grid-xs-loop(1);
@@ -162,4 +175,204 @@
 }
 .Sui_Grid_grid-xs-12 {
   .Sui_Grid_grid-xs-loop(12);
+}
+
+.Sui_Grid_grid-sm {
+  flex-basis: 0;
+  flex-grow: 1;
+  max-width: 100%;
+}
+// Sui_Grid_grid-sm-{size} function
+.Sui_Grid_grid-sm-loop(@n) {
+  flex-basis: unit(round(@n / 12 * pow(10, 6)) / pow(10, 4), %);
+  flex-grow: 1;
+  max-width: unit(round(@n / 12 * pow(10, 6)) / pow(10, 4), %);
+}
+@media (min-width:@breakpoints_values_sm) {
+  .Sui_Grid_grid-sm-1 {
+    .Sui_Grid_grid-sm-loop(1);
+  }
+  .Sui_Grid_grid-sm-2 {
+    .Sui_Grid_grid-sm-loop(2);
+  }
+  .Sui_Grid_grid-sm-3 {
+    .Sui_Grid_grid-sm-loop(3);
+  }
+  .Sui_Grid_grid-sm-4 {
+    .Sui_Grid_grid-sm-loop(4);
+  }
+  .Sui_Grid_grid-sm-5 {
+    .Sui_Grid_grid-sm-loop(5);
+  }
+  .Sui_Grid_grid-sm-6 {
+    .Sui_Grid_grid-sm-loop(6);
+  }
+  .Sui_Grid_grid-sm-7 {
+    .Sui_Grid_grid-sm-loop(7);
+  }
+  .Sui_Grid_grid-sm-8 {
+    .Sui_Grid_grid-sm-loop(8);
+  }
+  .Sui_Grid_grid-sm-9 {
+    .Sui_Grid_grid-sm-loop(9);
+  }
+  .Sui_Grid_grid-sm-10 {
+    .Sui_Grid_grid-sm-loop(10);
+  }
+  .Sui_Grid_grid-sm-11 {
+    .Sui_Grid_grid-sm-loop(11);
+  }
+  .Sui_Grid_grid-sm-12 {
+    .Sui_Grid_grid-sm-loop(12);
+  }
+}
+
+.Sui_Grid_grid-md {
+  flex-basis: 0;
+  flex-grow: 1;
+  max-width: 100%;
+}
+// Sui_Grid_grid-md-{size} function
+.Sui_Grid_grid-md-loop(@n) {
+  flex-basis: unit(round(@n / 12 * pow(10, 6)) / pow(10, 4), %);
+  flex-grow: 1;
+  max-width: unit(round(@n / 12 * pow(10, 6)) / pow(10, 4), %);
+}
+@media (min-width:@breakpoints_values_md) {
+  .Sui_Grid_grid-md-1 {
+    .Sui_Grid_grid-md-loop(1);
+  }
+  .Sui_Grid_grid-md-2 {
+    .Sui_Grid_grid-md-loop(2);
+  }
+  .Sui_Grid_grid-md-3 {
+    .Sui_Grid_grid-md-loop(3);
+  }
+  .Sui_Grid_grid-md-4 {
+    .Sui_Grid_grid-md-loop(4);
+  }
+  .Sui_Grid_grid-md-5 {
+    .Sui_Grid_grid-md-loop(5);
+  }
+  .Sui_Grid_grid-md-6 {
+    .Sui_Grid_grid-md-loop(6);
+  }
+  .Sui_Grid_grid-md-7 {
+    .Sui_Grid_grid-md-loop(7);
+  }
+  .Sui_Grid_grid-md-8 {
+    .Sui_Grid_grid-md-loop(8);
+  }
+  .Sui_Grid_grid-md-9 {
+    .Sui_Grid_grid-md-loop(9);
+  }
+  .Sui_Grid_grid-md-10 {
+    .Sui_Grid_grid-md-loop(10);
+  }
+  .Sui_Grid_grid-md-11 {
+    .Sui_Grid_grid-md-loop(11);
+  }
+  .Sui_Grid_grid-md-12 {
+    .Sui_Grid_grid-md-loop(12);
+  }
+}
+
+.Sui_Grid_grid-lg {
+  flex-basis: 0;
+  flex-grow: 1;
+  max-width: 100%;
+}
+// Sui_Grid_grid-lg-{size} function
+.Sui_Grid_grid-lg-loop(@n) {
+  flex-basis: unit(round(@n / 12 * pow(10, 6)) / pow(10, 4), %);
+  flex-grow: 1;
+  max-width: unit(round(@n / 12 * pow(10, 6)) / pow(10, 4), %);
+}
+@media (min-width:@breakpoints_values_lg) {
+  .Sui_Grid_grid-lg-1 {
+    .Sui_Grid_grid-lg-loop(1);
+  }
+  .Sui_Grid_grid-lg-2 {
+    .Sui_Grid_grid-lg-loop(2);
+  }
+  .Sui_Grid_grid-lg-3 {
+    .Sui_Grid_grid-lg-loop(3);
+  }
+  .Sui_Grid_grid-lg-4 {
+    .Sui_Grid_grid-lg-loop(4);
+  }
+  .Sui_Grid_grid-lg-5 {
+    .Sui_Grid_grid-lg-loop(5);
+  }
+  .Sui_Grid_grid-lg-6 {
+    .Sui_Grid_grid-lg-loop(6);
+  }
+  .Sui_Grid_grid-lg-7 {
+    .Sui_Grid_grid-lg-loop(7);
+  }
+  .Sui_Grid_grid-lg-8 {
+    .Sui_Grid_grid-lg-loop(8);
+  }
+  .Sui_Grid_grid-lg-9 {
+    .Sui_Grid_grid-lg-loop(9);
+  }
+  .Sui_Grid_grid-lg-10 {
+    .Sui_Grid_grid-lg-loop(10);
+  }
+  .Sui_Grid_grid-lg-11 {
+    .Sui_Grid_grid-lg-loop(11);
+  }
+  .Sui_Grid_grid-lg-12 {
+    .Sui_Grid_grid-lg-loop(12);
+  }
+}
+
+.Sui_Grid_grid-xl {
+  flex-basis: 0;
+  flex-grow: 1;
+  max-width: 100%;
+}
+// Sui_Grid_grid-xl-{size} function
+.Sui_Grid_grid-xl-loop(@n) {
+  flex-basis: unit(round(@n / 12 * pow(10, 6)) / pow(10, 4), %);
+  flex-grow: 1;
+  max-width: unit(round(@n / 12 * pow(10, 6)) / pow(10, 4), %);
+}
+@media (min-width:@breakpoints_values_xl) {
+  .Sui_Grid_grid-xl-1 {
+    .Sui_Grid_grid-xl-loop(1);
+  }
+  .Sui_Grid_grid-xl-2 {
+    .Sui_Grid_grid-xl-loop(2);
+  }
+  .Sui_Grid_grid-xl-3 {
+    .Sui_Grid_grid-xl-loop(3);
+  }
+  .Sui_Grid_grid-xl-4 {
+    .Sui_Grid_grid-xl-loop(4);
+  }
+  .Sui_Grid_grid-xl-5 {
+    .Sui_Grid_grid-xl-loop(5);
+  }
+  .Sui_Grid_grid-xl-6 {
+    .Sui_Grid_grid-xl-loop(6);
+  }
+  .Sui_Grid_grid-xl-7 {
+    .Sui_Grid_grid-xl-loop(7);
+  }
+  .Sui_Grid_grid-xl-8 {
+    .Sui_Grid_grid-xl-loop(8);
+  }
+  .Sui_Grid_grid-xl-9 {
+    .Sui_Grid_grid-xl-loop(9);
+  }
+  .Sui_Grid_grid-xl-10 {
+    .Sui_Grid_grid-xl-loop(10);
+  }
+  .Sui_Grid_grid-xl-11 {
+    .Sui_Grid_grid-xl-loop(11);
+  }
+  .Sui_Grid_grid-xl-12 {
+    .Sui_Grid_grid-xl-loop(12);
+  }
 }

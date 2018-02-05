@@ -8,7 +8,10 @@ import {
   DialogFooter,
   DialogHeader,
   Drawer,
+  FormControl,
   FormControlLabel,
+  FormLabel,
+  Grid,
   LinearProgress,
   Menu,
   MenuItem,
@@ -27,8 +30,8 @@ class Examples extends React.Component {
     textFieldValue: '',
     textFieldValue2: '',
     textFieldValue3: '',
-    textFieldValue4: '',
-    textFieldValue5: '',
+    textFieldValue4: 'value1',
+    textFieldValue5: 'value1',
     anchorElMenu: null,
     radioGroup: 'left',
   }
@@ -178,7 +181,7 @@ class Examples extends React.Component {
           TextField / 输入框
         </div>
         <div className="content">
-          <div>
+          <div style={{ display: 'flex', flexWrap: 'wrap' }}>
             <TextField
               className="margin-left-8 margin-right-8"
               helperText="&nbsp;"
@@ -217,7 +220,7 @@ class Examples extends React.Component {
               helperText="Please select your currency"
               margin="normal"
             >
-              {[{value: 'value', label: 'label'}].map((option: any) => (
+              {[{value: 'value1', label: 'label'}].map((option: any) => (
                 <MenuItem key={option.value} value={option.value}>
                   {option.label}
                 </MenuItem>
@@ -236,9 +239,11 @@ class Examples extends React.Component {
               helperText="Please select your currency"
               margin="normal"
             >
-              [<option key="key" value="value">
-                label
-              </option>]
+              {[{value: 'value1', label: 'label'}].map((option: any) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
             </TextField>
           </div>
           <div className="margin-unit">
@@ -292,6 +297,44 @@ class Examples extends React.Component {
     )
   }
 
+  public renderSectionRadio() {
+    return (
+      <section id="Radio">
+        <div className="title">
+          Radio / 单选
+        </div>
+        <div className="content">
+          <Grid container>
+            <Grid item xs={12} sm={6}>
+              <FormControl component="fieldset">
+                <FormLabel component="legend">anchorReference</FormLabel>
+                <RadioGroup
+                  value={this.state.radioGroup}
+                  onChange={this.handleChange('radioGroup')}
+                >
+                  <FormControlLabel value="left" control={<Radio />} label="Left" />
+                  <FormControlLabel value="right" control={<Radio />} label="Right" />
+                </RadioGroup>
+              </FormControl>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <FormControl component="fieldset">
+                <FormLabel component="legend">anchorReference</FormLabel>
+                <RadioGroup
+                  value={this.state.radioGroup}
+                  onChange={this.handleChange('radioGroup')}
+                >
+                  <FormControlLabel value="left" control={<Radio />} label="Left" />
+                  <FormControlLabel value="right" control={<Radio />} label="Right" />
+                </RadioGroup>
+              </FormControl>
+            </Grid>
+          </Grid>
+        </div>
+      </section>
+    )
+  }
+
   public render() {
     return (
       <div className="page">
@@ -309,13 +352,7 @@ class Examples extends React.Component {
         {this.renderSectionInput()}
         {this.renderSectionMenu()}
         {this.renderSectionProgress()}
-        <RadioGroup
-          value={this.state.radioGroup}
-          onChange={this.handleChange('radioGroup')}
-        >
-          <FormControlLabel value="left" control={<Radio />} label="Left" />
-          <FormControlLabel value="right" control={<Radio />} label="Right" />
-        </RadioGroup>
+        {this.renderSectionRadio()}
         <br /><br /><br /><br /><br /><br /><br />
         <div className="remark">
           Remarks / 备注

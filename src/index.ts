@@ -22,6 +22,8 @@ export {
   FormHelperText,
   FormLabel,
 } from './Form'
+export { default as Grid } from './Grid'
+export { default as Hidden } from './Hidden'
 export { default as Icon } from './Icon'
 export { default as IconButton } from './IconButton'
 export { default as Input, InputLabel } from './Input'

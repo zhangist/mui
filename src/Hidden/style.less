@@ -1,33 +1,25 @@
 @import '../theme.less';
 
-@breakpoints_keys: 'xs', 'sm', 'md', 'lg', 'xl';
-
-@breakpoints_values_xs: 0;
-@breakpoints_values_sm: 600;
-@breakpoints_values_md: 960;
-@breakpoints_values_lg: 1280;
-@breakpoints_values_xl: 1920;
-
 /**
  * HiddenCss
  */
 // xs
 .Sui_HiddenCss_only-xs {
   @media
-  (min-width:unit(@breakpoints_values_xs, px)) and
-  (max-width:unit(((@breakpoints_values_xs - 5) / 100), px)) {
+  (min-width:@breakpoints_values_xs) and
+  (max-width:((@breakpoints_values_xs - 5) / 100)) {
     display: none;
   }
 }
 
 .Sui_HiddenCss_xs-up {
-  @media (min-width:unit(@breakpoints_values_xs, px)) {
+  @media (min-width:@breakpoints_values_xs) {
     display: none;
   }
 }
 
 .Sui_HiddenCss_xs-down {
-  @media (max-width:unit(((@breakpoints_values_xs - 5) / 100), px)) {
+  @media (max-width:((@breakpoints_values_xs - 5) / 100)) {
     display: none;
   }
 }
@@ -35,20 +27,20 @@
 // sm
 .Sui_HiddenCss_only-sm {
   @media
-  (min-width:unit(@breakpoints_values_sm, px)) and
-  (max-width:unit(((@breakpoints_values_sm - 5) / 100), px)) {
+  (min-width:@breakpoints_values_sm) and
+  (max-width:((@breakpoints_values_sm - 5) / 100)) {
     display: none;
   }
 }
 
 .Sui_HiddenCss_sm-up {
-  @media (min-width:unit(@breakpoints_values_sm, px)) {
+  @media (min-width:@breakpoints_values_sm) {
     display: none;
   }
 }
 
 .Sui_HiddenCss_sm-down {
-  @media (max-width:unit(((@breakpoints_values_sm - 5) / 100), px)) {
+  @media (max-width:((@breakpoints_values_sm - 5) / 100)) {
     display: none;
   }
 }
@@ -56,20 +48,20 @@
 // md
 .Sui_HiddenCss_only-md {
   @media
-  (min-width:unit(@breakpoints_values_md, px)) and
-  (max-width:unit(((@breakpoints_values_md - 5) / 100), px)) {
+  (min-width:@breakpoints_values_md) and
+  (max-width:((@breakpoints_values_md - 5) / 100)) {
     display: none;
   }
 }
 
 .Sui_HiddenCss_md-up {
-  @media (min-width:unit(@breakpoints_values_md, px)) {
+  @media (min-width:@breakpoints_values_md) {
     display: none;
   }
 }
 
 .Sui_HiddenCss_md-down {
-  @media (max-width:unit(((@breakpoints_values_md - 5) / 100), px)) {
+  @media (max-width:((@breakpoints_values_md - 5) / 100)) {
     display: none;
   }
 }
@@ -77,39 +69,39 @@
 // lg
 .Sui_HiddenCss_only-lg {
   @media
-  (min-width:unit(@breakpoints_values_lg, px)) and
-  (max-width:unit(((@breakpoints_values_lg - 5) / 100), px)) {
+  (min-width:@breakpoints_values_lg) and
+  (max-width:((@breakpoints_values_lg - 5) / 100)) {
     display: none;
   }
 }
 
 .Sui_HiddenCss_md-up {
-  @media (min-width:unit(@breakpoints_values_lg, px)) {
+  @media (min-width:@breakpoints_values_lg) {
     display: none;
   }
 }
 
 .Sui_HiddenCss_md-down {
-  @media (max-width:unit(((@breakpoints_values_lg - 5) / 100), px)) {
+  @media (max-width:((@breakpoints_values_lg - 5) / 100)) {
     display: none;
   }
 }
 
 // xl
 .Sui_HiddenCss_only-xl {
-  @media (min-width:unit(@breakpoints_values_xl, px)) {
+  @media (min-width:@breakpoints_values_xl) {
     display: none;
   }
 }
 
 .Sui_HiddenCss_md-up {
-  @media (min-width:unit(@breakpoints_values_lg, px)) {
+  @media (min-width:@breakpoints_values_lg) {
     display: none;
   }
 }
 
 .Sui_HiddenCss_md-down {
-  @media (min-width:unit(@breakpoints_values_xs, px)) {
+  @media (min-width:@breakpoints_values_xs) {
     display: none;
   }
 }

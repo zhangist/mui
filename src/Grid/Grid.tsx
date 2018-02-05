@@ -10,93 +10,118 @@
 // - https://css-tricks.com/snippets/css/a-guide-to-flexbox/
 
 import * as classNames from 'classnames'
+import * as PropTypes from 'prop-types'
 import * as React from 'react'
 import Hidden from '../Hidden'
 import requirePropFactory from '../utils/requirePropFactory'
 
-const breakpointKeys = ['xs', 'sm', 'md', 'lg', 'xl']
-
-const GUTTERS = [0, 8, 16, 24, 40]
-const GRID_SIZES = [true, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-
-function generateGrid(globalStyles, theme, breakpoint) {
-  // For the auto layouting
-  const styles = {
-    [`grid-${breakpoint}`]: {
-      flexBasis: 0,
-      flexGrow: 1,
-      maxWidth: '100%',
-    },
-  }
-
-  GRID_SIZES.forEach(size => {
-    if (typeof size === 'boolean') {
-      // Skip the first one as handle above.
-      return
-    }
-
-    // Only keep 6 significant numbers.
-    const width = `${Math.round(size / 12 * Math.pow(10, 6)) / Math.pow(10, 4)}%`
-
-    /* eslint-disable max-len */
-    // Close to the bootstrap implementation:
-    // https://github.com/twbs/bootstrap/blob/b0508a975d711d6b24c01f57dd5445c22699fac4/scss/mixins/_grid.scss#L69
-    /* eslint-enable max-len */
-    styles[`grid-${breakpoint}-${size}`] = {
-      flexBasis: width,
-      maxWidth: width,
-    }
-  })
-
-  // No need for a media query for the first size.
-  if (breakpoint === 'xs') {
-    Object.assign(globalStyles, styles)
-  } else {
-    globalStyles[theme.breakpoints.up(breakpoint)] = styles
-  }
+const defaultProps: any = {
+  alignContent: 'stretch',
+  alignItems: 'stretch',
+  component: 'div',
+  container: false,
+  direction: 'row',
+  item: false,
+  justify: 'flex-start',
+  zeroMinWidth: false,
+  spacing: 16,
+  wrap: 'wrap',
 }
 
-function generateGutter(theme, breakpoint) {
-  const styles = {}
-
-  GUTTERS.forEach((spacing, index) => {
-    if (index === 0) {
-      // Skip the default style.
-      return
-    }
-
-    styles[`spacing-${breakpoint}-${spacing}`] = {
-      margin: -spacing / 2,
-      width: `calc(100% + ${spacing}px)`,
-      '& > $typeItem': {
-        padding: spacing / 2,
-      },
-    }
-  })
-
-  return styles
+export interface Props {
+  /**
+   * Defines the `align-content` style property.
+   * It's applied for all screen sizes.
+   */
+  alignContent?: 'stretch'|'center'|'flex-start'|'flex-end'|'space-between'|'space-around',
+  /**
+   * Defines the `align-items` style property.
+   * It's applied for all screen sizes.
+   */
+  alignItems?: 'flex-start'|'center'|'flex-end'|'stretch'|'baseline',
+  /**
+   * The content of the component.
+   */
+  children?: React.ReactNode,
+  /**
+   * @ignore
+   */
+  className?: string,
+  /**
+   * The component used for the root node.
+   * Either a string to use a DOM element or a component.
+   */
+  component?: any,
+  /**
+   * If `true`, the component will have the flex *container* behavior.
+   * You should be wrapping *items* with a *container*.
+   */
+  container?: boolean,
+  /**
+   * Defines the `flex-direction` style property.
+   * It is applied for all screen sizes.
+   */
+  direction?: 'row'|'row-reverse'|'column'|'column-reverse',
+  /**
+   * If provided, will wrap with [Hidden](/api/hidden) component and given properties.
+   */
+  hidden?: any,
+  /**
+   * If `true`, the component will have the flex *item* behavior.
+   * You should be wrapping *items* with a *container*.
+   */
+  item?: boolean,
+  /**
+   * Defines the `justify-content` style property.
+   * It is applied for all screen sizes.
+   */
+  justify?: 'flex-start'|'center'|'flex-end'|'space-between'|'space-around',
+  /**
+   * Defines the number of grids the component is going to use.
+   * It's applied for the `lg` breakpoint and wider screens if not overridden.
+   */
+  lg?: true|1|2|3|4|5|6|7|8|9|10|11|12,
+  /**
+   * Defines the number of grids the component is going to use.
+   * It's applied for the `md` breakpoint and wider screens if not overridden.
+   */
+  md?: true|1|2|3|4|5|6|7|8|9|10|11|12,
+  /**
+   * Defines the number of grids the component is going to use.
+   * It's applied for the `sm` breakpoint and wider screens if not overridden.
+   */
+  sm?: true|1|2|3|4|5|6|7|8|9|10|11|12,
+  /**
+   * Defines the space between the type `item` component.
+   * It can only be used on a type `container` component.
+   */
+  spacing?: 0|8|16|24|40,
+  /**
+   * Defines the `flex-wrap` style property.
+   * It's applied for all screen sizes.
+   */
+  wrap?: 'nowrap'|'wrap'|'wrap-reverse',
+  /**
+   * Defines the number of grids the component is going to use.
+   * It's applied for the `xl` breakpoint and wider screens.
+   */
+  xl?: true|1|2|3|4|5|6|7|8|9|10|11|12,
+  /**
+   * Defines the number of grids the component is going to use.
+   * It's applied for all the screen sizes with the lowest priority.
+   */
+  xs?: true|1|2|3|4|5|6|7|8|9|10|11|12,
+  /**
+   * If `true`, it sets `min-width: 0` on the item.
+   * Refer to the limitations section of the documentation to better understand the use case.
+   */
+  zeroMinWidth?: boolean,
 }
 
-// Default CSS values
-// flex: '0 1 auto',
-// flexDirection: 'row',
-// alignItems: 'flex-start',
-// flexWrap: 'nowrap',
-// justifyContent: 'flex-start',
-export const styles = theme => ({
-  
-  ...breakpointKeys.reduce((accumulator, key) => {
-    // Use side effect over immutability for better performance.
-    generateGrid(accumulator, theme, key)
-    return accumulator
-  }, {}),
-})
-
-function Grid(props) {
+const Grid: React.SFC<Props> = (props) => {
   const {
     alignContent,
     alignItems,
-    classes,
     className: classNameProp,
     component: Component,
     container,
@@ -112,32 +137,30 @@ function Grid(props) {
     wrap,
     xl,
     xs,
-    ...other
+    ...other,
   } = props
 
   const className = classNames(
     {
-      [classes.typeContainer]: container,
-      [classes.typeItem]: item,
-      [classes.zeroMinWidth]: zeroMinWidth,
-      [classes[`spacing-xs-${String(spacing)}`]]: container && spacing !== 0,
-      [classes[`direction-xs-${String(direction)}`]]: direction !== Grid.defaultProps.direction,
-      [classes[`wrap-xs-${String(wrap)}`]]: wrap !== Grid.defaultProps.wrap,
-      [classes[`align-items-xs-${String(alignItems)}`]]:
-        alignItems !== Grid.defaultProps.alignItems,
-      [classes[`align-content-xs-${String(alignContent)}`]]:
-        alignContent !== Grid.defaultProps.alignContent,
-      [classes[`justify-xs-${String(justify)}`]]: justify !== Grid.defaultProps.justify,
-      [classes['grid-xs']]: xs === true,
-      [classes[`grid-xs-${String(xs)}`]]: xs && xs !== true,
-      [classes['grid-sm']]: sm === true,
-      [classes[`grid-sm-${String(sm)}`]]: sm && sm !== true,
-      [classes['grid-md']]: md === true,
-      [classes[`grid-md-${String(md)}`]]: md && md !== true,
-      [classes['grid-lg']]: lg === true,
-      [classes[`grid-lg-${String(lg)}`]]: lg && lg !== true,
-      [classes['grid-xl']]: xl === true,
-      [classes[`grid-xl-${String(xl)}`]]: xl && xl !== true,
+      'Sui_Grid_type-container': container,
+      'Sui_Grid_type-item': item,
+      'Sui_Grid_zeroMinWidth': zeroMinWidth,
+      ['Sui_Grid_spacing-xs-' + String(spacing)]: container && spacing !== 0,
+      ['Sui_Grid_direction-xs-' + String(direction)]: direction !== defaultProps.direction,
+      ['Sui_Grid_wrap-xs-' + String(wrap)]: wrap !== defaultProps.wrap,
+      ['Sui_Grid_align-items-xs-' + String(alignItems)]: alignItems !== defaultProps.alignItems,
+      ['Sui_Grid_align-content-xs-' + String(alignContent)]: alignContent !== defaultProps.alignContent,
+      ['Sui_Grid_justify-xs-' + String(justify)]: justify !== defaultProps.justify,
+      'Sui_Grid_grid-xs': xs === true,
+      ['Sui_Grid_grid-xs-' + String(xs)]: xs && xs !== true,
+      'Sui_Grid_grid-sm': sm === true,
+      ['Sui_Grid_grid-sm-' + String(sm)]: sm && sm !== true,
+      'Sui_Grid_grid-md': md === true,
+      ['Sui_Grid_grid-md-' + String(md)]: md && md !== true,
+      'Sui_Grid_grid-lg': lg === true,
+      ['Sui_Grid_grid-lg-' + String(lg)]: lg && lg !== true,
+      'Sui_Grid_grid-xl': xl === true,
+      ['Sui_Grid_grid-xl-' + String(xl)]: xl && xl !== true,
     },
     classNameProp,
   )
@@ -154,119 +177,7 @@ function Grid(props) {
   return <Component {...gridProps} />
 }
 
-Grid.propTypes = {
-  /**
-   * Defines the `align-content` style property.
-   * It's applied for all screen sizes.
-   */
-  alignContent: PropTypes.oneOf([
-    'stretch',
-    'center',
-    'flex-start',
-    'flex-end',
-    'space-between',
-    'space-around',
-  ]),
-  /**
-   * Defines the `align-items` style property.
-   * It's applied for all screen sizes.
-   */
-  alignItems: PropTypes.oneOf(['flex-start', 'center', 'flex-end', 'stretch', 'baseline']),
-  /**
-   * The content of the component.
-   */
-  children: PropTypes.node,
-  /**
-   * Useful to extend the style applied to components.
-   */
-  classes: PropTypes.object.isRequired,
-  /**
-   * @ignore
-   */
-  className: PropTypes.string,
-  /**
-   * The component used for the root node.
-   * Either a string to use a DOM element or a component.
-   */
-  component: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
-  /**
-   * If `true`, the component will have the flex *container* behavior.
-   * You should be wrapping *items* with a *container*.
-   */
-  container: PropTypes.bool,
-  /**
-   * Defines the `flex-direction` style property.
-   * It is applied for all screen sizes.
-   */
-  direction: PropTypes.oneOf(['row', 'row-reverse', 'column', 'column-reverse']),
-  /**
-   * If provided, will wrap with [Hidden](/api/hidden) component and given properties.
-   */
-  hidden: PropTypes.object,
-  /**
-   * If `true`, the component will have the flex *item* behavior.
-   * You should be wrapping *items* with a *container*.
-   */
-  item: PropTypes.bool,
-  /**
-   * Defines the `justify-content` style property.
-   * It is applied for all screen sizes.
-   */
-  justify: PropTypes.oneOf(['flex-start', 'center', 'flex-end', 'space-between', 'space-around']),
-  /**
-   * Defines the number of grids the component is going to use.
-   * It's applied for the `lg` breakpoint and wider screens if not overridden.
-   */
-  lg: PropTypes.oneOf([true, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
-  /**
-   * Defines the number of grids the component is going to use.
-   * It's applied for the `md` breakpoint and wider screens if not overridden.
-   */
-  md: PropTypes.oneOf([true, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
-  /**
-   * Defines the number of grids the component is going to use.
-   * It's applied for the `sm` breakpoint and wider screens if not overridden.
-   */
-  sm: PropTypes.oneOf([true, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
-  /**
-   * Defines the space between the type `item` component.
-   * It can only be used on a type `container` component.
-   */
-  spacing: PropTypes.oneOf(GUTTERS),
-  /**
-   * Defines the `flex-wrap` style property.
-   * It's applied for all screen sizes.
-   */
-  wrap: PropTypes.oneOf(['nowrap', 'wrap', 'wrap-reverse']),
-  /**
-   * Defines the number of grids the component is going to use.
-   * It's applied for the `xl` breakpoint and wider screens.
-   */
-  xl: PropTypes.oneOf([true, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
-  /**
-   * Defines the number of grids the component is going to use.
-   * It's applied for all the screen sizes with the lowest priority.
-   */
-  xs: PropTypes.oneOf([true, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
-  /**
-   * If `true`, it sets `min-width: 0` on the item.
-   * Refer to the limitations section of the documentation to better understand the use case.
-   */
-  zeroMinWidth: PropTypes.bool,
-}
-
-Grid.defaultProps = {
-  alignContent: 'stretch',
-  alignItems: 'stretch',
-  component: 'div',
-  container: false,
-  direction: 'row',
-  item: false,
-  justify: 'flex-start',
-  zeroMinWidth: false,
-  spacing: 16,
-  wrap: 'wrap',
-}
+Grid.defaultProps = defaultProps
 
 // Add a wrapper component to generate some helper messages in the development
 // environment.
@@ -275,7 +186,7 @@ Grid.defaultProps = {
 let GridWrapper = Grid
 
 if (process.env.NODE_ENV !== 'production') {
-  GridWrapper = props => <Grid {...props} />
+  GridWrapper = (props: any) => <Grid {...props} />
 
   const requireProp = requirePropFactory('Grid')
   GridWrapper.propTypes = {
@@ -293,4 +204,4 @@ if (process.env.NODE_ENV !== 'production') {
   }
 }
 
-export default withStyles(styles, { name: 'MuiGrid' })(GridWrapper)
+export default GridWrapper

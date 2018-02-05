@@ -8,9 +8,12 @@ import {
   DialogFooter,
   DialogHeader,
   Drawer,
+  FormControlLabel,
   LinearProgress,
   Menu,
   MenuItem,
+  Radio,
+  RadioGroup,
   TextField,
 } from '../src'
 
@@ -27,6 +30,7 @@ class Examples extends React.Component {
     textFieldValue4: '',
     textFieldValue5: '',
     anchorElMenu: null,
+    radioGroup: 'left',
   }
 
   public handleChange = (name: string) => (event: any) => {
@@ -305,6 +309,13 @@ class Examples extends React.Component {
         {this.renderSectionInput()}
         {this.renderSectionMenu()}
         {this.renderSectionProgress()}
+        <RadioGroup
+          value={this.state.radioGroup}
+          onChange={this.handleChange('radioGroup')}
+        >
+          <FormControlLabel value="left" control={<Radio />} label="Left" />
+          <FormControlLabel value="right" control={<Radio />} label="Right" />
+        </RadioGroup>
         <br /><br /><br /><br /><br /><br /><br />
         <div className="remark">
           Remarks / 备注

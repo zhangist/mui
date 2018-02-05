@@ -1,0 +1,165 @@
+@import '../theme.less';
+
+/**
+ * Grid
+ */
+.Sui_Grid_type-container {
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.Sui_Grid_type-item {
+  box-sizing: border-box;
+  flex: 0 0 auto;
+  margin: 0; // For instance, its useful when used with a `figure` element.
+}
+
+.Sui_Grid_zero-min-width {
+  min-width: 0;
+}
+
+.Sui_Grid_direction-xs-column {
+  flex-direction: column;
+}
+
+.Sui_Grid_direction-xs-column-reverse {
+  flex-direction: column-reverse;
+}
+
+.Sui_Grid_direction-xs-row-reverse {
+  flex-direction: row-reverse;
+}
+
+.Sui_Grid_wrap-xs-nowrap {
+  flex-wrap: nowrap;
+}
+
+.Sui_Grid_wrap-xs-wrap-reverse {
+  flex-wrap: wrap-reverse;
+}
+
+.Sui_Grid_align-items-xs-center {
+  align-items: center;
+}
+
+.Sui_Grid_align-items-xs-flex-start {
+  align-items: flex-start;
+}
+
+.Sui_Grid_align-items-xs-flex-end {
+  align-items: flex-end;
+}
+
+.Sui_Grid_align-items-xs-baseline {
+  align-items: baseline;
+}
+
+.Sui_Grid_align-content-xs-center {
+  align-content: center;
+}
+
+.Sui_Grid_align-content-xs-flex-start {
+  align-content: flex-start;
+}
+
+.Sui_Grid_align-content-xs-flex-end {
+  align-content: flex-end;
+}
+
+.Sui_Grid_align-content-xs-space-between {
+  align-content: space-between;
+}
+
+.Sui_Grid_align-content-xs-space-around {
+  align-content: space-around;
+}
+
+.Sui_Grid_justify-xs-center {
+  justify-content: center;
+}
+
+.Sui_Grid_justify-xs-flex-end {
+  justify-content: flex-end;
+}
+
+.Sui_Grid_justify-xs-space-between {
+  justify-content: space-between;
+}
+
+.Sui_Grid_justify-xs-space-around {
+  justify-content: space-around;
+}
+
+.Sui_Grid_spacing-xs-8 {
+  margin: (-8px / 2);
+  width: calc(100% + 8px);
+  & > .Sui_Grid_type-item {
+    padding: (8px / 2),
+  }
+}
+.Sui_Grid_spacing-xs-16 {
+  margin: (-16px / 2);
+  width: calc(100% + 16px);
+  & > .Sui_Grid_type-item {
+    padding: (16px / 2),
+  }
+}
+.Sui_Grid_spacing-xs-24 {
+  margin: (-24px / 2);
+  width: calc(100% + 24px);
+  & > .Sui_Grid_type-item {
+    padding: (24px / 2),
+  }
+}
+.Sui_Grid_spacing-xs-40 {
+  margin: (-40px / 2);
+  width: calc(100% + 40px);
+  & > .Sui_Grid_type-item {
+    padding: (40px / 2),
+  }
+}
+
+// Sui_Grid_grid-xs-{size} function
+.Sui_Grid_grid-xs-loop(@n) {
+  flex-basis: unit(round(@n / 12 * pow(10, 6)) / pow(10, 4), '%');
+  flex-grow: 1;
+  max-width: unit(round(@n / 12 * pow(10, 6)) / pow(10, 4), '%');
+}
+.Sui_Grid_grid-xs-1 {
+  .Sui_Grid_grid-xs-loop(1);
+}
+.Sui_Grid_grid-xs-2 {
+  .Sui_Grid_grid-xs-loop(2);
+}
+.Sui_Grid_grid-xs-3 {
+  .Sui_Grid_grid-xs-loop(3);
+}
+.Sui_Grid_grid-xs-4 {
+  .Sui_Grid_grid-xs-loop(4);
+}
+.Sui_Grid_grid-xs-5 {
+  .Sui_Grid_grid-xs-loop(5);
+}
+.Sui_Grid_grid-xs-6 {
+  .Sui_Grid_grid-xs-loop(6);
+}
+.Sui_Grid_grid-xs-7 {
+  .Sui_Grid_grid-xs-loop(7);
+}
+.Sui_Grid_grid-xs-8 {
+  .Sui_Grid_grid-xs-loop(8);
+}
+.Sui_Grid_grid-xs-9 {
+  .Sui_Grid_grid-xs-loop(9);
+}
+.Sui_Grid_grid-xs-10 {
+  .Sui_Grid_grid-xs-loop(10);
+}
+.Sui_Grid_grid-xs-11 {
+  .Sui_Grid_grid-xs-loop(11);
+}
+.Sui_Grid_grid-xs-12 {
+  .Sui_Grid_grid-xs-loop(12);
+}

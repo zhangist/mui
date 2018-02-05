@@ -38,6 +38,8 @@ export interface Props {
    * Use that property to pass a ref callback to the root component.
    */
   rootRef?: (arg?: any) => any,
+  component?: string,
+  role?: string,
 }
 
 /**

@@ -14,6 +14,7 @@ export interface Props {
    * Display group of elements in a compact row.
    */
   row?: boolean,
+  role?: string,
 }
 
 /**

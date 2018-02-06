@@ -101,28 +101,28 @@
 
 .Sui_Grid_spacing-xs-8 {
   margin: (-8px / 2);
-  width: calc(100% + 8px);
+  width: calc(~'100% + 8px');
   & > .Sui_Grid_type-item {
     padding: (8px / 2),
   }
 }
 .Sui_Grid_spacing-xs-16 {
   margin: (-16px / 2);
-  width: calc(100% + 16px);
+  width: calc(~'100% + 16px');
   & > .Sui_Grid_type-item {
     padding: (16px / 2),
   }
 }
 .Sui_Grid_spacing-xs-24 {
   margin: (-24px / 2);
-  width: calc(100% + 24px);
+  width: calc(~'100% + 24px');
   & > .Sui_Grid_type-item {
     padding: (24px / 2),
   }
 }
 .Sui_Grid_spacing-xs-40 {
   margin: (-40px / 2);
-  width: calc(100% + 40px);
+  width: calc(~'100% + 40px');
   & > .Sui_Grid_type-item {
     padding: (40px / 2),
   }
@@ -136,9 +136,9 @@
 }
 // Sui_Grid_grid-xs-{size} function
 .Sui_Grid_grid-xs-loop(@n) {
-  flex-basis: unit(round(@n / 12 * pow(10, 6)) / pow(10, 4), %);
+  flex-basis: (round(@n / 12% * pow(10, 6)) / pow(10, 4));
   flex-grow: 1;
-  max-width: unit(round(@n / 12 * pow(10, 6)) / pow(10, 4), %);
+  max-width: (round(@n / 12% * pow(10, 6)) / pow(10, 4));
 }
 .Sui_Grid_grid-xs-1 {
   .Sui_Grid_grid-xs-loop(1);
@@ -184,9 +184,7 @@
 }
 // Sui_Grid_grid-sm-{size} function
 .Sui_Grid_grid-sm-loop(@n) {
-  flex-basis: unit(round(@n / 12 * pow(10, 6)) / pow(10, 4), %);
-  flex-grow: 1;
-  max-width: unit(round(@n / 12 * pow(10, 6)) / pow(10, 4), %);
+  .Sui_Grid_grid-xs-loop(@n);
 }
 @media (min-width:@breakpoints_values_sm) {
   .Sui_Grid_grid-sm-1 {
@@ -234,9 +232,7 @@
 }
 // Sui_Grid_grid-md-{size} function
 .Sui_Grid_grid-md-loop(@n) {
-  flex-basis: unit(round(@n / 12 * pow(10, 6)) / pow(10, 4), %);
-  flex-grow: 1;
-  max-width: unit(round(@n / 12 * pow(10, 6)) / pow(10, 4), %);
+  .Sui_Grid_grid-xs-loop(@n);
 }
 @media (min-width:@breakpoints_values_md) {
   .Sui_Grid_grid-md-1 {
@@ -284,9 +280,7 @@
 }
 // Sui_Grid_grid-lg-{size} function
 .Sui_Grid_grid-lg-loop(@n) {
-  flex-basis: unit(round(@n / 12 * pow(10, 6)) / pow(10, 4), %);
-  flex-grow: 1;
-  max-width: unit(round(@n / 12 * pow(10, 6)) / pow(10, 4), %);
+  .Sui_Grid_grid-xs-loop(@n);
 }
 @media (min-width:@breakpoints_values_lg) {
   .Sui_Grid_grid-lg-1 {
@@ -334,9 +328,7 @@
 }
 // Sui_Grid_grid-xl-{size} function
 .Sui_Grid_grid-xl-loop(@n) {
-  flex-basis: unit(round(@n / 12 * pow(10, 6)) / pow(10, 4), %);
-  flex-grow: 1;
-  max-width: unit(round(@n / 12 * pow(10, 6)) / pow(10, 4), %);
+  .Sui_Grid_grid-xs-loop(@n);
 }
 @media (min-width:@breakpoints_values_xl) {
   .Sui_Grid_grid-xl-1 {

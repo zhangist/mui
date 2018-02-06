@@ -4,7 +4,7 @@
 import { Children, cloneElement, isValidElement } from 'react'
 
 export function cloneChildrenWithClassName(children: Node, className: string) {
-  return Children.map(children, (child: any) => {
+  return (Children.map(children, (child: any) => {
     return (
       isValidElement(child) &&
       cloneElement(child as any, {
@@ -13,7 +13,7 @@ export function cloneChildrenWithClassName(children: Node, className: string) {
           : className,
       })
     )
-  })
+  }) as any) // ? any -> for tsc build error
 }
 
 export function isMuiElement(element: any, muiNames: string[]) {

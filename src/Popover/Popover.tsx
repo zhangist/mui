@@ -1,7 +1,7 @@
 // @inheritedComponent Modal
 
 import contains = require('dom-helpers/query/contains')
-import debounce = require('lodash/debounce')
+import { debounce } from 'lodash'
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 import EventListener from 'react-event-listener'
@@ -10,7 +10,7 @@ import Modal from '../Modal'
 import Paper from '../Paper'
 import Grow from '../transitions/Grow'
 
-function getOffsetTop(rect: any, vertical: any) {
+export function getOffsetTop(rect: any, vertical: any) {
   let offset = 0
 
   if (typeof vertical === 'number') {
@@ -24,7 +24,7 @@ function getOffsetTop(rect: any, vertical: any) {
   return offset
 }
 
-function getOffsetLeft(rect: any, horizontal: any) {
+export function getOffsetLeft(rect: any, horizontal: any) {
   let offset = 0
 
   if (typeof horizontal === 'number') {
@@ -207,7 +207,7 @@ class Popover extends React.Component<Props, {}> {
   public handleGetOffsetTop = getOffsetTop
   public handleGetOffsetLeft = getOffsetLeft
 
-  public handleResize = debounce(() => {
+  private handleResize = debounce(() => {
     const element = ReactDOM.findDOMNode(this.transitionEl)
     this.setPositioningStyles(element)
   }, 166)

@@ -62,3 +62,13 @@ section>.content {
   font-size: 12px;
   color: #666;
 }
+
+.margin-unit {
+  margin: 8px;
+}
+.margin-left-unit {
+  margin: 8px;
+}
+.margin-right-unit {
+  margin: 8px;
+}

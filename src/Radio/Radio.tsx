@@ -73,6 +73,9 @@ function Radio(props: Props) {
       inputType="radio"
       icon={<RadioButtonUncheckedIcon />}
       checkedIcon={<RadioButtonCheckedIcon />}
+      classNameDefault="Sui_Radio_default"
+      classNameChecked="Sui_Radio_checked"
+      classNameDisabled="Sui_Radio_disabled"
       {...props}
     />
   )

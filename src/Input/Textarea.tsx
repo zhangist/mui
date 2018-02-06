@@ -1,5 +1,5 @@
 import * as classnames from 'classnames'
-import debounce = require('lodash/debounce')
+import { debounce } from 'lodash'
 import * as React from 'react'
 import EventListener from 'react-event-listener'
 
@@ -47,15 +47,17 @@ class Textarea extends React.Component<Props, {}> {
   public static defaultProps = {
     rows: 1,
   }
-  public shadow = null
-  public singlelineShadow = null
-  public input = null
-  public value: any = null
+
   public state = {
     height: null,
   }
 
-  public handleResize = debounce((event: any) => {
+  private shadow = null
+  private singlelineShadow = null
+  private input = null
+  private value: any = null
+
+  private handleResize = debounce((event: any) => {
     this.syncHeightWithShadow(event)
   }, 166)
 

@@ -57,7 +57,7 @@ const withWidth = (options: any = {}) => (Component: any) => {
       width: undefined,
     }
 
-    public handleResize = debounce(() => {
+    private handleResize = debounce(() => {
       this.updateWidth(window.innerWidth)
     }, resizeInterval)
 
@@ -138,7 +138,7 @@ const withWidth = (options: any = {}) => (Component: any) => {
 
   hoistNonReactStatics(WithWidth, Component)
 
-  return WithWidth
+  return (WithWidth as any) // ? any -> for tsc build error
 }
 
 export default withWidth

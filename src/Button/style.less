@@ -4,12 +4,14 @@
  * Button
  */
 .Sui_Button_root {
+  // typography button
+  .typography_button();
   line-height: 1.4em; // Improve readability for multiline button.
   box-sizing: border-box;
   min-width: 88px;
   min-height: 36px;
   padding: @spacing_unit @spacing_unit * 2;
-  border-radius: 0;
+  border-radius: 2px;
   color: @palette_text_primary;
   transition: @transitions_backgroundColor, @transitions_boxShadow;
 
@@ -150,4 +152,8 @@
 
 .Sui_Button_full-width {
   width: 100%;
+}
+
+.Sui_Button_no-radius {
+  border-radius: 0;
 }

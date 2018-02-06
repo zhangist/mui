@@ -5,7 +5,7 @@ import Transition from 'react-transition-group/Transition'
 
 const reflow = (node: any) => node.scrollTop
 
-interface Props {
+export interface Props {
   /**
    * @ignore
    */

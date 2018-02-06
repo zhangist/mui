@@ -3,52 +3,47 @@
 @palette_type: 'light';
 
 // light
-.lightOrDark() when (@palette_type = 'light') {
-  @palette_text_primary: rgba(0, 0, 0, 0.87);
-  @palette_text_secondary: rgba(0, 0, 0, 0.54);
-  @palette_text_disabled: rgba(0, 0, 0, 0.38);
-  @palette_text_hint: rgba(0, 0, 0, 0.38);
-  @palette_divider: rgba(0, 0, 0, 0.12);
-  @palette_background_paper: @palette_common_white;
-  @palette_background_default: @palette_grey_50;
-  @palette_background_appBar: @palette_grey_100;
-  @palette_background_chip: @palette_grey_300;
-  @palette_background_avatar: @palette_grey_400;
-  @palette_action_active: rgba(0, 0, 0, 0.54);
-  @palette_action_hover: rgba(0, 0, 0, 0.14);
-  @palette_action_selected: rgba(0, 0, 0, 0.08);
-  @palette_action_disabled: rgba(0, 0, 0, 0.26);
-  @palette_action_disabledBackground: rgba(0, 0, 0, 0.12);
-}
+@palette_text_primary: rgba(0, 0, 0, 0.87);
+@palette_text_secondary: rgba(0, 0, 0, 0.54);
+@palette_text_disabled: rgba(0, 0, 0, 0.38);
+@palette_text_hint: rgba(0, 0, 0, 0.38);
+@palette_divider: rgba(0, 0, 0, 0.12);
+@palette_background_paper: @palette_common_white;
+@palette_background_default: @palette_grey_50;
+@palette_background_appBar: @palette_grey_100;
+@palette_background_chip: @palette_grey_300;
+@palette_background_avatar: @palette_grey_400;
+@palette_action_active: rgba(0, 0, 0, 0.54);
+@palette_action_hover: rgba(0, 0, 0, 0.14);
+@palette_action_selected: rgba(0, 0, 0, 0.08);
+@palette_action_disabled: rgba(0, 0, 0, 0.26);
+@palette_action_disabledBackground: rgba(0, 0, 0, 0.12);
+
 // dark
-.lightOrDark() when (@palette_type = 'dark') {
-  @palette_text_primary: @palette_common_fullWhite;
-  @palette_text_secondary: rgba(255, 255, 255, 0.7);
-  @palette_text_disabled: rgba(255, 255, 255, 0.5);
-  @palette_text_hint: rgba(255, 255, 255, 0.5);
-  @palette_text_icon: rgba(255, 255, 255, 0.5);
-  @palette_divider: rgba(255, 255, 255, 0.12);
-  @palette_background_paper: @palette_grey_800;
-  @palette_background_default: #303030;
-  @palette_background_appBar: @palette_grey_900;
-  @palette_background_chip: @palette_grey_700;
-  @palette_background_avatar: @palette_grey_600;
-  @palette_action_active: @palette_common_fullWhite;
-  @palette_action_hover: rgba(255, 255, 255, 0.14);
-  @palette_action_selected: rgba(255, 255, 255, 0.8);
-  @palette_action_disabled: rgba(255, 255, 255, 0.3);
-  @palette_action_disabledBackground: rgba(255, 255, 255, 0.12);
-}
-// light or dark
-.lightOrDark();
+@palette_text_primary_dark: @palette_common_fullWhite;
+@palette_text_secondary_dark: rgba(255, 255, 255, 0.7);
+@palette_text_disabled_dark: rgba(255, 255, 255, 0.5);
+@palette_text_hint_dark: rgba(255, 255, 255, 0.5);
+@palette_text_icon_dark: rgba(255, 255, 255, 0.5);
+@palette_divider_dark: rgba(255, 255, 255, 0.12);
+@palette_background_paper_dark: @palette_grey_800;
+@palette_background_default_dark: #303030;
+@palette_background_appBar_dark: @palette_grey_900;
+@palette_background_chip_dark: @palette_grey_700;
+@palette_background_avatar_dark: @palette_grey_600;
+@palette_action_active_dark: @palette_common_fullWhite;
+@palette_action_hover_dark: rgba(255, 255, 255, 0.14);
+@palette_action_selected_dark: rgba(255, 255, 255, 0.8);
+@palette_action_disabled_dark: rgba(255, 255, 255, 0.3);
+@palette_action_disabledBackground_dark: rgba(255, 255, 255, 0.12);
 
 @palette_primary_light: @palette_blue_300;
 @palette_primary_main: @palette_blue_500;
 @palette_primary_dark: @palette_blue_700;
-@palette_primary_contrastText: @palette_text_primary; // ?
+@palette_primary_contrastText: @palette_text_primary_dark;
 @palette_secondary_light: @palette_pink_300;
 @palette_secondary_main: @palette_pink_500;
 @palette_secondary_dark: @palette_pink_700;
-@palette_secondary_contrastText: @palette_text_primary; // ?
+@palette_secondary_contrastText: @palette_text_primary_dark;
 @palette_error_main: @palette_red_500;
 @palette_input_labelText: rgba(0, 0, 0, 0.54);

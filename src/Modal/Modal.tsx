@@ -29,7 +29,7 @@ function getHasTransition(props: any) {
   return props.children ? props.children.props.hasOwnProperty('in') : false
 }
 
-export interface Props {
+export interface ModalProps {
   /**
    * A backdrop component. Useful for custom backdrop rendering.
    */
@@ -37,7 +37,7 @@ export interface Props {
   /**
    * Properties applied to the `Backdrop` element.
    */
-  BackdropProps?: any,
+  BackdropProps?: {[key: string]: any},
   /**
    * A single child content element.
    */
@@ -124,8 +124,9 @@ export interface Props {
   role?: string,
 }
 
-class Modal extends React.Component<Props, any> {
-  public static defaultProps = {
+class Modal extends React.Component<ModalProps, any> {
+  // ? any -> for tsc build error TS4023 https://stackoverflow.com/questions/43900035
+  public static defaultProps: any = {
     disableAutoFocus: false,
     disableBackdropClick: false,
     disableEnforceFocus: false,
@@ -146,7 +147,7 @@ class Modal extends React.Component<Props, any> {
   public onDocumentKeydownListener: any = null
   public onFocusinListener: any = null
 
-  constructor(props: Props, context: any) {
+  constructor(props: ModalProps, context: any) {
     super(props, context)
     this.state = {
       exited: !this.props.open,

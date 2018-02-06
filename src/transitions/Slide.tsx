@@ -1,5 +1,5 @@
 // @inheritedComponent Transition
-import debounce = require('lodash/debounce')
+import { debounce } from 'lodash'
 import * as React from 'react'
 import { findDOMNode } from 'react-dom'
 import EventListener from 'react-event-listener'
@@ -116,8 +116,12 @@ class Slide extends React.Component<Props, any> {
     },
   }
 
+  public state = {
+    mounted: false,
+  }
+
   public transition: any = null
-  public handleResize = debounce(() => {
+  private handleResize = debounce(() => {
     // Skip configuration where the position is screen size invariant.
     if (this.props.in || this.props.direction === 'down' || this.props.direction === 'right') {
       return
@@ -128,10 +132,6 @@ class Slide extends React.Component<Props, any> {
       setTranslateValue(this.props, node)
     }
   }, 166)
-
-  public state = {
-    mounted: false,
-  }
 
   public componentDidMount() {
     // state.mounted handle SSR, once the component is mounted, we need

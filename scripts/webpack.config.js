@@ -48,4 +48,35 @@ const config = {
   ]
 }
 
-module.exports = config;
+const minConfig = Object.assign({}, config)
+minConfig.entry = {
+  'style.min': path.join(__dirname, '../src/style.ts'),
+}
+minConfig.module = {
+  rules: [
+    {
+      test: /\.ts$/,
+      loader: 'ts-loader',
+    },
+    {
+      test: /\.less$/,
+      loader: ExtractTextPlugin.extract({
+        fallback: 'style-loader',
+        use: [
+          { loader: 'css-loader', options: { minimize: true } },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: () => [
+                autoprefixer({ browsers: ['> 5%'] }),
+              ],
+            },
+          },
+          'less-loader',
+        ],
+      }),
+    },
+  ]
+}
+
+module.exports = [config, minConfig];

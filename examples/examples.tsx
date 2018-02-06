@@ -51,7 +51,12 @@ class Examples extends React.Component {
         </div>
         <div className="subtitle">(a | button)</div>
         <div className="content">
-          <Button raised fullWidth>Button / 按钮</Button>
+          <Button>Button / 按钮</Button>
+          <Button raised className="margin-unit">Button / 按钮</Button>
+          <Button raised className="margin-unit" color="primary">Button / 按钮</Button>
+          <Button raised className="margin-unit" color="secondary">Button / 按钮</Button>
+          <br /><br />
+          <Button raised fullWidth className="margin-unit">Button / 按钮</Button>
         </div>
       </section>
     )
@@ -138,6 +143,7 @@ class Examples extends React.Component {
               rootStyle={{height: '100%', position: 'relative'}}
             >
               <Button
+                noRadius
                 onClick={() => this.setState({openDrawer: false})}
                 disabled={!this.state.openDrawer}
               >
@@ -161,12 +167,13 @@ class Examples extends React.Component {
               marginLeft: this.state.openDrawer ? '0px' : '-200px',
             }}>
               <Button
+                noRadius
                 onClick={() => this.setState({openDrawer: true})}
                 disabled={this.state.openDrawer}
               >
                 Open Drawer / 打开抽屉
               </Button>
-              <Button onClick={() => this.setState({openDrawer2: true})}>Open Drawer2 / 打开抽屉2</Button>
+              <Button noRadius onClick={() => this.setState({openDrawer2: true})}>Open Drawer2 / 打开抽屉2</Button>
             </div>
           </div>
         </div>
@@ -183,7 +190,6 @@ class Examples extends React.Component {
         <div className="content">
           <div style={{ display: 'flex', flexWrap: 'wrap' }}>
             <TextField
-              className="margin-left-8 margin-right-8"
               helperText="&nbsp;"
               label="&nbsp;"
               type="date"
@@ -192,7 +198,6 @@ class Examples extends React.Component {
               margin="normal"
             />
             <TextField
-              className="margin-left-unit margin-right-unit"
               helperText="Some important text"
               label="Helper text"
               type="text"
@@ -202,7 +207,6 @@ class Examples extends React.Component {
               margin="normal"
             />
             <TextField
-              className="margin-left-unit margin-right-unit"
               helperText="&nbsp;"
               label="&nbsp;"
               type="number"
@@ -211,7 +215,6 @@ class Examples extends React.Component {
               margin="normal"
             />
             <TextField
-              className="margin-left-unit margin-right-unit"
               id="select-currency"
               select
               label="Select"
@@ -227,7 +230,6 @@ class Examples extends React.Component {
               ))}
             </TextField>
             <TextField
-              className="margin-left-unit margin-right-unit"
               id="select-currency-native"
               select
               label="Native select"
@@ -246,7 +248,7 @@ class Examples extends React.Component {
               ))}
             </TextField>
           </div>
-          <div className="margin-unit">
+          <div>
             <span>TextField: {this.state.textFieldValue}</span>
           </div>
         </div>

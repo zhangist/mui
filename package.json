@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "webpack-dev-server --config ./scripts/webpack.config.dev.js --progress",
     "build:js": "tsc -d --outDir ./build",
+    "postbuild:js": "rimraf ./build/style.js && rimraf ./build/style.d.ts",
     "build:css": "webpack --config ./scripts/webpack.config.js",
+    "postbuild:css": "rimraf ./build/style.js && rimraf ./build/style.min.js",
     "build:copy-files": "node ./scripts/copy-files.js",
     "build": "npm run build:js && npm run build:css && npm run build:copy-files"
   },
@@ -58,6 +60,7 @@
     "postcss": "^6.0.16",
     "postcss-loader": "^2.0.10",
     "progress-bar-webpack-plugin": "^1.10.0",
+    "rimraf": "^2.6.2",
     "style-loader": "^0.19.1",
     "ts-loader": "^3.2.0",
     "tslint": "^5.9.1",

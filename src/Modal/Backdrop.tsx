@@ -2,7 +2,7 @@ import * as classNames from 'classnames'
 import * as React from 'react'
 import Fade from '../transitions/Fade'
 
-export interface Props {
+export interface BackdropProps {
   /**
    * If `true`, the backdrop is invisible.
    * It can be used when rendering a popover or a custom select component.
@@ -19,7 +19,7 @@ export interface Props {
   transitionDuration?: number|{ enter?: number, exit?: number },
 }
 
-function Backdrop(props: Props) {
+const Backdrop: React.SFC<BackdropProps> = (props) => {
   const {
     invisible = false,
     open,

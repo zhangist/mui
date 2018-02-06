@@ -79,6 +79,9 @@ export interface Props {
    * The value of the component.
    */
   value?: string,
+  classNameDefault?: string,
+  classNameChecked?: string,
+  classNameDisabled?: string,
 }
 
 /**
@@ -133,6 +136,9 @@ class SwitchBase extends React.Component<Props, {}> {
       checked: checkedProp,
       checkedIcon,
       className: classNameProp,
+      classNameDefault,
+      classNameChecked,
+      classNameDisabled,
       disabled: disabledProp,
       icon: iconProp,
       inputProps,
@@ -155,9 +161,14 @@ class SwitchBase extends React.Component<Props, {}> {
     }
 
     const checked: any = this.isControlled ? checkedProp : this.state.checked
-    const className = classNames('Sui_SwitchBase_root', 'Sui_SwitchBase_default', classNameProp, {
-      'Sui_SwitchBase_checked': checked,
-      'Sui_SwitchBase_disabled': disabled,
+    const className = classNames('Sui_SwitchBase_root',
+      'Sui_SwitchBase_default',
+      classNameDefault,
+      classNameProp, {
+        'Sui_SwitchBase_checked': checked,
+        'Sui_SwitchBase_disabled': disabled,
+        [classNameChecked + '']: checked,
+        [classNameDisabled + '']: disabled,
     })
 
     let icon = checked ? checkedIcon : iconProp

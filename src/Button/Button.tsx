@@ -16,7 +16,7 @@ export interface Props {
   /**
    * The color of the component. It's using the theme palette when that makes sense.
    */
-  color?: 'default'|'inherit'|'primary'|'accent'|'contrast',
+  color?: 'default'|'inherit'|'primary'|'secondary',
   /**
    * The component used for the root node.
    * Either a string to use a DOM element or a component.
@@ -65,6 +65,7 @@ export interface Props {
    * @ignore
    */
   type?: string,
+  noRadius?: boolean,
 }
 
 class Button extends React.Component<Props & ButtonBaseProps, any> {
@@ -82,6 +83,7 @@ class Button extends React.Component<Props & ButtonBaseProps, any> {
       mini = false,
       raised = false,
       type = 'button',
+      noRadius = false,
       ...other,
     } = this.props
 
@@ -94,14 +96,13 @@ class Button extends React.Component<Props & ButtonBaseProps, any> {
         'Sui_Button_mini': fab && mini,
         'Sui_Button_color-inherit': color === 'inherit',
         'Sui_Button_flat-primary': flat && color === 'primary',
-        'Sui_Button_flat-accent': flat && color === 'accent',
-        'Sui_Button_flat-contrast': flat && color === 'contrast',
+        'Sui_Button_flat-secondary': flat && color === 'secondary',
         'Sui_Button_raised-primary': !flat && color === 'primary',
-        'Sui_Button_raised-accent': !flat && color === 'accent',
-        'Sui_Button_raised-contrast': !flat && color === 'contrast',
+        'Sui_Button_raised-secondary': !flat && color === 'secondary',
         'Sui_Button_dense': dense,
         'Sui_Button_disabled': disabled,
         'Sui_Button_full-width': fullWidth,
+        'Sui_Button_no-radius': noRadius,
       },
       classNameProp,
     )

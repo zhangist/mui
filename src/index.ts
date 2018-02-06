@@ -1,5 +1,5 @@
 /**
- * base on Material-UI v1.0.0.beta.30
+ * base on Material-UI v1.0.0-beta.30
  */
 
 export { default as AppBar } from './AppBar'

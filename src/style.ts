@@ -1,5 +1,5 @@
 /**
- * base on Material-UI v1.0.0.beta.30
+ * base on Material-UI v1.0.0-beta.30
  */
 
 // tslint:disable:ordered-imports

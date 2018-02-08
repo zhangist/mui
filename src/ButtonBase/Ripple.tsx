@@ -11,9 +11,10 @@ export interface Props {
 }
 
 export default class Ripple extends React.Component<Props, any> {
-  public getInitialProps = {
+  public defaultProps = {
     pulsate: false,
   }
+
   public state = {
     rippleVisible: false,
     rippleLeaving: false,
